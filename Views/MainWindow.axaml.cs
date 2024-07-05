@@ -70,7 +70,7 @@ public partial class MainWindow : Window
         TabBatch.FontWeight = FontWeight.Normal;
     }
 
-    private void TbSource_TextChanged(object? sender, TextChangedEventArgs e)
+    private void TbSource_TextChanged(object? sender, EventArgs eventArgs)
     {
         LblTotalChars.Content = $"[ Chars: {TbSource.Text!.Length:N0} ]";
     }
@@ -494,7 +494,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private void UpdateTbSourceFileContents(string filename)
+    private async void UpdateTbSourceFileContents(string filename)
     {
         var fileInfo = new FileInfo(filename);
         if (fileInfo.Length > int.MaxValue)
@@ -508,8 +508,10 @@ public partial class MainWindow : Window
         // Read file contents
         try
         {
-            var contents = File.ReadAllText(_currentOpenFileName);
+            using var reader = new StreamReader(_currentOpenFileName);
+            var contents = await reader.ReadToEndAsync();
             // Display file contents to text box field
+            TbSource.Clear();
             TbSource.Text = contents;
             LblStatusBar.Content = $"File: {_currentOpenFileName}";
             var displayName = fileInfo.Name;
@@ -520,7 +522,7 @@ public partial class MainWindow : Window
         }
         catch (Exception)
         {
-            TbSource.Text = string.Empty;
+            TbSource.Clear();
             LblSourceCode.Content = string.Empty;
             LblStatusBar.Content = "Error: Invalid file";
             //throw;

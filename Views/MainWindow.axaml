@@ -3,11 +3,15 @@
         xmlns:vm="using:ZhoConverterAvaMvvm.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:avaloniaEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="ZhoConverterAvaMvvm.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="ZhoConverterAvaMvvm" Height="720" Width="1000" WindowStartupLocation="CenterScreen" MinWidth="1000"
+        Title="ZhoConverterAvaMvvm" 
+        Height="720" Width="1080" 
+        WindowStartupLocation="CenterScreen" 
+        MinWidth="1000"
         MinHeight="300">
 
     <Design.DataContext>
@@ -45,7 +49,8 @@
             <RadioButton x:Name="RbTag" Content="Keywords (关键词)" Grid.Row="0" Grid.Column="3" FontSize="14"
                          Padding="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="MainRb" />
             <TextBox Name="TbWordCount" Grid.Row="0" Grid.Column="3" Text="30" VerticalAlignment="Center"
-                     HorizontalAlignment="Left" Margin="160,0,0,0" FontSize="14" ToolTip.Tip="Number of keywords to extract" />
+                     HorizontalAlignment="Left" Margin="160,0,0,0" FontSize="14"
+                     ToolTip.Tip="Number of keywords to extract" />
 
             <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4">
                 <Grid.ColumnDefinitions>
@@ -63,11 +68,11 @@
                              Padding="5,0,0,0" Margin="15,0,0,0" VerticalAlignment="Center"
                              HorizontalAlignment="Center"
                              GroupName="SecondRb" Click="RbZHTW_Click" IsChecked="False" />
-                <RadioButton x:Name="RbHk" Grid.Row="0" Grid.Column="2" Content="HK (中港简繁)" FontSize="14"
+                <RadioButton x:Name="RbHk" Grid.Row="0" Grid.Column="2" Content="ZH-HK (中港简繁)" FontSize="14"
                              Padding="5,0,0,0" Margin="20,0,0,0" VerticalAlignment="Center"
                              HorizontalAlignment="Center"
                              GroupName="SecondRb" Click="RbHK_Click" />
-                <CheckBox x:Name="CbCnTw" Grid.Row="0" Grid.Column="3" Content="ZH-TW Idioms(中台惯用)" FontSize="14"
+                <CheckBox x:Name="CbCnTw" Grid.Row="0" Grid.Column="3" Content="ZH-TW Idioms(中台通语)" FontSize="14"
                           Padding="5,0,0,0" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
                 <CheckBox x:Name="CbPunctuation" Grid.Row="0" Grid.Column="4" Content="Punctuation (标点)"
                           FontSize="14" Padding="5,0,0,0" Margin="5,0,0,0" VerticalAlignment="Center"
@@ -91,46 +96,57 @@
                     <Grid Background="#FFE5E5E5">
                         <Grid.RowDefinitions>
                             <RowDefinition />
-                            <RowDefinition Height="30" />
+                            <RowDefinition Height="40" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <TextBox x:Name="TbSource" Grid.Row="0" Grid.Column="0" Margin="5,5,5,0"
-                                 BorderThickness="2,2,2,2" TextWrapping="Wrap"
-                                 TextChanged="TbSource_TextChanged" AcceptsReturn="True" FontSize="16" />
-                        <TextBox x:Name="TbDestination" Grid.Row="0" Grid.Column="1" Margin="5,5,5,0"
-                                 BorderThickness="2,2,2,2" TextWrapping="Wrap"
-                                 FontSize="16" IsReadOnly="True" />
+                        <!-- <TextBox x:Name="TbSource" Grid.Row="0" Grid.Column="0" Margin="5,5,5,0" -->
+                        <!--          BorderThickness="2,2,2,2" TextWrapping="Wrap" -->
+                        <!--          TextChanged="TbSource_TextChanged" AcceptsReturn="True" FontSize="16" IsUndoEnabled="False" /> -->
+                        <avaloniaEdit:TextEditor
+                            x:Name="TbSource" Grid.Row="0" Grid.Column="0" Margin="5,5,5,0"
+                            FontFamily="Consolas" VerticalScrollBarVisibility="Visible" ShowLineNumbers="True"
+                            BorderThickness="2,2,2,2" BorderBrush="Black" WordWrap="True"
+                            TextChanged="TbSource_TextChanged" FontSize="16" />
+
+                        <!-- <TextBox x:Name="TbDestination" Grid.Row="0" Grid.Column="1" Margin="5,5,5,0" -->
+                        <!--          BorderThickness="2,2,2,2" TextWrapping="Wrap" -->
+                        <!--          FontSize="16" IsReadOnly="True" /> -->
+                        <avaloniaEdit:TextEditor x:Name="TbDestination" Grid.Row="0" Grid.Column="1" Margin="5,5,5,0"
+                                                 BorderThickness="2,2,2,2" BorderBrush="Black" WordWrap="True"
+                                                 VerticalScrollBarVisibility="Visible"
+                                                 ShowLineNumbers="True"
+                                                 FontSize="16" IsReadOnly="True" />
                         <Label Grid.Row="1" Grid.Column="0" Content="Source:" HorizontalAlignment="Left"
-                               VerticalAlignment="Top" Margin="5,0,0,0" FontSize="16" BorderBrush="Black"
+                               VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" BorderBrush="Black"
                                BorderThickness="3,0,0,0" />
                         <Label x:Name="LblSourceCode" Grid.Row="1" Grid.Column="0" Content=""
-                               HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80,0,0,0" FontSize="16" />
+                               HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,0,0,0" FontSize="16" />
                         <Label x:Name="LblTotalChars" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"
-                               VerticalAlignment="Top" Margin="0,0,130,0" FontSize="14" />
+                               VerticalAlignment="Center" Margin="0,0,130,0" FontSize="14" />
                         <Label Grid.Column="1" Content="Destination:" HorizontalAlignment="Left" Margin="5,0,0,0"
-                               Grid.Row="1" VerticalAlignment="Top" FontSize="16" BorderBrush="Black"
+                               Grid.Row="1" VerticalAlignment="Center" FontSize="16" BorderBrush="Black"
                                BorderThickness="3,0,0,0" />
                         <Label x:Name="LblDestinationCode" Grid.Column="1" Content="" HorizontalAlignment="Left"
-                               Margin="110,0,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" />
+                               Margin="110,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontSize="16" />
                         <Button x:Name="BtnClearSource" Content="AC" Padding="0 2" Width="40"
                                 HorizontalAlignment="Right" HorizontalContentAlignment="Center"
                                 Margin="0,2,90,0" Grid.Row="1"
-                                Grid.Column="0" VerticalAlignment="Top" FontSize="14" Click="BtnClearSource_Click"
+                                Grid.Column="0" VerticalAlignment="Center" FontSize="14" Click="BtnClearSource_Click"
                                 FontWeight="Bold" />
                         <Button x:Name="BtnPaste" Content="Paste" Padding="0 2" Width="80" HorizontalAlignment="Right"
                                 HorizontalContentAlignment="Center"
                                 Margin="0,2,5,0" Grid.Row="1"
-                                Grid.Column="0" VerticalAlignment="Top" FontSize="14" Click="BtnPaste_Click" />
+                                Grid.Column="0" VerticalAlignment="Center" FontSize="14" Click="BtnPaste_Click" />
                         <Button x:Name="BtnClearDestination" Grid.Column="1" Content="AC" Padding="0 2" Width="40"
                                 HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="0,2,90,0"
-                                Grid.Row="1" VerticalAlignment="Top"
+                                Grid.Row="1" VerticalAlignment="Center"
                                 FontSize="14" Click="BtnClearDestination_Click" FontWeight="Bold" />
                         <Button x:Name="BtnCopy" Grid.Column="1" Content="Copy" Padding="0 2" Width="80"
                                 HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="0,2,5,0"
-                                Grid.Row="1" VerticalAlignment="Top"
+                                Grid.Row="1" VerticalAlignment="Center"
                                 FontSize="14" Click="BtnCopy_Click" />
 
 
@@ -141,7 +157,7 @@
                     <Grid Background="#FFE5E5E5">
                         <Grid.RowDefinitions>
                             <RowDefinition />
-                            <RowDefinition Height="30" />
+                            <RowDefinition Height="40" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
