@@ -3,7 +3,8 @@ using System.IO;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Newtonsoft.Json;
+using Microsoft.Extensions.DependencyInjection;
+using ZhoConverterAvaMvvm.Services;
 using ZhoConverterAvaMvvm.ViewModels;
 using ZhoConverterAvaMvvm.Views;
 
@@ -11,32 +12,40 @@ namespace ZhoConverterAvaMvvm;
 
 public class App : Application
 {
+    private readonly IServiceProvider _serviceProvider;
+
     public App()
     {
-        var settingsFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LanguageSettings.json");
-        LanguageSettings = ReadLanguageSettingsFromJson(settingsFilePath);
+        var services = new ServiceCollection();
+        ConfigureServices(services);
+        _serviceProvider = services.BuildServiceProvider();
     }
-
-    public static LanguageSettings? LanguageSettings { get; private set; }
 
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
     }
 
-    private static LanguageSettings ReadLanguageSettingsFromJson(string filePath)
-    {
-        return JsonConvert.DeserializeObject<LanguageSettings>(File.ReadAllText(filePath))!;
-    }
-
     public override void OnFrameworkInitializationCompleted()
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            desktop.MainWindow = new MainWindow
-            {
-                DataContext = new MainWindowViewModel()
-            };
+        {
+            var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+            mainWindow.DataContext = _serviceProvider.GetRequiredService<MainWindowViewModel>();
+            desktop.MainWindow = mainWindow;
+        }
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    private void ConfigureServices(ServiceCollection services)
+    {
+        // Register LanguageSettingsService with the path to the settings file
+        services.AddSingleton(new LanguageSettingsService(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+            "LanguageSettings.json")));
+        // Register ViewModels
+        services.AddSingleton<MainWindowViewModel>();
+        // Register MainWindow
+        services.AddTransient<MainWindow>();
     }
 }

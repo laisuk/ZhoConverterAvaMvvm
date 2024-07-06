@@ -9,32 +9,37 @@ using Avalonia.Platform.Storage;
 using JiebaNet.Analyser;
 using JiebaNet.Segmenter;
 using OpenccFmmsegNetLib;
+using ZhoConverterAvaMvvm.Services;
 
 namespace ZhoConverterAvaMvvm.Views;
 
 public partial class MainWindow : Window
 {
-    private readonly List<Language> _languagesInfo;
-    private readonly LanguageSettings _languagesSettings = App.LanguageSettings!;
-    private readonly List<string> _textFileTypes;
-    private string _currentOpenFileName;
+    private readonly List<Language>? _languagesInfo;
+    private readonly List<string>? _textFileTypes;
+    private string? _currentOpenFileName;
 
     public MainWindow()
     {
         InitializeComponent();
-        _languagesInfo = _languagesSettings.Languages!;
-        _textFileTypes = _languagesSettings.TextFileTypes!;
+    }
+
+    public MainWindow(LanguageSettingsService languageSettingsService) : this()
+    {
+        var languageSettings = languageSettingsService.LanguageSettings;
+        _languagesInfo = languageSettings!.Languages;
+        _textFileTypes = languageSettings.TextFileTypes;
         _currentOpenFileName = string.Empty;
     }
 
     private void RbT2s_Click(object? sender, RoutedEventArgs e)
     {
-        LblSourceCode.Content = _languagesInfo[1].Name;
+        LblSourceCode.Content = _languagesInfo![1].Name;
     }
 
     private void RbS2t_Click(object? sender, RoutedEventArgs e)
     {
-        LblSourceCode.Content = _languagesInfo[2].Name;
+        LblSourceCode.Content = _languagesInfo![2].Name;
     }
 
     private void RbStd_Click(object? sender, RoutedEventArgs e)
@@ -107,19 +112,19 @@ public partial class MainWindow : Window
         switch (codeText)
         {
             case 1:
-                LblSourceCode.Content = _languagesInfo[codeText].Name;
+                LblSourceCode.Content = _languagesInfo![codeText].Name;
                 if (RbT2S.IsChecked == false) RbT2S.IsChecked = true;
 
                 break;
 
             case 2:
-                LblSourceCode.Content = _languagesInfo[codeText].Name;
+                LblSourceCode.Content = _languagesInfo![codeText].Name;
                 if (RbS2T.IsChecked == false) RbS2T.IsChecked = true;
 
                 break;
 
             default:
-                LblSourceCode.Content = _languagesInfo[0].Name;
+                LblSourceCode.Content = _languagesInfo![0].Name;
                 break;
         }
     }
@@ -152,7 +157,7 @@ public partial class MainWindow : Window
 
     private void TabBatch_GotFocus(object? sender, GotFocusEventArgs e)
     {
-        if (!Path.Exists(TbOutFolder.Text))
+        if (!Directory.Exists(TbOutFolder.Text))
             TbOutFolder.Text = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Output");
 
         BtnOpenFile.IsEnabled = false;
@@ -178,7 +183,7 @@ public partial class MainWindow : Window
             Title = "Open Text File",
             FileTypeFilter = new List<FilePickerFileType>
             {
-                new("Text Files") { Patterns = ["*.txt"] }
+                new("Text Files") { Patterns = new[] { "*.txt" } }
             },
             AllowMultiple = true
         });
@@ -217,7 +222,7 @@ public partial class MainWindow : Window
 
         var filename = LbxSource.SelectedItem as string;
 
-        if (!_textFileTypes.Contains(Path.GetExtension(filename)!))
+        if (!_textFileTypes!.Contains(Path.GetExtension(filename)!))
         {
             TabMessage.IsSelected = true;
             LbxDestination.Items.Add("File type [" + Path.GetExtension(filename)! + "] Preview not supported");
@@ -254,7 +259,7 @@ public partial class MainWindow : Window
             var sourceFilePath = item!.ToString();
             var fileExt = Path.GetExtension(sourceFilePath)!;
 
-            if (_textFileTypes.Contains(fileExt))
+            if (_textFileTypes!.Contains(fileExt))
             {
                 string inputText;
                 try
@@ -267,7 +272,7 @@ public partial class MainWindow : Window
                     continue;
                 }
 
-                var textCode = _languagesInfo[OpenccFmmsegNet.ZhoCheck(inputText)].Name!;
+                var textCode = _languagesInfo![OpenccFmmsegNet.ZhoCheck(inputText)].Name!;
                 LbxDestination.Items.Add($"[{textCode}] {sourceFilePath}");
             }
             else
@@ -331,13 +336,13 @@ public partial class MainWindow : Window
         {
             LblDestinationCode.Content = LblSourceCode.Content!.ToString()!.Contains("Non")
                 ? LblSourceCode.Content
-                : _languagesInfo[2].Name;
+                : _languagesInfo![2].Name;
         }
         else if (RbS2T.IsChecked == true)
         {
             LblDestinationCode.Content = LblSourceCode.Content!.ToString()!.Contains("Non")
                 ? LblSourceCode.Content
-                : _languagesInfo[1].Name;
+                : _languagesInfo![1].Name;
         }
         else if (RbJieba.IsChecked == true)
         {
@@ -425,7 +430,7 @@ public partial class MainWindow : Window
                 continue;
             }
 
-            if (!_textFileTypes.Contains(fileExt))
+            if (!_textFileTypes!.Contains(fileExt))
             {
                 LbxDestination.Items.Add($"({count}) [File skipped ({fileExt})] {sourceFilePath}");
                 continue;
@@ -481,7 +486,7 @@ public partial class MainWindow : Window
             Title = "Open Text File",
             FileTypeFilter = new List<FilePickerFileType>
             {
-                new("Text Files") { Patterns = ["*.txt"] }
+                new("Text Files") { Patterns = new[] { "*.txt" } }
             },
             AllowMultiple = false
         });
@@ -540,7 +545,7 @@ public partial class MainWindow : Window
             SuggestedFileName = "document.txt",
             FileTypeChoices = new List<FilePickerFileType>
             {
-                new("Text Files") { Patterns = ["*.txt"] }
+                new("Text Files") { Patterns = new[] { "*.txt" } }
             }
         });
 
