@@ -108,7 +108,7 @@
                         <avaloniaEdit:TextEditor
                             x:Name="TbSource" Grid.Row="0" Grid.Column="0" Margin="5,5,5,0"
                             FontFamily="Consolas" VerticalScrollBarVisibility="Visible" ShowLineNumbers="True"
-                            BorderThickness="2,2,2,2" BorderBrush="Black" WordWrap="True"
+                            BorderThickness="2,2,2,2" BorderBrush="Black" Background="WhiteSmoke" WordWrap="True"
                             TextChanged="TbSource_TextChanged" FontSize="16" />
 
                         <!-- <TextBox x:Name="TbDestination" Grid.Row="0" Grid.Column="1" Margin="5,5,5,0" -->
@@ -116,7 +116,7 @@
                         <!--          FontSize="16" IsReadOnly="True" /> -->
                         <avaloniaEdit:TextEditor x:Name="TbDestination" Grid.Row="0" Grid.Column="1" Margin="5,5,5,0"
                                                  BorderThickness="2,2,2,2" BorderBrush="Black" WordWrap="True"
-                                                 VerticalScrollBarVisibility="Visible"
+                                                 Background="WhiteSmoke" VerticalScrollBarVisibility="Visible"
                                                  ShowLineNumbers="True"
                                                  FontSize="16" IsReadOnly="True" />
                         <Label Grid.Row="1" Grid.Column="0" Content="Source:" HorizontalAlignment="Left"
@@ -246,7 +246,7 @@
         <Button x:Name="BtnExit" Content=" Exit " Padding="0 2" Width="50" HorizontalAlignment="Right"
                 HorizontalContentAlignment="Center"
                 Margin="0,0,20,0" Grid.Row="2" VerticalAlignment="Center" FontSize="14" Foreground="Red"
-                Click="BtnExit_Click" />
+                FontWeight="Bold" Click="BtnExit_Click" />
         <StackPanel x:Name="StbStatusBar" Grid.Row="3" Height="30">
             <Label x:Name="LblStatusBar" Content="Zho Converter" Padding="0 2" Margin="10,0,0,0"
                    HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
