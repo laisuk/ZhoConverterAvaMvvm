@@ -210,18 +210,18 @@
                         <Button x:Name="BtnClear" Content="AC" Padding="0 2" Width="50" HorizontalAlignment="Right"
                                 HorizontalContentAlignment="Center"
                                 Margin="0,2,5,2" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" FontSize="14"
-                                FontWeight="Bold" Click="BtnClear_Click" />
+                                FontWeight="Bold" Click="BtnClearListBox_Click" />
                         <TextBox x:Name="TbOutFolder" Grid.Row="1" Grid.Column="1" Width="290" Text=".\Output\"
                                  HorizontalAlignment="Left" VerticalAlignment="Center"
                                  VerticalContentAlignment="Center" Margin="70,2,2,2" Padding="0 2" />
                         <Button x:Name="BtnOutFolder" Content="…" Padding="0 2" Width="50" HorizontalAlignment="Right"
                                 HorizontalContentAlignment="Center"
                                 Margin="0,2,60,2" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" FontSize="14"
-                                FontWeight="Bold" Click="BtnOutFolder_Click" />
+                                FontWeight="Bold" Click="BtnSelectOutFolder_Click" />
                         <Button x:Name="BtnOutClear" Content="AC" Padding="0 2" Width="50" HorizontalAlignment="Right"
                                 HorizontalContentAlignment="Center"
                                 Margin="0,2,5,2" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" FontSize="14"
-                                FontWeight="Bold" Click="BtnOutClear_Click" />
+                                FontWeight="Bold" Click="BtnMessagePreviewClear_Click" />
 
                     </Grid>
                 </TabItem>

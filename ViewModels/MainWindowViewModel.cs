@@ -1,8 +1,24 @@
-﻿namespace ZhoConverterAvaMvvm.ViewModels;
+﻿using System.Collections.Generic;
+using ZhoConverterAvaMvvm.Services;
+
+namespace ZhoConverterAvaMvvm.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
-#pragma warning disable CA1822 // Mark members as static
-    public string Greeting => "Welcome to Avalonia!";
-#pragma warning restore CA1822 // Mark members as static
+    private readonly ITopLevelService? _topLevelService;
+    private readonly List<Language>? _languagesInfo;
+    private readonly List<string>? _textFileTypes;
+
+    public MainWindowViewModel()
+    {
+
+    }
+
+    public MainWindowViewModel(ITopLevelService topLevelService, LanguageSettingsService languageSettingsService) : this()
+    {
+        _topLevelService = topLevelService;
+        var languageSettings = languageSettingsService.LanguageSettings;
+        _languagesInfo = languageSettings?.Languages;
+        _textFileTypes = languageSettings?.TextFileTypes;
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -189,11 +190,18 @@ public partial class MainWindow : Window
         });
 
         if (result.Count <= 0) return;
+        var listBoxItems = LbxSource.Items.ToList();
         foreach (var file in result)
         {
             var path = file.Path.LocalPath;
-            if (!LbxSource.Items.Contains(path))
-                LbxSource.Items.Add(path);
+            if (!listBoxItems.Contains(path))
+                listBoxItems.Add(path);
+        }
+        var sortedList = listBoxItems.OrderBy(x => x);
+        LbxSource.Items.Clear();
+        foreach (var item in sortedList)
+        {
+            LbxSource.Items.Add(item);
         }
     }
 
@@ -284,13 +292,13 @@ public partial class MainWindow : Window
         LblStatusBar.Content = "Batch zho code detection done.";
     }
 
-    private void BtnClear_Click(object? sender, RoutedEventArgs e)
+    private void BtnClearListBox_Click(object? sender, RoutedEventArgs e)
     {
         LbxSource.Items.Clear();
         LblStatusBar.Content = "All source entries cleared.";
     }
 
-    private async void BtnOutFolder_Click(object? sender, RoutedEventArgs e)
+    private async void BtnSelectOutFolder_Click(object? sender, RoutedEventArgs e)
     {
         var mainWindow = this;
 
@@ -310,7 +318,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private void BtnOutClear_Click(object? sender, RoutedEventArgs e)
+    private void BtnMessagePreviewClear_Click(object? sender, RoutedEventArgs e)
     {
         if (TabMessage.IsSelected)
             LbxDestination.Items.Clear();

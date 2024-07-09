@@ -38,11 +38,12 @@ public class App : Application
         base.OnFrameworkInitializationCompleted();
     }
 
-    private void ConfigureServices(ServiceCollection services)
+    private static void ConfigureServices(ServiceCollection services)
     {
         // Register LanguageSettingsService with the path to the settings file
         services.AddSingleton(new LanguageSettingsService(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
             "LanguageSettings.json")));
+        services.AddSingleton<ITopLevelService, TopLevelService>();
         // Register ViewModels
         services.AddSingleton<MainWindowViewModel>();
         // Register MainWindow
