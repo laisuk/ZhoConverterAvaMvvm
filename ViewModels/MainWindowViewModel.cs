@@ -1,53 +1,84 @@
-﻿using Avalonia.Interactivity;
-using Avalonia.Platform.Storage;
-using AvaloniaEdit.Document;
-using OpenccFmmsegNetLib;
-using ReactiveUI;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Reactive;
 using System.Threading.Tasks;
+using Avalonia.Platform.Storage;
+using AvaloniaEdit.Document;
+using JiebaNet.Analyser;
+using JiebaNet.Segmenter;
+using OpenccFmmsegNetLib;
+using ReactiveUI;
 using ZhoConverterAvaMvvm.Services;
+using ZhoConverterAvaMvvm.Views;
 
 namespace ZhoConverterAvaMvvm.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
-    private readonly ITopLevelService? _topLevelService;
     private readonly List<Language>? _languagesInfo;
     private readonly List<string>? _textFileTypes;
-    private bool _isRbS2T;
-    private bool _isRbT2S = true;
-    private bool _isRbJieba;
-    private bool _isRbTag;
-    private bool _isRbStd = true;
-    private bool _isRbZhtw;
-    private bool _isRbHk;
-    private bool _isCbZhtw;
-    private bool _isCbPunctuation;
-    private TextDocument? _tbSourceTextDocument;
-    private TextDocument? _tbDestinationTextDocument;
-    private string? _lblSourceCodeContent;
-    private string? _lblDestinationCodeContent;
-    private string? _lblStatusBarContent;
-    private string? _lblFilenameContent;
+    private readonly ITopLevelService? _topLevelService;
     private string? _currentOpenFileName;
+    private bool _isCbPunctuation = true;
+    private bool _isCbZhtw;
+    private bool _isRbHk;
+    private bool _isRbJieba;
+    private bool _isRbS2T;
+    private bool _isRbStd = true;
+    private bool _isRbT2S = true;
+    private bool _isRbTag;
+    private bool _isRbZhtw;
+    private bool _isTabMessage = true;
+    private bool _isTabPreview;
+    private bool _isTbOutFolderFocus;
+    private string? _lblDestinationCodeContent;
+    private string? _lblFilenameContent;
+    private string? _lblSourceCodeContent;
+    private string? _lblStatusBarContent;
     private string? _lblTotalCharsContent;
+    private ObservableCollection<string>? _lbxDestinationItems;
+    private ObservableCollection<string>? _lbxSourceItems;
+    private int _lbxSourceSelectedIndex;
+    private string? _lbxSourceSelectedItem;
+    private string? _rbHkContent = "ZH-HK (中港简繁)";
+    private string? _rbS2TContent = "Hans (简体) to Hant (繁体)";
+    private string? _rbStdContent = "Standard (标准简繁)";
+    private string? _rbT2SContent = "Hant (繁体) to Hans (简体)";
+    private string? _rbZhtwContent = "ZH-TW (中台简繁)";
+    private TextDocument? _tbDestinationTextDocument;
+    private string? _tbOutFolderText = "./output/";
+    private string? _tbPreviewText;
+    private TextDocument? _tbSourceTextDocument;
+    private string? _tbWordCountText = "30";
 
     public MainWindowViewModel()
     {
         TbSourceTextDocument = new TextDocument();
+        TbDestinationTextDocument = new TextDocument();
+        LbxSourceItems = new ObservableCollection<string>();
+        LbxDestinationItems = new ObservableCollection<string>();
         BtnPasteCommand = ReactiveCommand.CreateFromTask(BtnPaste);
+        BtnCopyCommand = ReactiveCommand.CreateFromTask(BtnCopy);
         BtnOpenFileCommand = ReactiveCommand.CreateFromTask(BtnOpenFile);
+        BtnSaveFileCommand = ReactiveCommand.CreateFromTask(BtnSaveFile);
+        BtnProcessCommand = ReactiveCommand.Create(BtnProcess);
         BtnClearTbSourceCommand = ReactiveCommand.Create(BtnClearTbSource);
         BtnClearTbDestinationCommand = ReactiveCommand.Create(BtnClearTbDestination);
-
+        BtnAddCommand = ReactiveCommand.CreateFromTask(BtnAdd);
+        BtnRemoveCommand = ReactiveCommand.Create(BtnRemove);
+        BtnClearLbxSourceCommand = ReactiveCommand.Create(BtnClearLbxSource);
+        BtnSelectOutFolderCommand = ReactiveCommand.CreateFromTask(BtnSelectOutFolder);
+        BtnPreviewCommand = ReactiveCommand.CreateFromTask(BtnPreview);
+        BtnDetectCommand = ReactiveCommand.CreateFromTask(BtnDetect);
+        BtnMessagePreviewClearCommand = ReactiveCommand.Create(BtnMessagePreviewClear);
+        BtnBatchStartCommand = ReactiveCommand.CreateFromTask(BtnBatchStart);
     }
 
-
-
-    public MainWindowViewModel(ITopLevelService topLevelService, LanguageSettingsService languageSettingsService) : this()
+    public MainWindowViewModel(ITopLevelService topLevelService, LanguageSettingsService languageSettingsService) :
+        this()
     {
         _topLevelService = topLevelService;
         var languageSettings = languageSettingsService.LanguageSettings;
@@ -55,135 +86,136 @@ public class MainWindowViewModel : ViewModelBase
         _textFileTypes = languageSettings?.TextFileTypes;
     }
 
-    #region RbCbRegion
-    public bool IsRbS2T
+    public string? LblSourceCodeContent
     {
-        get => _isRbS2T;
-        set
-        {
-            this.RaiseAndSetIfChanged(ref _isRbS2T, value);
-            if (value)
-            {
-                IsRbT2S = false;
-                IsRbJieba = false;
-                IsRbTag = false;
-            }
-        }
+        get => _lblSourceCodeContent;
+        set => this.RaiseAndSetIfChanged(ref _lblSourceCodeContent, value);
     }
 
-    public bool IsRbT2S
+    public string? LblDestinationCodeContent
     {
-        get => _isRbT2S;
-        set
-        {
-            this.RaiseAndSetIfChanged(ref _isRbT2S, value);
-            if (value)
-            {
-                IsRbS2T = false;
-                IsRbJieba = false;
-                IsRbTag = false;
-            }
-        }
+        get => _lblDestinationCodeContent;
+        set => this.RaiseAndSetIfChanged(ref _lblDestinationCodeContent, value);
     }
 
-    public bool IsRbJieba
+    public string? LblStatusBarContent
     {
-        get => _isRbJieba;
-        set
-        {
-            this.RaiseAndSetIfChanged(ref _isRbJieba, value);
-            if (value)
-            {
-                IsRbS2T = false;
-                IsRbT2S = false;
-                IsRbTag = false;
-            }
-        }
+        get => _lblStatusBarContent;
+        set => this.RaiseAndSetIfChanged(ref _lblStatusBarContent, value);
     }
 
-    public bool IsRbTag
+    public string? LblFileNameContent
     {
-        get => _isRbTag;
-        set
-        {
-            this.RaiseAndSetIfChanged(ref _isRbTag, value);
-            if (value)
-            {
-                IsRbS2T = false;
-                IsRbT2S = false;
-                IsRbJieba = false;
-            }
-        }
+        get => _lblFilenameContent;
+        set => this.RaiseAndSetIfChanged(ref _lblFilenameContent, value);
     }
 
-    public bool IsRbStd
+    public TextDocument? TbSourceTextDocument
     {
-        get => _isRbStd;
-        set
-        {
-            this.RaiseAndSetIfChanged(ref _isRbStd, value);
-            if (value)
-            {
-                IsRbZhtw = false;
-                IsRbHk = false;
-            }
-        }
+        get => _tbSourceTextDocument;
+        set => this.RaiseAndSetIfChanged(ref _tbSourceTextDocument, value);
     }
 
-    public bool IsRbZhtw
+    public TextDocument? TbDestinationTextDocument
     {
-        get => _isRbZhtw;
-        set
-        {
-            this.RaiseAndSetIfChanged(ref _isRbZhtw, value);
-            if (value)
-            {
-                IsRbStd = false;
-                IsRbHk = false;
-            }
-        }
+        get => _tbDestinationTextDocument;
+        set => this.RaiseAndSetIfChanged(ref _tbDestinationTextDocument, value);
     }
 
-    public bool IsRbHk
+    public string? LblTotalCharsContent
     {
-        get => _isRbHk;
-        set
-        {
-            this.RaiseAndSetIfChanged(ref _isRbHk, value);
-            if (value)
-            {
-                IsRbStd = false;
-                IsRbZhtw = false;
-            }
-        }
+        get => _lblTotalCharsContent;
+        set => this.RaiseAndSetIfChanged(ref _lblTotalCharsContent, value);
     }
 
-    public bool IsCbZhtw
+    public string? TbWordCountText
     {
-        get { return _isCbZhtw; }
-        set { this.RaiseAndSetIfChanged(ref _isCbZhtw, value); }
+        get => _tbWordCountText;
+        set => this.RaiseAndSetIfChanged(ref _tbWordCountText, value);
     }
 
-    public bool IsCbPunctuation
+    public ObservableCollection<string>? LbxSourceItems
     {
-        get { return _isCbPunctuation; }
-        set { this.RaiseAndSetIfChanged(ref _isCbPunctuation, value); }
+        get => _lbxSourceItems;
+        set => this.RaiseAndSetIfChanged(ref _lbxSourceItems, value);
     }
 
-    #endregion
+    public ObservableCollection<string>? LbxDestinationItems
+    {
+        get => _lbxDestinationItems;
+        set => this.RaiseAndSetIfChanged(ref _lbxDestinationItems, value);
+    }
 
-    public string? LblSourceCodeContent { get => _lblSourceCodeContent; set => this.RaiseAndSetIfChanged(ref _lblSourceCodeContent, value); }
-    public string? LblDestinationCodeContent { get => _lblDestinationCodeContent; set => this.RaiseAndSetIfChanged(ref _lblDestinationCodeContent, value); }
-    public string? LblStatusBarContent { get => _lblStatusBarContent; set => this.RaiseAndSetIfChanged(ref _lblStatusBarContent, value); }
-    public string? LblFileNameContentt { get => _lblFilenameContent; set => this.RaiseAndSetIfChanged(ref _lblFilenameContent, value); }
-    public TextDocument? TbSourceTextDocument { get => _tbSourceTextDocument; set => this.RaiseAndSetIfChanged(ref _tbSourceTextDocument, value); }
-    public TextDocument? TbDestinationTextDocument { get => _tbDestinationTextDocument; set => this.RaiseAndSetIfChanged(ref _tbDestinationTextDocument, value); }
-    public string? LblTotalCharsContent { get => _lblTotalCharsContent; set => this.RaiseAndSetIfChanged(ref _lblTotalCharsContent, value); }
+    public int LbxSourceSelectedIndex
+    {
+        get => _lbxSourceSelectedIndex;
+        set => this.RaiseAndSetIfChanged(ref _lbxSourceSelectedIndex, value);
+    }
+
+    public string? LbxSourceSelectedItem
+    {
+        get => _lbxSourceSelectedItem;
+        set => this.RaiseAndSetIfChanged(ref _lbxSourceSelectedItem, value);
+    }
+
+    public string? TbOutFolderText
+    {
+        get => _tbOutFolderText;
+        set => this.RaiseAndSetIfChanged(ref _tbOutFolderText, value);
+    }
+
+    public string? TbPreviewText
+    {
+        get => _tbPreviewText;
+        set => this.RaiseAndSetIfChanged(ref _tbPreviewText, value);
+    }
+
+    public string? RbS2TContent
+    {
+        get => _rbS2TContent;
+        set => this.RaiseAndSetIfChanged(ref _rbS2TContent, value);
+    }
+
+    public string? RbT2SContent
+    {
+        get => _rbT2SContent;
+        set => this.RaiseAndSetIfChanged(ref _rbT2SContent, value);
+    }
+
+    public string? RbStdContent
+    {
+        get => _rbStdContent;
+        set => this.RaiseAndSetIfChanged(ref _rbStdContent, value);
+    }
+
+    public string? RbZhtwContent
+    {
+        get => _rbZhtwContent;
+        set => this.RaiseAndSetIfChanged(ref _rbZhtwContent, value);
+    }
+
+    public string? RbHkContent
+    {
+        get => _rbHkContent;
+        set => this.RaiseAndSetIfChanged(ref _rbHkContent, value);
+    }
 
     public ReactiveCommand<Unit, Unit> BtnPasteCommand { get; }
+    public ReactiveCommand<Unit, Unit> BtnCopyCommand { get; }
     public ReactiveCommand<Unit, Unit> BtnOpenFileCommand { get; }
+    public ReactiveCommand<Unit, Unit> BtnSaveFileCommand { get; }
+    public ReactiveCommand<Unit, Unit> BtnProcessCommand { get; }
     public ReactiveCommand<Unit, Unit> BtnClearTbSourceCommand { get; }
     public ReactiveCommand<Unit, Unit> BtnClearTbDestinationCommand { get; }
+    public ReactiveCommand<Unit, Unit> BtnAddCommand { get; }
+    public ReactiveCommand<Unit, Unit> BtnRemoveCommand { get; }
+    public ReactiveCommand<Unit, Unit> BtnClearLbxSourceCommand { get; }
+    public ReactiveCommand<Unit, Unit> BtnSelectOutFolderCommand { get; }
+    public ReactiveCommand<Unit, Unit> BtnPreviewCommand { get; }
+    public ReactiveCommand<Unit, Unit> BtnDetectCommand { get; }
+    public ReactiveCommand<Unit, Unit> BtnMessagePreviewClearCommand { get; }
+    public ReactiveCommand<Unit, Unit> BtnBatchStartCommand { get; }
+
 
     private async Task BtnPaste()
     {
@@ -199,8 +231,27 @@ public class MainWindowViewModel : ViewModelBase
         LblStatusBarContent = "Clipboard content pasted";
         var codeText = OpenccFmmsegNet.ZhoCheck(inputText);
         UpdateEncodeInfo(codeText);
-        LblFileNameContentt = string.Empty;
+        LblFileNameContent = string.Empty;
         _currentOpenFileName = string.Empty;
+    }
+
+    private async Task BtnCopy()
+    {
+        if (string.IsNullOrEmpty(TbDestinationTextDocument!.Text))
+        {
+            LblStatusBarContent = "Not copied: Destination content is empty.";
+            return;
+        }
+
+        try
+        {
+            await _topLevelService!.SetClipboardTextAsync(TbDestinationTextDocument!.Text);
+            LblStatusBarContent = "Text copied to clipboard";
+        }
+        catch (Exception ex)
+        {
+            LblStatusBarContent = $"Clipboard error: {ex.Message}";
+        }
     }
 
     private async Task BtnOpenFile()
@@ -226,12 +277,194 @@ public class MainWindowViewModel : ViewModelBase
         }
     }
 
+    private async Task BtnSaveFile()
+    {
+        var mainWindow = _topLevelService!.GetMainWindow();
+
+        var storageProvider = mainWindow.StorageProvider;
+        var result = await storageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+        {
+            Title = "Save Text File",
+            SuggestedFileName = "document.txt",
+            FileTypeChoices = new List<FilePickerFileType>
+            {
+                new("Text Files") { Patterns = new[] { "*.txt" } }
+            }
+        });
+
+        if (result != null)
+        {
+            var path = result.Path.LocalPath;
+            await File.WriteAllTextAsync(path, TbDestinationTextDocument!.Text);
+            LblStatusBarContent = $"Destination contents saved to file: {path}";
+        }
+    }
+
+    private void BtnProcess()
+    {
+        if (string.IsNullOrEmpty(TbSourceTextDocument!.Text))
+        {
+            LblStatusBarContent = "Source content is empty.";
+            return;
+        }
+
+        var config = GetCurrentConfig();
+        var convertedText = OpenccFmmsegNet.Convert(TbSourceTextDocument.Text, config, IsCbPunctuation);
+
+        TbDestinationTextDocument!.Text = convertedText;
+
+        if (IsRbT2S)
+        {
+            LblDestinationCodeContent = LblSourceCodeContent!.Contains("Non")
+                ? LblSourceCodeContent
+                : _languagesInfo![2].Name;
+        }
+        else if (IsRbS2T)
+        {
+            LblDestinationCodeContent = LblSourceCodeContent!.Contains("Non")
+                ? LblSourceCodeContent
+                : _languagesInfo![1].Name;
+        }
+        else if (IsRbJieba)
+        {
+            TbDestinationTextDocument.Text = string.Join("/", new JiebaSegmenter().Cut(TbSourceTextDocument.Text));
+            LblDestinationCodeContent = LblSourceCodeContent;
+        }
+        else if (IsRbTag)
+        {
+            var wordCount = int.Parse(TbWordCountText!) < 10 ? 10 : int.Parse(TbWordCountText!);
+            TbDestinationTextDocument.Text = "===== TextRank Method =====\n" + string.Join("/ ",
+                new TextRankExtractor().ExtractTags(TbSourceTextDocument.Text, wordCount));
+            TbDestinationTextDocument.Text = TbDestinationTextDocument.Text + "\n\n====== TF-IDF Method ======\n" +
+                                             string.Join("/ ",
+                                                 new TfidfExtractor().ExtractTags(TbSourceTextDocument.Text,
+                                                     wordCount));
+            if (TbDestinationTextDocument.Text.Length == 0)
+            {
+                LblDestinationCodeContent = string.Empty;
+                return;
+            }
+
+            LblDestinationCodeContent = LblSourceCodeContent;
+        }
+        else
+        {
+            return;
+        }
+
+        LblStatusBarContent = "Process completed";
+    }
+
+    private async Task BtnBatchStart()
+    {
+        if (!Directory.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Output")))
+            Directory.CreateDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Output"));
+
+        if (LbxSourceItems!.Count == 0)
+        {
+            LblStatusBarContent = "Nothing to convert.";
+            return;
+        }
+
+        if (!Directory.Exists(TbOutFolderText))
+        {
+            await MessageBox.Show("Invalid output folder:\n " + TbOutFolderText, "Error",
+                _topLevelService!.GetMainWindow());
+            IsTbOutFolderFocus = true;
+            return;
+        }
+
+        if (IsRbS2T == false && IsRbT2S == false)
+        {
+            await MessageBox.Show("Please select conversion type:\n zh-Hans / zh-Hant", "Error",
+                _topLevelService!.GetMainWindow());
+            return;
+        }
+
+        var conversion = IsRbS2T ? RbS2TContent : RbT2SContent;
+        var region = IsRbStd
+            ? RbStdContent
+            : IsRbHk
+                ? RbHkContent
+                : RbZhtwContent;
+        var iSZhTwIdioms = IsCbZhtw ? "Yes" : "No";
+        var isPunctuations = IsCbPunctuation ? "Yes" : "No";
+
+        IsTabMessage = true;
+        LbxDestinationItems!.Clear();
+        LbxDestinationItems.Add($"Conversion Type (转换方式) => {conversion}");
+        LbxDestinationItems.Add($"Region (区域) => {region}");
+        LbxDestinationItems.Add($"ZH/TW Idioms (中台惯用语) => {iSZhTwIdioms}");
+        LbxDestinationItems.Add($"Punctuations (标点) => {isPunctuations}");
+        LbxDestinationItems.Add($"Output folder: (输出文件夹) => {TbOutFolderText}");
+
+        var count = 0;
+
+        foreach (var item in LbxSourceItems)
+        {
+            count++;
+            var sourceFilePath = item;
+            var fileExt = Path.GetExtension(sourceFilePath);
+            var filenameWithoutExt = Path.GetFileNameWithoutExtension(sourceFilePath);
+
+            if (!File.Exists(sourceFilePath))
+            {
+                LbxDestinationItems.Add($"({count}) {sourceFilePath} -> File not found.");
+                continue;
+            }
+
+            if (!_textFileTypes!.Contains(fileExt))
+            {
+                LbxDestinationItems.Add($"({count}) [File skipped ({fileExt})] {sourceFilePath}");
+                continue;
+            }
+
+            string inputText;
+            try
+            {
+                inputText = await File.ReadAllTextAsync(sourceFilePath);
+            }
+            catch (Exception)
+            {
+                LbxDestinationItems.Add($"({count}) {sourceFilePath} -> Conversion error.");
+                continue;
+            }
+
+            string convertedText;
+            string suffix;
+            var config = GetCurrentConfig();
+            if (IsRbT2S)
+            {
+                suffix = "(Hans)";
+                convertedText = OpenccFmmsegNet.Convert(inputText, config, IsCbPunctuation);
+            }
+            else if (IsRbS2T)
+            {
+                suffix = "(Hant)";
+                convertedText = OpenccFmmsegNet.Convert(inputText, config, IsCbPunctuation);
+            }
+            else
+            {
+                suffix = "(Other)";
+                convertedText = inputText;
+            }
+
+            var outputFilename = Path.Combine(Path.GetFullPath(TbOutFolderText),
+                filenameWithoutExt + suffix + fileExt);
+            await File.WriteAllTextAsync(outputFilename, convertedText);
+
+            LbxDestinationItems.Add($"({count}) {outputFilename} -> [Done ✓]");
+        }
+
+        LblStatusBarContent = "Batch conversion done.";
+    }
+
     private void BtnClearTbSource()
     {
         TbSourceTextDocument!.Text = string.Empty;
         _currentOpenFileName = string.Empty;
         LblSourceCodeContent = string.Empty;
-        LblFileNameContentt = string.Empty;
+        LblFileNameContent = string.Empty;
         LblStatusBarContent = "Source text box cleared";
     }
 
@@ -240,6 +473,154 @@ public class MainWindowViewModel : ViewModelBase
         TbDestinationTextDocument!.Text = string.Empty;
         LblDestinationCodeContent = string.Empty;
         LblStatusBarContent = "Destination contents cleared";
+    }
+
+    private async Task BtnAdd()
+    {
+        var mainWindow = _topLevelService!.GetMainWindow();
+
+        var storageProvider = mainWindow.StorageProvider;
+        var result = await storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+        {
+            Title = "Open Text File",
+            FileTypeFilter = new List<FilePickerFileType>
+            {
+                new("Text Files") { Patterns = new[] { "*.txt" } }
+            },
+            AllowMultiple = true
+        });
+
+        if (result.Count <= 0) return;
+        var listBoxItems = LbxSourceItems!.ToList();
+        foreach (var file in result)
+        {
+            var path = file.Path.LocalPath;
+            if (!listBoxItems.Contains(path))
+                listBoxItems.Add(path);
+        }
+
+        var sortedList = listBoxItems.OrderBy(x => x);
+        LbxSourceItems!.Clear();
+        foreach (var item in sortedList) LbxSourceItems.Add(item);
+    }
+
+    private void BtnRemove()
+    {
+        var index = LbxSourceSelectedIndex;
+        var name = LbxSourceSelectedItem;
+        if (LbxSourceSelectedIndex == -1)
+        {
+            LblStatusBarContent = "Nothing to remove.";
+            return;
+        }
+
+        LbxSourceItems!.Remove(LbxSourceSelectedItem!);
+        //lbxSource.Items.RemoveAt(lbxSource.SelectedIndex);
+        LblStatusBarContent = $"Item ({index}) {name} removed";
+    }
+
+    private async Task BtnPreview()
+    {
+        if (LbxSourceSelectedIndex == -1)
+        {
+            LblStatusBarContent = "Nothing to preview.";
+            return;
+        }
+
+        var filename = LbxSourceSelectedItem;
+
+        if (!_textFileTypes!.Contains(Path.GetExtension(filename)!))
+        {
+            IsTabMessage = true;
+            LbxDestinationItems!.Add("File type [" + Path.GetExtension(filename)! + "] Preview not supported");
+            return;
+        }
+
+        try
+        {
+            var displayText = await File.ReadAllTextAsync(filename!);
+            IsTabPreview = true;
+            TbPreviewText = displayText;
+        }
+        catch (Exception)
+        {
+            IsTabPreview = true;
+            LbxDestinationItems!.Add($"File read error: {filename}");
+            LblStatusBarContent = "File read error.";
+        }
+    }
+
+    private async Task BtnDetect()
+    {
+        if (LbxSourceItems!.Count == 0)
+        {
+            LblStatusBarContent = "Nothing to detect.";
+            return;
+        }
+
+        IsTabMessage = true;
+        LbxDestinationItems!.Clear();
+
+        foreach (var item in LbxSourceItems)
+        {
+            var fileExt = Path.GetExtension(item);
+
+            if (_textFileTypes!.Contains(fileExt))
+            {
+                string inputText;
+                try
+                {
+                    inputText = await File.ReadAllTextAsync(item);
+                }
+                catch (Exception)
+                {
+                    LbxDestinationItems.Add(item + " -> File read error.");
+                    continue;
+                }
+
+                var textCode = _languagesInfo![OpenccFmmsegNet.ZhoCheck(inputText)].Name!;
+                LbxDestinationItems.Add($"[{textCode}] {item}");
+            }
+            else
+            {
+                LbxDestinationItems.Add($"[File skipped ({fileExt})] {item}");
+            }
+        }
+
+        LblStatusBarContent = "Batch zho code detection done.";
+    }
+
+    private void BtnClearLbxSource()
+    {
+        LbxSourceItems!.Clear();
+        LblStatusBarContent = "All source entries cleared.";
+    }
+
+    private void BtnMessagePreviewClear()
+    {
+        if (IsTabMessage)
+            LbxDestinationItems!.Clear();
+        else if (IsTabPreview) TbPreviewText = string.Empty;
+    }
+
+    private async Task BtnSelectOutFolder()
+    {
+        var mainWindow = _topLevelService!.GetMainWindow();
+
+        // Show folder picker dialog
+        var result = await mainWindow.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
+        {
+            Title = "Select Output Folder"
+            // InitialDirectory is not supported in FolderPickerOpenOptions, can be handled differently if needed
+        });
+
+        // Process folder picker dialog results
+        if (result.Count > 0)
+        {
+            var folderPath = result[0].Path.LocalPath;
+            TbOutFolderText = folderPath;
+            IsTbOutFolderFocus = true;
+        }
     }
 
     private void UpdateEncodeInfo(int codeText)
@@ -284,7 +665,7 @@ public class MainWindowViewModel : ViewModelBase
             TbSourceTextDocument!.Text = contents;
             LblStatusBarContent = $"File: {_currentOpenFileName}";
             var displayName = fileInfo.Name;
-            LblFileNameContentt =
+            LblFileNameContent =
                 displayName.Length > 50 ? $"{displayName[..25]}...{displayName[^15..]}" : displayName;
             var codeText = OpenccFmmsegNet.ZhoCheck(contents);
             UpdateEncodeInfo(codeText);
@@ -300,19 +681,19 @@ public class MainWindowViewModel : ViewModelBase
 
     private string GetCurrentConfig()
     {
-        var config = IsRbS2T == true
-            ? IsRbStd == true
+        var config = IsRbS2T
+            ? IsRbStd
                 ? "s2t"
-                : IsRbHk == true
+                : IsRbHk
                     ? "s2hk"
-                    : IsCbZhtw == true
+                    : IsCbZhtw
                         ? "s2twp"
                         : "s2tw"
-            : IsRbStd == true
+            : IsRbStd
                 ? "t2s"
-                : IsRbHk == true
+                : IsRbHk
                     ? "t2hk"
-                    : IsCbZhtw == true
+                    : IsCbZhtw
                         ? "tw2sp"
                         : "tw2s";
         return config;
@@ -322,4 +703,136 @@ public class MainWindowViewModel : ViewModelBase
     {
         LblTotalCharsContent = $"[ Chars: {TbSourceTextDocument!.Text!.Length:N0} ]";
     }
+
+    #region RbCbRegion
+
+    public bool IsRbS2T
+    {
+        get => _isRbS2T;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _isRbS2T, value);
+            if (!value) return;
+            IsRbT2S = false;
+            IsRbJieba = false;
+            IsRbTag = false;
+        }
+    }
+
+    public bool IsRbT2S
+    {
+        get => _isRbT2S;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _isRbT2S, value);
+            if (!value) return;
+            IsRbS2T = false;
+            IsRbJieba = false;
+            IsRbTag = false;
+        }
+    }
+
+    public bool IsRbJieba
+    {
+        get => _isRbJieba;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _isRbJieba, value);
+            if (!value) return;
+            IsRbS2T = false;
+            IsRbT2S = false;
+            IsRbTag = false;
+        }
+    }
+
+    public bool IsRbTag
+    {
+        get => _isRbTag;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _isRbTag, value);
+            if (!value) return;
+            IsRbS2T = false;
+            IsRbT2S = false;
+            IsRbJieba = false;
+        }
+    }
+
+    public bool IsRbStd
+    {
+        get => _isRbStd;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _isRbStd, value);
+            if (!value) return;
+            IsRbZhtw = false;
+            IsRbHk = false;
+        }
+    }
+
+    public bool IsRbZhtw
+    {
+        get => _isRbZhtw;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _isRbZhtw, value);
+            if (!value) return;
+            IsRbStd = false;
+            IsRbHk = false;
+        }
+    }
+
+    public bool IsRbHk
+    {
+        get => _isRbHk;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _isRbHk, value);
+            if (!value) return;
+            IsRbStd = false;
+            IsRbZhtw = false;
+        }
+    }
+
+    public bool IsTabMessage
+    {
+        get => _isTabMessage;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _isTabMessage, value);
+            if (!value) return;
+            IsTabPreview = false;
+        }
+    }
+
+    public bool IsTabPreview
+    {
+        get => _isTabPreview;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _isTabPreview, value);
+            if (!value) return;
+            IsTabMessage = false;
+        }
+    }
+
+    public bool IsCbZhtw
+    {
+        get => _isCbZhtw;
+        set => this.RaiseAndSetIfChanged(ref _isCbZhtw, value);
+    }
+
+    public bool IsCbPunctuation
+    {
+        get => _isCbPunctuation;
+        set => this.RaiseAndSetIfChanged(ref _isCbPunctuation, value);
+    }
+
+    public bool IsTbOutFolderFocus
+    {
+        get => _isTbOutFolderFocus;
+        set => this.RaiseAndSetIfChanged(ref _isTbOutFolderFocus, value);
+    }
+
+    #endregion
 }
