@@ -45,20 +45,20 @@ public partial class MainWindow : Window
 
     private void RbStd_Click(object? sender, RoutedEventArgs e)
     {
-        CbCnTw.IsEnabled = false;
-        CbCnTw.IsChecked = false;
+        CbZhtw.IsEnabled = false;
+        CbZhtw.IsChecked = false;
     }
 
     private void RbZHTW_Click(object? sender, RoutedEventArgs e)
     {
-        CbCnTw.IsEnabled = true;
-        CbCnTw.IsChecked = true;
+        CbZhtw.IsEnabled = true;
+        CbZhtw.IsChecked = true;
     }
 
     private void RbHK_Click(object? sender, RoutedEventArgs e)
     {
-        CbCnTw.IsEnabled = false;
-        CbCnTw.IsChecked = false;
+        CbZhtw.IsEnabled = false;
+        CbZhtw.IsChecked = false;
     }
 
     private void TabMain_GotFocus(object? sender, GotFocusEventArgs e)
@@ -411,7 +411,7 @@ public partial class MainWindow : Window
             : (bool)RbHk.IsChecked!
                 ? RbHk.Content!.ToString()!
                 : RbZhtw.Content!.ToString()!;
-        var iSZhTwIdioms = (bool)CbCnTw.IsChecked! ? "Yes" : "No";
+        var iSZhTwIdioms = (bool)CbZhtw.IsChecked! ? "Yes" : "No";
         var isPunctuations = (bool)CbPunctuation.IsChecked! ? "Yes" : "No";
 
         TabMessage.IsSelected = true;
@@ -576,14 +576,14 @@ public partial class MainWindow : Window
                 ? "s2t"
                 : RbHk.IsChecked == true
                     ? "s2hk"
-                    : CbCnTw.IsChecked == true
+                    : CbZhtw.IsChecked == true
                         ? "s2twp"
                         : "s2tw"
             : RbStd.IsChecked == true
                 ? "t2s"
                 : RbHk.IsChecked == true
                     ? "t2hk"
-                    : CbCnTw.IsChecked == true
+                    : CbZhtw.IsChecked == true
                         ? "tw2sp"
                         : "tw2s";
         return config;

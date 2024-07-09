@@ -40,14 +40,16 @@
             </Grid.RowDefinitions>
             <RadioButton x:Name="RbT2S" Content="Hant (繁体) to Hans (简体)" Grid.Row="0" Grid.Column="0" FontSize="14"
                          Padding="5,0,0,0" Margin="20,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"
-                         IsChecked="True" Click="RbT2s_Click" GroupName="MainRb" />
+                         IsChecked="{Binding IsRbT2S}" Click="RbT2s_Click" GroupName="MainRb" />
             <RadioButton x:Name="RbS2T" Content="Hans (简体) to Hant (繁体)" Grid.Row="0" Grid.Column="1" FontSize="14"
                          Padding="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Click="RbS2t_Click"
-                         GroupName="MainRb" />
+                         GroupName="MainRb" IsChecked="{Binding IsRbS2T}"/>
             <RadioButton x:Name="RbJieba" Content="Segmentation (分词)" Grid.Row="0" Grid.Column="2" FontSize="14"
-                         Padding="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="MainRb" />
+                         Padding="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="MainRb" 
+						 IsChecked="{Binding IsRbJieba}"/>
             <RadioButton x:Name="RbTag" Content="Keywords (关键词)" Grid.Row="0" Grid.Column="3" FontSize="14"
-                         Padding="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="MainRb" />
+                         Padding="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="MainRb" 
+						 IsChecked="{Binding IsRbTag}"/>
             <TextBox Name="TbWordCount" Grid.Row="0" Grid.Column="3" Text="30" VerticalAlignment="Center"
                      HorizontalAlignment="Left" Margin="160,0,0,0" FontSize="14"
                      ToolTip.Tip="Number of keywords to extract" />
@@ -63,16 +65,16 @@
 
                 <RadioButton x:Name="RbStd" Grid.Row="0" Grid.Column="0" Content="Standard (标准简繁)" FontSize="14"
                              Padding="5,0,0,0" Margin="20,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"
-                             GroupName="SecondRb" Click="RbStd_Click" IsChecked="True" />
+                             GroupName="SecondRb" Click="RbStd_Click" IsChecked="{Binding IsRbStd}" />
                 <RadioButton x:Name="RbZhtw" Grid.Row="0" Grid.Column="1" Content="ZH-TW (中台简繁)" FontSize="14"
                              Padding="5,0,0,0" Margin="15,0,0,0" VerticalAlignment="Center"
-                             HorizontalAlignment="Center"
-                             GroupName="SecondRb" Click="RbZHTW_Click" IsChecked="False" />
+                             HorizontalAlignment="Center" 
+                             GroupName="SecondRb" Click="RbZHTW_Click" IsChecked="{Binding IsRbZhtw}" />
                 <RadioButton x:Name="RbHk" Grid.Row="0" Grid.Column="2" Content="ZH-HK (中港简繁)" FontSize="14"
                              Padding="5,0,0,0" Margin="20,0,0,0" VerticalAlignment="Center"
-                             HorizontalAlignment="Center"
+                             HorizontalAlignment="Center" IsChecked="{Binding IsRbHk}"
                              GroupName="SecondRb" Click="RbHK_Click" />
-                <CheckBox x:Name="CbCnTw" Grid.Row="0" Grid.Column="3" Content="ZH-TW Idioms(中台惯用语)" FontSize="14"
+                <CheckBox x:Name="CbZhtw" Grid.Row="0" Grid.Column="3" Content="ZH-TW Idioms(中台惯用语)" FontSize="14"
                           Padding="5,0,0,0" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
                 <CheckBox x:Name="CbPunctuation" Grid.Row="0" Grid.Column="4" Content="Punctuation (标点)"
                           FontSize="14" Padding="5,0,0,0" Margin="5,0,0,0" VerticalAlignment="Center"
