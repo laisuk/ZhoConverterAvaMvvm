@@ -11,6 +11,7 @@ using JiebaNet.Analyser;
 using JiebaNet.Segmenter;
 using OpenccFmmsegNetLib;
 using ZhoConverterAvaMvvm.Services;
+using ZhoConverterAvaMvvm.ViewModels;
 
 namespace ZhoConverterAvaMvvm.Views;
 
@@ -78,10 +79,14 @@ public partial class MainWindow : Window
 
     private void TbSource_TextChanged(object? sender, EventArgs eventArgs)
     {
-        LblTotalChars.Content = $"[ Chars: {TbSource.Text!.Length:N0} ]";
+        //LblTotalChars.Content = $"[ Chars: {TbSource.Text!.Length:N0} ]";
+        if (DataContext is MainWindowViewModel viewModel)
+            {
+                viewModel.TbSourceTextChanged();
+            }
     }
 
-    private void BtnClearSource_Click(object? sender, RoutedEventArgs e)
+    private void BtnClearTbSource_Click(object? sender, RoutedEventArgs e)
     {
         TbSource.Clear();
         _currentOpenFileName = string.Empty;
@@ -90,47 +95,47 @@ public partial class MainWindow : Window
         LblStatusBar.Content = "Source text box cleared";
     }
 
-    private async void BtnPaste_Click(object? sender, RoutedEventArgs e)
-    {
-        var inputText = await Clipboard!.GetTextAsync();
+    //private async void BtnPaste_Click(object? sender, RoutedEventArgs e)
+    //{
+    //    var inputText = await Clipboard!.GetTextAsync();
 
-        if (string.IsNullOrEmpty(inputText))
-        {
-            LblStatusBar.Content = "Clipboard is empty.";
-            return;
-        }
+    //    if (string.IsNullOrEmpty(inputText))
+    //    {
+    //        LblStatusBar.Content = "Clipboard is empty.";
+    //        return;
+    //    }
 
-        TbSource.Text = inputText;
-        LblStatusBar.Content = "Clipboard content pasted";
-        var codeText = OpenccFmmsegNet.ZhoCheck(inputText);
-        UpdateEncodeInfo(codeText);
-        LblFileName.Content = string.Empty;
-        _currentOpenFileName = string.Empty;
-    }
+    //    TbSource.Text = inputText;
+    //    LblStatusBar.Content = "Clipboard content pasted";
+    //    var codeText = OpenccFmmsegNet.ZhoCheck(inputText);
+    //    UpdateEncodeInfo(codeText);
+    //    LblFileName.Content = string.Empty;
+    //    _currentOpenFileName = string.Empty;
+    //}
 
-    private void UpdateEncodeInfo(int codeText)
-    {
-        switch (codeText)
-        {
-            case 1:
-                LblSourceCode.Content = _languagesInfo![codeText].Name;
-                if (RbT2S.IsChecked == false) RbT2S.IsChecked = true;
+    //private void UpdateEncodeInfo(int codeText)
+    //{
+    //    switch (codeText)
+    //    {
+    //        case 1:
+    //            LblSourceCode.Content = _languagesInfo![codeText].Name;
+    //            if (RbT2S.IsChecked == false) RbT2S.IsChecked = true;
 
-                break;
+    //            break;
 
-            case 2:
-                LblSourceCode.Content = _languagesInfo![codeText].Name;
-                if (RbS2T.IsChecked == false) RbS2T.IsChecked = true;
+    //        case 2:
+    //            LblSourceCode.Content = _languagesInfo![codeText].Name;
+    //            if (RbS2T.IsChecked == false) RbS2T.IsChecked = true;
 
-                break;
+    //            break;
 
-            default:
-                LblSourceCode.Content = _languagesInfo![0].Name;
-                break;
-        }
-    }
+    //        default:
+    //            LblSourceCode.Content = _languagesInfo![0].Name;
+    //            break;
+    //    }
+    //}
 
-    private void BtnClearDestination_Click(object? sender, RoutedEventArgs e)
+    private void BtnClearTbDestination_Click(object? sender, RoutedEventArgs e)
     {
         TbDestination.Clear();
         LblDestinationCode.Content = string.Empty;
@@ -484,63 +489,63 @@ public partial class MainWindow : Window
         LblStatusBar.Content = "Batch conversion done.";
     }
 
-    private async void BtnOpenFile_Click(object? sender, RoutedEventArgs e)
-    {
-        var mainWindow = this;
+    //private async void BtnOpenFile_Click(object? sender, RoutedEventArgs e)
+    //{
+    //    var mainWindow = this;
 
-        var storageProvider = mainWindow.StorageProvider;
-        var result = await storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
-        {
-            Title = "Open Text File",
-            FileTypeFilter = new List<FilePickerFileType>
-            {
-                new("Text Files") { Patterns = new[] { "*.txt" } }
-            },
-            AllowMultiple = false
-        });
+    //    var storageProvider = mainWindow.StorageProvider;
+    //    var result = await storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+    //    {
+    //        Title = "Open Text File",
+    //        FileTypeFilter = new List<FilePickerFileType>
+    //        {
+    //            new("Text Files") { Patterns = new[] { "*.txt" } }
+    //        },
+    //        AllowMultiple = false
+    //    });
 
-        if (result.Count <= 0) return;
-        var file = result[0];
-        {
-            var path = file.Path.LocalPath;
-            UpdateTbSourceFileContents(path);
-        }
-    }
+    //    if (result.Count <= 0) return;
+    //    var file = result[0];
+    //    {
+    //        var path = file.Path.LocalPath;
+    //        UpdateTbSourceFileContents(path);
+    //    }
+    //}
 
-    private async void UpdateTbSourceFileContents(string filename)
-    {
-        var fileInfo = new FileInfo(filename);
-        if (fileInfo.Length > int.MaxValue)
-        {
-            LblStatusBar.Content = "Error: File too large";
-            return;
-        }
+    //private async void UpdateTbSourceFileContents(string filename)
+    //{
+    //    var fileInfo = new FileInfo(filename);
+    //    if (fileInfo.Length > int.MaxValue)
+    //    {
+    //        LblStatusBar.Content = "Error: File too large";
+    //        return;
+    //    }
 
-        _currentOpenFileName = filename;
+    //    _currentOpenFileName = filename;
 
-        // Read file contents
-        try
-        {
-            using var reader = new StreamReader(_currentOpenFileName);
-            var contents = await reader.ReadToEndAsync();
-            // Display file contents to text box field
-            TbSource.Clear();
-            TbSource.Text = contents;
-            LblStatusBar.Content = $"File: {_currentOpenFileName}";
-            var displayName = fileInfo.Name;
-            LblFileName.Content =
-                displayName.Length > 50 ? $"{displayName[..25]}...{displayName[^15..]}" : displayName;
-            var codeText = OpenccFmmsegNet.ZhoCheck(contents);
-            UpdateEncodeInfo(codeText);
-        }
-        catch (Exception)
-        {
-            TbSource.Clear();
-            LblSourceCode.Content = string.Empty;
-            LblStatusBar.Content = "Error: Invalid file";
-            //throw;
-        }
-    }
+    //    // Read file contents
+    //    try
+    //    {
+    //        using var reader = new StreamReader(_currentOpenFileName);
+    //        var contents = await reader.ReadToEndAsync();
+    //        // Display file contents to text box field
+    //        TbSource.Clear();
+    //        TbSource.Text = contents;
+    //        LblStatusBar.Content = $"File: {_currentOpenFileName}";
+    //        var displayName = fileInfo.Name;
+    //        LblFileName.Content =
+    //            displayName.Length > 50 ? $"{displayName[..25]}...{displayName[^15..]}" : displayName;
+    //        var codeText = OpenccFmmsegNet.ZhoCheck(contents);
+    //        UpdateEncodeInfo(codeText);
+    //    }
+    //    catch (Exception)
+    //    {
+    //        TbSource.Clear();
+    //        LblSourceCode.Content = string.Empty;
+    //        LblStatusBar.Content = "Error: Invalid file";
+    //        //throw;
+    //    }
+    //}
 
     private async void BtnSaveFile_Click(object? sender, RoutedEventArgs e)
     {
@@ -588,4 +593,5 @@ public partial class MainWindow : Window
                         : "tw2s";
         return config;
     }
+    
 }

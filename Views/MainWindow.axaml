@@ -108,10 +108,10 @@
                         <!--          BorderThickness="2,2,2,2" TextWrapping="Wrap" -->
                         <!--          TextChanged="TbSource_TextChanged" AcceptsReturn="True" FontSize="16" IsUndoEnabled="False" /> -->
                         <avaloniaEdit:TextEditor
-                            x:Name="TbSource" Grid.Row="0" Grid.Column="0" Margin="5,5,5,0"
-                            FontFamily="Consolas" VerticalScrollBarVisibility="Visible" ShowLineNumbers="True"
+                            x:Name="TbSource" Grid.Row="0" Grid.Column="0" Margin="5,5,5,0" Document="{Binding TbSourceTextDocument}"
+                            FontFamily="Consolas" VerticalScrollBarVisibility="Visible" ShowLineNumbers="True" TextChanged="TbSource_TextChanged"
                             BorderThickness="2,2,2,2" BorderBrush="Black" Background="WhiteSmoke" WordWrap="True"
-                            TextChanged="TbSource_TextChanged" FontSize="16" />
+                            FontSize="16"  />
 
                         <!-- <TextBox x:Name="TbDestination" Grid.Row="0" Grid.Column="1" Margin="5,5,5,0" -->
                         <!--          BorderThickness="2,2,2,2" TextWrapping="Wrap" -->
@@ -119,15 +119,15 @@
                         <avaloniaEdit:TextEditor x:Name="TbDestination" Grid.Row="0" Grid.Column="1" Margin="5,5,5,0"
                                                  BorderThickness="2,2,2,2" BorderBrush="Black" WordWrap="True"
                                                  Background="WhiteSmoke" VerticalScrollBarVisibility="Visible"
-                                                 ShowLineNumbers="True"
+                                                 ShowLineNumbers="True" 
                                                  FontSize="16" IsReadOnly="True" />
                         <Label Grid.Row="1" Grid.Column="0" Content="Source:" HorizontalAlignment="Left"
                                VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" BorderBrush="Black"
                                BorderThickness="3,0,0,0" />
-                        <Label x:Name="LblSourceCode" Grid.Row="1" Grid.Column="0" Content=""
+                        <Label x:Name="LblSourceCode" Grid.Row="1" Grid.Column="0" Content="{Binding LblSourceCodeContent}"
                                HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,0,0,0" FontSize="16" />
-                        <Label x:Name="LblTotalChars" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"
-                               VerticalAlignment="Center" Margin="0,0,130,0" FontSize="14" />
+                        <Label x:Name="LblTotalChars" Grid.Row="1" Grid.Column="0" Content="{Binding LblTotalCharsContent}" HorizontalAlignment="Right"
+                               VerticalAlignment="Center" Margin="0,0,130,0" FontSize="14"  />
                         <Label Grid.Column="1" Content="Destination:" HorizontalAlignment="Left" Margin="5,0,0,0"
                                Grid.Row="1" VerticalAlignment="Center" FontSize="16" BorderBrush="Black"
                                BorderThickness="3,0,0,0" />
@@ -136,16 +136,16 @@
                         <Button x:Name="BtnClearSource" Content="AC" Padding="0 2" Width="40"
                                 HorizontalAlignment="Right" HorizontalContentAlignment="Center"
                                 Margin="0,2,90,0" Grid.Row="1"
-                                Grid.Column="0" VerticalAlignment="Center" FontSize="14" Click="BtnClearSource_Click"
+                                Grid.Column="0" VerticalAlignment="Center" FontSize="14" Click="BtnClearTbSource_Click"
                                 FontWeight="Bold" />
                         <Button x:Name="BtnPaste" Content="Paste" Padding="0 2" Width="80" HorizontalAlignment="Right"
                                 HorizontalContentAlignment="Center"
                                 Margin="0,2,5,0" Grid.Row="1"
-                                Grid.Column="0" VerticalAlignment="Center" FontSize="14" Click="BtnPaste_Click" />
+                                Grid.Column="0" VerticalAlignment="Center" FontSize="14" Command="{Binding BtnPasteCommand}" />
                         <Button x:Name="BtnClearDestination" Grid.Column="1" Content="AC" Padding="0 2" Width="40"
                                 HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="0,2,90,0"
                                 Grid.Row="1" VerticalAlignment="Center"
-                                FontSize="14" Click="BtnClearDestination_Click" FontWeight="Bold" />
+                                FontSize="14" Click="BtnClearTbDestination_Click" FontWeight="Bold" />
                         <Button x:Name="BtnCopy" Grid.Column="1" Content="Copy" Padding="0 2" Width="80"
                                 HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="0,2,5,0"
                                 Grid.Row="1" VerticalAlignment="Center"
@@ -239,8 +239,8 @@
                 IsVisible="False" Click="BtnBatchStart_Click" />
         <Button x:Name="BtnOpenFile" Content="Open File" Padding="0 2" Width="80" HorizontalAlignment="Left"
                 HorizontalContentAlignment="Center"
-                Margin="20,0,0,0" Grid.Row="2" VerticalAlignment="Center" FontSize="14" Click="BtnOpenFile_Click" />
-        <Label x:Name="LblFileName" Content="" Padding="0 2" HorizontalAlignment="Left" Margin="110,0,0,0" Grid.Row="2"
+                Margin="20,0,0,0" Grid.Row="2" VerticalAlignment="Center" FontSize="14" Command="{Binding BtnOpenFileCommand}" />
+        <Label x:Name="LblFileName" Content="{Binding LblFileNameContentt}" Padding="0 2" HorizontalAlignment="Left" Margin="110,0,0,0" Grid.Row="2"
                VerticalAlignment="Center" FontSize="14" />
         <Button x:Name="BtnSaveFile" Content="Save As" Padding="0 2" Width="80" HorizontalAlignment="Right"
                 HorizontalContentAlignment="Center"
@@ -250,7 +250,7 @@
                 Margin="0,0,20,0" Grid.Row="2" VerticalAlignment="Center" FontSize="14" Foreground="Red"
                 FontWeight="Bold" Click="BtnExit_Click" />
         <StackPanel x:Name="StbStatusBar" Grid.Row="3" Height="30">
-            <Label x:Name="LblStatusBar" Content="Zho Converter" Padding="0 2" Margin="10,0,0,0"
+            <Label x:Name="LblStatusBar" Content="{Binding LblStatusBarContent}" Padding="0 2" Margin="10,0,0,0"
                    HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
         </StackPanel>
     </Grid>
