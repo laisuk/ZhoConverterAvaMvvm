@@ -1,100 +1,89 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using Avalonia.Controls;
-using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Media;
-using ZhoConverterAvaMvvm.Services;
 using ZhoConverterAvaMvvm.ViewModels;
 
 namespace ZhoConverterAvaMvvm.Views;
 
 public partial class MainWindow : Window
 {
-    private readonly List<Language>? _languagesInfo;
+    // private readonly List<Language>? _languagesInfo;
 
     public MainWindow()
     {
         InitializeComponent();
     }
 
-    public MainWindow(LanguageSettingsService languageSettingsService) : this()
-    {
-        var languageSettings = languageSettingsService.LanguageSettings;
-        _languagesInfo = languageSettings!.Languages;
-    }
+    // public MainWindow(LanguageSettingsService languageSettingsService) : this()
+    // {
+    //     // var languageSettings = languageSettingsService.LanguageSettings;
+    //     // _languagesInfo = languageSettings!.Languages;
+    // }
 
-    private void RbT2s_Click(object? sender, RoutedEventArgs e)
-    {
-        LblSourceCode.Content = _languagesInfo![1].Name;
-    }
+    // private void RbT2s_Click(object? sender, RoutedEventArgs e)
+    // {
+    //     LblSourceCode.Content = _languagesInfo![1].Name;
+    // }
+    //
+    // private void RbS2t_Click(object? sender, RoutedEventArgs e)
+    // {
+    //     LblSourceCode.Content = _languagesInfo![2].Name;
+    // }
 
-    private void RbS2t_Click(object? sender, RoutedEventArgs e)
-    {
-        LblSourceCode.Content = _languagesInfo![2].Name;
-    }
-
-    private void RbStd_Click(object? sender, RoutedEventArgs e)
-    {
-        CbZhtw.IsEnabled = false;
-        CbZhtw.IsChecked = false;
-    }
-
-    private void RbZHTW_Click(object? sender, RoutedEventArgs e)
-    {
-        CbZhtw.IsEnabled = true;
-        CbZhtw.IsChecked = true;
-    }
-
-    private void RbHK_Click(object? sender, RoutedEventArgs e)
-    {
-        CbZhtw.IsEnabled = false;
-        CbZhtw.IsChecked = false;
-    }
-
-    private void TabMain_GotFocus(object? sender, GotFocusEventArgs e)
-    {
-        BtnOpenFile.IsEnabled = true;
-        BtnOpenFile.IsVisible = true;
-        BtnSaveFile.IsEnabled = true;
-        BtnSaveFile.IsVisible = true;
-        BtnProcess.IsEnabled = true;
-        BtnProcess.IsVisible = true;
-        LblFileName.IsVisible = true;
-        BtnBatchStart.IsEnabled = false;
-        BtnBatchStart.IsVisible = false;
-        TabMain.FontWeight = FontWeight.Black;
-        TabBatch.FontWeight = FontWeight.Normal;
-    }
+    // private void RbStd_Click(object? sender, RoutedEventArgs e)
+    // {
+    //     CbZhtw.IsEnabled = false;
+    //     CbZhtw.IsChecked = false;
+    // }
+    //
+    // private void RbZHTW_Click(object? sender, RoutedEventArgs e)
+    // {
+    //     CbZhtw.IsEnabled = true;
+    //     CbZhtw.IsChecked = true;
+    // }
+    //
+    // private void RbHK_Click(object? sender, RoutedEventArgs e)
+    // {
+    //     CbZhtw.IsEnabled = false;
+    //     CbZhtw.IsChecked = false;
+    // }
 
     private void TbSource_TextChanged(object? sender, EventArgs eventArgs)
     {
         if (DataContext is MainWindowViewModel viewModel) viewModel.TbSourceTextChanged();
     }
 
-    private void TabBatch_GotFocus(object? sender, GotFocusEventArgs e)
-    {
-        if (!Directory.Exists(TbOutFolder.Text))
-            TbOutFolder.Text = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Output");
-
-        BtnOpenFile.IsEnabled = false;
-        BtnOpenFile.IsVisible = false;
-        BtnSaveFile.IsEnabled = false;
-        BtnSaveFile.IsVisible = false;
-        BtnProcess.IsEnabled = false;
-        BtnProcess.IsVisible = false;
-        LblFileName.IsVisible = false;
-        BtnBatchStart.IsEnabled = true;
-        BtnBatchStart.IsVisible = true;
-        TabBatch.FontWeight = FontWeight.Black;
-        TabMain.FontWeight = FontWeight.Normal;
-    }
-
     private void BtnExit_Click(object? sender, RoutedEventArgs e)
     {
         Close();
     }
+
+    // private void TabMain_GotFocus(object? sender, GotFocusEventArgs e)
+    // {
+    //     BtnOpenFile.IsVisible = true;
+    //     BtnSaveFile.IsVisible = true;
+    //     BtnProcess.IsVisible = true;
+    //     LblFileName.IsVisible = true;
+    //     BtnBatchStart.IsVisible = false;
+    //     TabMain.FontWeight = FontWeight.Black;
+    //     TabBatch.FontWeight = FontWeight.Normal;
+    // }
+    //
+    // private void TabBatch_GotFocus(object? sender, GotFocusEventArgs e)
+    // {
+    //     if (!Directory.Exists(TbOutFolder.Text))
+    //         TbOutFolder.Text = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Output");
+    //
+    //     BtnOpenFile.IsVisible = false;
+    //     BtnSaveFile.IsVisible = false;
+    //     BtnProcess.IsVisible = false;
+    //     LblFileName.IsVisible = false;
+    //     BtnBatchStart.IsVisible = true;
+    //     TabBatch.FontWeight = FontWeight.Black;
+    //     TabMain.FontWeight = FontWeight.Normal;
+    // }
+    //
+    //
     //private void BtnClearTbSource_Click(object? sender, RoutedEventArgs e)
     //{
     //    TbSource.Clear();

@@ -8,13 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ab2cb51-e8f0-4aca-a1c3-d0eb023c0689" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Helpers/FocusAttachedProperty.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/TopLevelService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/TopLevelService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/MainWindow.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MainWindow.axaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/MainWindow.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MainWindow.axaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +110,8 @@
       <workItem from="1720387843949" duration="733000" />
       <workItem from="1720388596274" duration="271000" />
       <workItem from="1720468709654" duration="2078000" />
-      <workItem from="1720554767302" duration="7922000" />
+      <workItem from="1720554767302" duration="8872000" />
+      <workItem from="1720567633916" duration="5124000" />
     </task>
     <task id="LOCAL-00001" summary="Add Dependency Injection">
       <option name="closed" value="true" />
@@ -123,7 +121,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720292006994</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Update to MVVM 3">
+      <option name="closed" value="true" />
+      <created>1720562902838</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1720562902838</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -134,6 +140,7 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Add Dependency Injection" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Dependency Injection" />
+    <MESSAGE value="Update to MVVM 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update to MVVM 3" />
   </component>
 </project>

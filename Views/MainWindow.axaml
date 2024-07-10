@@ -41,9 +41,9 @@
             </Grid.RowDefinitions>
             <RadioButton x:Name="RbT2S" Content="{Binding RbT2SContent}" Grid.Row="0" Grid.Column="0" FontSize="14"
                          Padding="5,0,0,0" Margin="20,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"
-                         IsChecked="{Binding IsRbT2S}" Click="RbT2s_Click" GroupName="MainRb" />
+                         IsChecked="{Binding IsRbT2S}" GroupName="MainRb" />
             <RadioButton x:Name="RbS2T" Content="{Binding RbS2TContent}" Grid.Row="0" Grid.Column="1" FontSize="14"
-                         Padding="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Click="RbS2t_Click"
+                         Padding="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"
                          GroupName="MainRb" IsChecked="{Binding IsRbS2T}" />
             <RadioButton x:Name="RbJieba" Content="Segmentation (分词)" Grid.Row="0" Grid.Column="2" FontSize="14"
                          Padding="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="MainRb"
@@ -67,18 +67,19 @@
 
                 <RadioButton x:Name="RbStd" Grid.Row="0" Grid.Column="0" Content="{Binding RbStdContent}" FontSize="14"
                              Padding="5,0,0,0" Margin="20,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"
-                             GroupName="SecondRb" Click="RbStd_Click" IsChecked="{Binding IsRbStd}" />
+                             GroupName="SecondRb" IsChecked="{Binding IsRbStd}" />
                 <RadioButton x:Name="RbZhtw" Grid.Row="0" Grid.Column="1" Content="{Binding RbZhtwContent}"
                              FontSize="14"
                              Padding="5,0,0,0" Margin="15,0,0,0" VerticalAlignment="Center"
                              HorizontalAlignment="Center"
-                             GroupName="SecondRb" Click="RbZHTW_Click" IsChecked="{Binding IsRbZhtw}" />
+                             GroupName="SecondRb" IsChecked="{Binding IsRbZhtw}" />
                 <RadioButton x:Name="RbHk" Grid.Row="0" Grid.Column="2" Content="{Binding RbHkContent}" FontSize="14"
                              Padding="5,0,0,0" Margin="20,0,0,0" VerticalAlignment="Center"
                              HorizontalAlignment="Center" IsChecked="{Binding IsRbHk}"
-                             GroupName="SecondRb" Click="RbHK_Click" />
+                             GroupName="SecondRb" />
                 <CheckBox x:Name="CbZhtw" Grid.Row="0" Grid.Column="3" Content="ZH-TW Idioms(中台惯用语)" FontSize="14"
-                          Padding="5,0,0,0" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                          Padding="5,0,0,0" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                          IsChecked="{Binding IsCbZhtw}" IsEnabled="{Binding IsCbZhtwEnabled}" />
                 <CheckBox x:Name="CbPunctuation" Grid.Row="0" Grid.Column="4" Content="Punctuation (标点)"
                           FontSize="14" Padding="5,0,0,0" Margin="5,0,0,0" VerticalAlignment="Center"
                           HorizontalAlignment="Left" IsChecked="{Binding IsCbPunctuation}" />
@@ -96,8 +97,8 @@
             </Grid.ColumnDefinitions>
 
             <TabControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="10,0,10,0">
-                <TabItem x:Name="TabMain" Header="Main Conversion" IsSelected="True" GotFocus="TabMain_GotFocus"
-                         FontSize="14" FontWeight="Black">
+                <TabItem x:Name="TabMain" Header="Main Conversion" IsSelected="{Binding IsTabMain}"
+                         FontSize="14" FontWeight="{Binding TabMainFontWeight}">
                     <Grid Background="#FFE5E5E5">
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -164,8 +165,8 @@
 
                     </Grid>
                 </TabItem>
-                <TabItem x:Name="TabBatch" Header="Batch Conversion" GotFocus="TabBatch_GotFocus" FontSize="14"
-                         FontWeight="Normal">
+                <TabItem x:Name="TabBatch" Header="Batch Conversion" IsSelected="{Binding IsTabBatch}" FontSize="14"
+                         FontWeight="{Binding TabBatchFontWeight}">
                     <Grid Background="#FFE5E5E5">
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -246,22 +247,22 @@
             </TabControl>
         </Grid>
         <Button x:Name="BtnProcess" Content="Process" Padding="0 2" Width="100" HorizontalAlignment="Center"
-                HorizontalContentAlignment="Center"
+                HorizontalContentAlignment="Center" IsVisible="{Binding IsBtnProcessVisible}"
                 Margin="0,0,0,0" Grid.Row="2" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"
                 Command="{Binding BtnProcessCommand}" />
         <Button x:Name="BtnBatchStart" Content="Batch Start" Padding="0 2" Width="120" HorizontalAlignment="Center"
                 HorizontalContentAlignment="Center"
                 Margin="0,0,0,0" Grid.Row="2" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"
-                IsVisible="False" Command="{Binding BtnBatchStartCommand}" />
+                IsVisible="{Binding IsBtnBatchStartVisible}" Command="{Binding BtnBatchStartCommand}" />
         <Button x:Name="BtnOpenFile" Content="Open File" Padding="0 2" Width="80" HorizontalAlignment="Left"
-                HorizontalContentAlignment="Center"
+                HorizontalContentAlignment="Center" IsVisible="{Binding IsBtnOpenFileVisible}"
                 Margin="20,0,0,0" Grid.Row="2" VerticalAlignment="Center" FontSize="14"
                 Command="{Binding BtnOpenFileCommand}" />
         <Label x:Name="LblFileName" Content="{Binding LblFileNameContent}" Padding="0 2" HorizontalAlignment="Left"
-               Margin="110,0,0,0" Grid.Row="2"
+               Margin="110,0,0,0" Grid.Row="2" IsVisible="{Binding IsLblFileNameVisible}"
                VerticalAlignment="Center" FontSize="14" />
         <Button x:Name="BtnSaveFile" Content="Save As" Padding="0 2" Width="80" HorizontalAlignment="Right"
-                HorizontalContentAlignment="Center"
+                HorizontalContentAlignment="Center" IsVisible="{Binding IsBtnSaveFileVisible}"
                 Margin="0,0,80,0" Grid.Row="2" VerticalAlignment="Center" FontSize="14"
                 Command="{Binding BtnSaveFileCommand}" />
         <Button x:Name="BtnExit" Content=" Exit " Padding="0 2" Width="50" HorizontalAlignment="Right"

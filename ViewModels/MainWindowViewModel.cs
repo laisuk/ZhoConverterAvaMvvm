@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reactive;
 using System.Threading.Tasks;
+using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using AvaloniaEdit.Document;
 using JiebaNet.Analyser;
@@ -22,8 +23,14 @@ public class MainWindowViewModel : ViewModelBase
     private readonly List<string>? _textFileTypes;
     private readonly ITopLevelService? _topLevelService;
     private string? _currentOpenFileName;
+    private bool _isBtnBatchStartVisible;
+    private bool _isBtnOpenFileVisible = true;
+    private bool _isBtnProcessVisible = true;
+    private bool _isBtnSaveFileVisible = true;
     private bool _isCbPunctuation = true;
     private bool _isCbZhtw;
+    private bool _isCbZhtwEnabled;
+    private bool _isLblFileNameVisible = true;
     private bool _isRbHk;
     private bool _isRbJieba;
     private bool _isRbS2T;
@@ -31,6 +38,8 @@ public class MainWindowViewModel : ViewModelBase
     private bool _isRbT2S = true;
     private bool _isRbTag;
     private bool _isRbZhtw;
+    private bool _isTabBatch;
+    private bool _isTabMain = true;
     private bool _isTabMessage = true;
     private bool _isTabPreview;
     private bool _isTbOutFolderFocus;
@@ -48,6 +57,8 @@ public class MainWindowViewModel : ViewModelBase
     private string? _rbStdContent = "Standard (标准简繁)";
     private string? _rbT2SContent = "Hant (繁体) to Hans (简体)";
     private string? _rbZhtwContent = "ZH-TW (中台简繁)";
+    private FontWeight _tabBatchFontWeight = FontWeight.Normal;
+    private FontWeight _tabMainFontWeight = FontWeight.Black;
     private TextDocument? _tbDestinationTextDocument;
     private string? _tbOutFolderText = "./output/";
     private string? _tbPreviewText;
@@ -84,120 +95,6 @@ public class MainWindowViewModel : ViewModelBase
         var languageSettings = languageSettingsService.LanguageSettings;
         _languagesInfo = languageSettings?.Languages;
         _textFileTypes = languageSettings?.TextFileTypes;
-    }
-
-    public string? LblSourceCodeContent
-    {
-        get => _lblSourceCodeContent;
-        set => this.RaiseAndSetIfChanged(ref _lblSourceCodeContent, value);
-    }
-
-    public string? LblDestinationCodeContent
-    {
-        get => _lblDestinationCodeContent;
-        set => this.RaiseAndSetIfChanged(ref _lblDestinationCodeContent, value);
-    }
-
-    public string? LblStatusBarContent
-    {
-        get => _lblStatusBarContent;
-        set => this.RaiseAndSetIfChanged(ref _lblStatusBarContent, value);
-    }
-
-    public string? LblFileNameContent
-    {
-        get => _lblFilenameContent;
-        set => this.RaiseAndSetIfChanged(ref _lblFilenameContent, value);
-    }
-
-    public TextDocument? TbSourceTextDocument
-    {
-        get => _tbSourceTextDocument;
-        set => this.RaiseAndSetIfChanged(ref _tbSourceTextDocument, value);
-    }
-
-    public TextDocument? TbDestinationTextDocument
-    {
-        get => _tbDestinationTextDocument;
-        set => this.RaiseAndSetIfChanged(ref _tbDestinationTextDocument, value);
-    }
-
-    public string? LblTotalCharsContent
-    {
-        get => _lblTotalCharsContent;
-        set => this.RaiseAndSetIfChanged(ref _lblTotalCharsContent, value);
-    }
-
-    public string? TbWordCountText
-    {
-        get => _tbWordCountText;
-        set => this.RaiseAndSetIfChanged(ref _tbWordCountText, value);
-    }
-
-    public ObservableCollection<string>? LbxSourceItems
-    {
-        get => _lbxSourceItems;
-        set => this.RaiseAndSetIfChanged(ref _lbxSourceItems, value);
-    }
-
-    public ObservableCollection<string>? LbxDestinationItems
-    {
-        get => _lbxDestinationItems;
-        set => this.RaiseAndSetIfChanged(ref _lbxDestinationItems, value);
-    }
-
-    public int LbxSourceSelectedIndex
-    {
-        get => _lbxSourceSelectedIndex;
-        set => this.RaiseAndSetIfChanged(ref _lbxSourceSelectedIndex, value);
-    }
-
-    public string? LbxSourceSelectedItem
-    {
-        get => _lbxSourceSelectedItem;
-        set => this.RaiseAndSetIfChanged(ref _lbxSourceSelectedItem, value);
-    }
-
-    public string? TbOutFolderText
-    {
-        get => _tbOutFolderText;
-        set => this.RaiseAndSetIfChanged(ref _tbOutFolderText, value);
-    }
-
-    public string? TbPreviewText
-    {
-        get => _tbPreviewText;
-        set => this.RaiseAndSetIfChanged(ref _tbPreviewText, value);
-    }
-
-    public string? RbS2TContent
-    {
-        get => _rbS2TContent;
-        set => this.RaiseAndSetIfChanged(ref _rbS2TContent, value);
-    }
-
-    public string? RbT2SContent
-    {
-        get => _rbT2SContent;
-        set => this.RaiseAndSetIfChanged(ref _rbT2SContent, value);
-    }
-
-    public string? RbStdContent
-    {
-        get => _rbStdContent;
-        set => this.RaiseAndSetIfChanged(ref _rbStdContent, value);
-    }
-
-    public string? RbZhtwContent
-    {
-        get => _rbZhtwContent;
-        set => this.RaiseAndSetIfChanged(ref _rbZhtwContent, value);
-    }
-
-    public string? RbHkContent
-    {
-        get => _rbHkContent;
-        set => this.RaiseAndSetIfChanged(ref _rbHkContent, value);
     }
 
     public ReactiveCommand<Unit, Unit> BtnPasteCommand { get; }
@@ -704,7 +601,125 @@ public class MainWindowViewModel : ViewModelBase
         LblTotalCharsContent = $"[ Chars: {TbSourceTextDocument!.Text!.Length:N0} ]";
     }
 
-    #region RbCbRegion
+    #region Control Binding fields
+
+    public string? LblSourceCodeContent
+    {
+        get => _lblSourceCodeContent;
+        set => this.RaiseAndSetIfChanged(ref _lblSourceCodeContent, value);
+    }
+
+    public string? LblDestinationCodeContent
+    {
+        get => _lblDestinationCodeContent;
+        set => this.RaiseAndSetIfChanged(ref _lblDestinationCodeContent, value);
+    }
+
+    public string? LblStatusBarContent
+    {
+        get => _lblStatusBarContent;
+        set => this.RaiseAndSetIfChanged(ref _lblStatusBarContent, value);
+    }
+
+    public string? LblFileNameContent
+    {
+        get => _lblFilenameContent;
+        set => this.RaiseAndSetIfChanged(ref _lblFilenameContent, value);
+    }
+
+    public TextDocument? TbSourceTextDocument
+    {
+        get => _tbSourceTextDocument;
+        set => this.RaiseAndSetIfChanged(ref _tbSourceTextDocument, value);
+    }
+
+    public TextDocument? TbDestinationTextDocument
+    {
+        get => _tbDestinationTextDocument;
+        set => this.RaiseAndSetIfChanged(ref _tbDestinationTextDocument, value);
+    }
+
+    public string? LblTotalCharsContent
+    {
+        get => _lblTotalCharsContent;
+        set => this.RaiseAndSetIfChanged(ref _lblTotalCharsContent, value);
+    }
+
+    public string? TbWordCountText
+    {
+        get => _tbWordCountText;
+        set => this.RaiseAndSetIfChanged(ref _tbWordCountText, value);
+    }
+
+    public ObservableCollection<string>? LbxSourceItems
+    {
+        get => _lbxSourceItems;
+        set => this.RaiseAndSetIfChanged(ref _lbxSourceItems, value);
+    }
+
+    public ObservableCollection<string>? LbxDestinationItems
+    {
+        get => _lbxDestinationItems;
+        set => this.RaiseAndSetIfChanged(ref _lbxDestinationItems, value);
+    }
+
+    public int LbxSourceSelectedIndex
+    {
+        get => _lbxSourceSelectedIndex;
+        set => this.RaiseAndSetIfChanged(ref _lbxSourceSelectedIndex, value);
+    }
+
+    public string? LbxSourceSelectedItem
+    {
+        get => _lbxSourceSelectedItem;
+        set => this.RaiseAndSetIfChanged(ref _lbxSourceSelectedItem, value);
+    }
+
+    public string? TbOutFolderText
+    {
+        get => _tbOutFolderText;
+        set => this.RaiseAndSetIfChanged(ref _tbOutFolderText, value);
+    }
+
+    public string? TbPreviewText
+    {
+        get => _tbPreviewText;
+        set => this.RaiseAndSetIfChanged(ref _tbPreviewText, value);
+    }
+
+    public string? RbS2TContent
+    {
+        get => _rbS2TContent;
+        set => this.RaiseAndSetIfChanged(ref _rbS2TContent, value);
+    }
+
+    public string? RbT2SContent
+    {
+        get => _rbT2SContent;
+        set => this.RaiseAndSetIfChanged(ref _rbT2SContent, value);
+    }
+
+    public string? RbStdContent
+    {
+        get => _rbStdContent;
+        set => this.RaiseAndSetIfChanged(ref _rbStdContent, value);
+    }
+
+    public string? RbZhtwContent
+    {
+        get => _rbZhtwContent;
+        set => this.RaiseAndSetIfChanged(ref _rbZhtwContent, value);
+    }
+
+    public string? RbHkContent
+    {
+        get => _rbHkContent;
+        set => this.RaiseAndSetIfChanged(ref _rbHkContent, value);
+    }
+
+    #endregion
+
+    #region RbCb Boolean Binding Region
 
     public bool IsRbS2T
     {
@@ -716,6 +731,7 @@ public class MainWindowViewModel : ViewModelBase
             IsRbT2S = false;
             IsRbJieba = false;
             IsRbTag = false;
+            LblSourceCodeContent = _languagesInfo![2].Name;
         }
     }
 
@@ -729,6 +745,7 @@ public class MainWindowViewModel : ViewModelBase
             IsRbS2T = false;
             IsRbJieba = false;
             IsRbTag = false;
+            LblSourceCodeContent = _languagesInfo![1].Name;
         }
     }
 
@@ -767,6 +784,8 @@ public class MainWindowViewModel : ViewModelBase
             if (!value) return;
             IsRbZhtw = false;
             IsRbHk = false;
+            IsCbZhtw = false;
+            IsCbZhtwEnabled = false;
         }
     }
 
@@ -779,6 +798,8 @@ public class MainWindowViewModel : ViewModelBase
             if (!value) return;
             IsRbStd = false;
             IsRbHk = false;
+            IsCbZhtw = true;
+            IsCbZhtwEnabled = true;
         }
     }
 
@@ -791,6 +812,44 @@ public class MainWindowViewModel : ViewModelBase
             if (!value) return;
             IsRbStd = false;
             IsRbZhtw = false;
+            IsCbZhtw = false;
+            IsCbZhtwEnabled = false;
+        }
+    }
+
+    public bool IsTabMain
+    {
+        get => _isTabMain;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _isTabMain, value);
+            if (!value) return;
+            IsTabBatch = false;
+            IsBtnOpenFileVisible = true;
+            IsLblFileNameVisible = true;
+            IsBtnSaveFileVisible = true;
+            IsBtnProcessVisible = true;
+            IsBtnBatchStartVisible = false;
+            TabMainFontWeight = FontWeight.Black;
+            TabBatchFontWeight = FontWeight.Normal;
+        }
+    }
+
+    public bool IsTabBatch
+    {
+        get => _isTabBatch;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _isTabBatch, value);
+            if (!value) return;
+            IsTabMain = false;
+            IsBtnOpenFileVisible = false;
+            IsLblFileNameVisible = false;
+            IsBtnSaveFileVisible = false;
+            IsBtnProcessVisible = false;
+            IsBtnBatchStartVisible = true;
+            TabMainFontWeight = FontWeight.Normal;
+            TabBatchFontWeight = FontWeight.Black;
         }
     }
 
@@ -819,7 +878,19 @@ public class MainWindowViewModel : ViewModelBase
     public bool IsCbZhtw
     {
         get => _isCbZhtw;
-        set => this.RaiseAndSetIfChanged(ref _isCbZhtw, value);
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _isCbZhtw, value);
+            if (!value) return;
+            IsRbHk = false;
+            IsRbStd = false;
+        }
+    }
+
+    public bool IsCbZhtwEnabled
+    {
+        get => _isCbZhtwEnabled;
+        set => this.RaiseAndSetIfChanged(ref _isCbZhtwEnabled, value);
     }
 
     public bool IsCbPunctuation
@@ -832,6 +903,48 @@ public class MainWindowViewModel : ViewModelBase
     {
         get => _isTbOutFolderFocus;
         set => this.RaiseAndSetIfChanged(ref _isTbOutFolderFocus, value);
+    }
+
+    public bool IsBtnOpenFileVisible
+    {
+        get => _isBtnOpenFileVisible;
+        set => this.RaiseAndSetIfChanged(ref _isBtnOpenFileVisible, value);
+    }
+
+    public bool IsBtnSaveFileVisible
+    {
+        get => _isBtnSaveFileVisible;
+        set => this.RaiseAndSetIfChanged(ref _isBtnSaveFileVisible, value);
+    }
+
+    public bool IsBtnProcessVisible
+    {
+        get => _isBtnProcessVisible;
+        set => this.RaiseAndSetIfChanged(ref _isBtnProcessVisible, value);
+    }
+
+    public bool IsLblFileNameVisible
+    {
+        get => _isLblFileNameVisible;
+        set => this.RaiseAndSetIfChanged(ref _isLblFileNameVisible, value);
+    }
+
+    public bool IsBtnBatchStartVisible
+    {
+        get => _isBtnBatchStartVisible;
+        set => this.RaiseAndSetIfChanged(ref _isBtnBatchStartVisible, value);
+    }
+
+    public FontWeight TabMainFontWeight
+    {
+        get => _tabMainFontWeight;
+        set => this.RaiseAndSetIfChanged(ref _tabMainFontWeight, value);
+    }
+
+    public FontWeight TabBatchFontWeight
+    {
+        get => _tabBatchFontWeight;
+        set => this.RaiseAndSetIfChanged(ref _tabBatchFontWeight, value);
     }
 
     #endregion
