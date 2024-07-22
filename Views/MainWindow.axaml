@@ -140,8 +140,8 @@
                         <Label Grid.Column="1" Content="Destination:" HorizontalAlignment="Left" Margin="5,0,0,0"
                                Grid.Row="1" VerticalAlignment="Center" FontSize="16" BorderBrush="Black"
                                BorderThickness="3,0,0,0" />
-                        <Label x:Name="LblDestinationCode" Grid.Column="1" Content="" HorizontalAlignment="Left"
-                               Margin="110,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontSize="16" />
+                        <Label x:Name="LblDestinationCode" Grid.Column="1" Content="{Binding LblDestinationCodeContent}" HorizontalAlignment="Left"
+                               Margin="110,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontSize="16"  />
                         <Button x:Name="BtnClearSource" Content="AC" Padding="0 2" Width="40"
                                 HorizontalAlignment="Right" HorizontalContentAlignment="Center"
                                 Margin="0,2,90,0" Grid.Row="1"

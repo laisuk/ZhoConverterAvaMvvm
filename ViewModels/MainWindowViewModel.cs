@@ -405,7 +405,7 @@ public class MainWindowViewModel : ViewModelBase
     {
         var index = LbxSourceSelectedIndex;
         var name = LbxSourceSelectedItem;
-        if (LbxSourceSelectedIndex == -1)
+        if (LbxSourceSelectedIndex == -1 || LbxSourceItems!.Count == 0)
         {
             LblStatusBarContent = "Nothing to remove.";
             return;
@@ -517,6 +517,7 @@ public class MainWindowViewModel : ViewModelBase
             var folderPath = result[0].Path.LocalPath;
             TbOutFolderText = folderPath;
             IsTbOutFolderFocus = true;
+            LblStatusBarContent = $"Output folder set: {folderPath}";
         }
     }
 

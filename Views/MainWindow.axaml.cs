@@ -13,6 +13,16 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
+    
+    private void TbSource_TextChanged(object? sender, EventArgs eventArgs)
+    {
+        if (DataContext is MainWindowViewModel viewModel) viewModel.TbSourceTextChanged();
+    }
+
+    private void BtnExit_Click(object? sender, RoutedEventArgs e)
+    {
+        Close();
+    }
 
     // public MainWindow(LanguageSettingsService languageSettingsService) : this()
     // {
@@ -47,16 +57,6 @@ public partial class MainWindow : Window
     //     CbZhtw.IsEnabled = false;
     //     CbZhtw.IsChecked = false;
     // }
-
-    private void TbSource_TextChanged(object? sender, EventArgs eventArgs)
-    {
-        if (DataContext is MainWindowViewModel viewModel) viewModel.TbSourceTextChanged();
-    }
-
-    private void BtnExit_Click(object? sender, RoutedEventArgs e)
-    {
-        Close();
-    }
 
     // private void TabMain_GotFocus(object? sender, GotFocusEventArgs e)
     // {

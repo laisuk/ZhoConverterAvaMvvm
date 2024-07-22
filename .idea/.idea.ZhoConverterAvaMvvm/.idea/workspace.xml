@@ -37,7 +37,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://D:/codes/avolonia/ZhoConverterAvaMvvm/App.axaml.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/codes/avolonia/ZhoConverterAvaMvvm/Views/MainWindow.axaml" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -111,7 +111,9 @@
       <workItem from="1720388596274" duration="271000" />
       <workItem from="1720468709654" duration="2078000" />
       <workItem from="1720554767302" duration="8872000" />
-      <workItem from="1720567633916" duration="5124000" />
+      <workItem from="1720567633916" duration="7186000" />
+      <workItem from="1721037561822" duration="148000" />
+      <workItem from="1721512599515" duration="439000" />
     </task>
     <task id="LOCAL-00001" summary="Add Dependency Injection">
       <option name="closed" value="true" />
@@ -129,7 +131,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720562902838</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Refactoring code-behind to MVVM done">
+      <option name="closed" value="true" />
+      <created>1720573551178</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1720573551178</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -141,6 +151,7 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Add Dependency Injection" />
     <MESSAGE value="Update to MVVM 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update to MVVM 3" />
+    <MESSAGE value="Refactoring code-behind to MVVM done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring code-behind to MVVM done" />
   </component>
 </project>
