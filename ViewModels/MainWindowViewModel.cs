@@ -717,7 +717,19 @@ public class MainWindowViewModel : ViewModelBase
         get => _rbHkContent;
         set => this.RaiseAndSetIfChanged(ref _rbHkContent, value);
     }
+    
+    public FontWeight TabMainFontWeight
+    {
+        get => _tabMainFontWeight;
+        set => this.RaiseAndSetIfChanged(ref _tabMainFontWeight, value);
+    }
 
+    public FontWeight TabBatchFontWeight
+    {
+        get => _tabBatchFontWeight;
+        set => this.RaiseAndSetIfChanged(ref _tabBatchFontWeight, value);
+    }
+    
     #endregion
 
     #region RbCb Boolean Binding Region
@@ -934,18 +946,6 @@ public class MainWindowViewModel : ViewModelBase
     {
         get => _isBtnBatchStartVisible;
         set => this.RaiseAndSetIfChanged(ref _isBtnBatchStartVisible, value);
-    }
-
-    public FontWeight TabMainFontWeight
-    {
-        get => _tabMainFontWeight;
-        set => this.RaiseAndSetIfChanged(ref _tabMainFontWeight, value);
-    }
-
-    public FontWeight TabBatchFontWeight
-    {
-        get => _tabBatchFontWeight;
-        set => this.RaiseAndSetIfChanged(ref _tabBatchFontWeight, value);
     }
 
     #endregion
