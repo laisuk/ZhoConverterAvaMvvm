@@ -58,7 +58,7 @@ public class MainWindowViewModel : ViewModelBase
     private string? _rbT2SContent = "Hant (繁体) to Hans (简体)";
     private string? _rbZhtwContent = "ZH-TW (中台简繁)";
     private FontWeight _tabBatchFontWeight = FontWeight.Normal;
-    private FontWeight _tabMainFontWeight = FontWeight.Black;
+    private FontWeight _tabMainFontWeight = FontWeight.Bold;
     private TextDocument? _tbDestinationTextDocument;
     private string? _tbOutFolderText = "./output/";
     private string? _tbPreviewText;
@@ -843,7 +843,7 @@ public class MainWindowViewModel : ViewModelBase
             IsBtnSaveFileVisible = true;
             IsBtnProcessVisible = true;
             IsBtnBatchStartVisible = false;
-            TabMainFontWeight = FontWeight.Black;
+            TabMainFontWeight = FontWeight.Bold;
             TabBatchFontWeight = FontWeight.Normal;
         }
     }
@@ -862,7 +862,7 @@ public class MainWindowViewModel : ViewModelBase
             IsBtnProcessVisible = false;
             IsBtnBatchStartVisible = true;
             TabMainFontWeight = FontWeight.Normal;
-            TabBatchFontWeight = FontWeight.Black;
+            TabBatchFontWeight = FontWeight.Bold;
         }
     }
 
