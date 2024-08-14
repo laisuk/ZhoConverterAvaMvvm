@@ -71,21 +71,21 @@ public class MainWindowViewModel : ViewModelBase
         TbDestinationTextDocument = new TextDocument();
         LbxSourceItems = new ObservableCollection<string>();
         LbxDestinationItems = new ObservableCollection<string>();
-        BtnPasteCommand = ReactiveCommand.CreateFromTask(BtnPaste);
-        BtnCopyCommand = ReactiveCommand.CreateFromTask(BtnCopy);
-        BtnOpenFileCommand = ReactiveCommand.CreateFromTask(BtnOpenFile);
-        BtnSaveFileCommand = ReactiveCommand.CreateFromTask(BtnSaveFile);
-        BtnProcessCommand = ReactiveCommand.Create(BtnProcess);
-        BtnClearTbSourceCommand = ReactiveCommand.Create(BtnClearTbSource);
-        BtnClearTbDestinationCommand = ReactiveCommand.Create(BtnClearTbDestination);
-        BtnAddCommand = ReactiveCommand.CreateFromTask(BtnAdd);
-        BtnRemoveCommand = ReactiveCommand.Create(BtnRemove);
-        BtnClearLbxSourceCommand = ReactiveCommand.Create(BtnClearLbxSource);
-        BtnSelectOutFolderCommand = ReactiveCommand.CreateFromTask(BtnSelectOutFolder);
-        BtnPreviewCommand = ReactiveCommand.CreateFromTask(BtnPreview);
-        BtnDetectCommand = ReactiveCommand.CreateFromTask(BtnDetect);
-        BtnMessagePreviewClearCommand = ReactiveCommand.Create(BtnMessagePreviewClear);
-        BtnBatchStartCommand = ReactiveCommand.CreateFromTask(BtnBatchStart);
+        BtnPasteCommand = ReactiveCommand.CreateFromTask(Paste);
+        BtnCopyCommand = ReactiveCommand.CreateFromTask(Copy);
+        BtnOpenFileCommand = ReactiveCommand.CreateFromTask(OpenFile);
+        BtnSaveFileCommand = ReactiveCommand.CreateFromTask(SaveFile);
+        BtnProcessCommand = ReactiveCommand.Create(Process);
+        BtnClearTbSourceCommand = ReactiveCommand.Create(ClearTbSource);
+        BtnClearTbDestinationCommand = ReactiveCommand.Create(ClearTbDestination);
+        BtnAddCommand = ReactiveCommand.CreateFromTask(Add);
+        BtnRemoveCommand = ReactiveCommand.Create(Remove);
+        BtnClearLbxSourceCommand = ReactiveCommand.Create(ClearLbxSource);
+        BtnSelectOutFolderCommand = ReactiveCommand.CreateFromTask(SelectOutFolder);
+        BtnPreviewCommand = ReactiveCommand.CreateFromTask(Preview);
+        BtnDetectCommand = ReactiveCommand.CreateFromTask(Detect);
+        BtnMessagePreviewClearCommand = ReactiveCommand.Create(MessagePreviewClear);
+        BtnBatchStartCommand = ReactiveCommand.CreateFromTask(BatchStart);
     }
 
     public MainWindowViewModel(ITopLevelService topLevelService, LanguageSettingsService languageSettingsService) :
@@ -114,7 +114,7 @@ public class MainWindowViewModel : ViewModelBase
     public ReactiveCommand<Unit, Unit> BtnBatchStartCommand { get; }
 
 
-    private async Task BtnPaste()
+    private async Task Paste()
     {
         var inputText = await _topLevelService!.GetClipboardTextAsync();
 
@@ -132,7 +132,7 @@ public class MainWindowViewModel : ViewModelBase
         _currentOpenFileName = string.Empty;
     }
 
-    private async Task BtnCopy()
+    private async Task Copy()
     {
         if (string.IsNullOrEmpty(TbDestinationTextDocument!.Text))
         {
@@ -151,7 +151,7 @@ public class MainWindowViewModel : ViewModelBase
         }
     }
 
-    private async Task BtnOpenFile()
+    private async Task OpenFile()
     {
         var mainWindow = _topLevelService!.GetMainWindow();
 
@@ -174,7 +174,7 @@ public class MainWindowViewModel : ViewModelBase
         }
     }
 
-    private async Task BtnSaveFile()
+    private async Task SaveFile()
     {
         var mainWindow = _topLevelService!.GetMainWindow();
 
@@ -197,7 +197,7 @@ public class MainWindowViewModel : ViewModelBase
         }
     }
 
-    private void BtnProcess()
+    private void Process()
     {
         if (string.IsNullOrEmpty(TbSourceTextDocument!.Text))
         {
@@ -252,7 +252,7 @@ public class MainWindowViewModel : ViewModelBase
         LblStatusBarContent = "Process completed";
     }
 
-    private async Task BtnBatchStart()
+    private async Task BatchStart()
     {
         if (!Directory.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Output")))
             Directory.CreateDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Output"));
@@ -356,7 +356,7 @@ public class MainWindowViewModel : ViewModelBase
         LblStatusBarContent = "Batch conversion done.";
     }
 
-    private void BtnClearTbSource()
+    private void ClearTbSource()
     {
         TbSourceTextDocument!.Text = string.Empty;
         _currentOpenFileName = string.Empty;
@@ -365,14 +365,14 @@ public class MainWindowViewModel : ViewModelBase
         LblStatusBarContent = "Source text box cleared";
     }
 
-    private void BtnClearTbDestination()
+    private void ClearTbDestination()
     {
         TbDestinationTextDocument!.Text = string.Empty;
         LblDestinationCodeContent = string.Empty;
         LblStatusBarContent = "Destination contents cleared";
     }
 
-    private async Task BtnAdd()
+    private async Task Add()
     {
         var mainWindow = _topLevelService!.GetMainWindow();
 
@@ -401,7 +401,7 @@ public class MainWindowViewModel : ViewModelBase
         foreach (var item in sortedList) LbxSourceItems.Add(item);
     }
 
-    private void BtnRemove()
+    private void Remove()
     {
         var index = LbxSourceSelectedIndex;
         var name = LbxSourceSelectedItem;
@@ -416,7 +416,7 @@ public class MainWindowViewModel : ViewModelBase
         LblStatusBarContent = $"Item ({index}) {name} removed";
     }
 
-    private async Task BtnPreview()
+    private async Task Preview()
     {
         if (LbxSourceSelectedIndex == -1)
         {
@@ -447,7 +447,7 @@ public class MainWindowViewModel : ViewModelBase
         }
     }
 
-    private async Task BtnDetect()
+    private async Task Detect()
     {
         if (LbxSourceItems!.Count == 0)
         {
@@ -487,20 +487,20 @@ public class MainWindowViewModel : ViewModelBase
         LblStatusBarContent = "Batch zho code detection done.";
     }
 
-    private void BtnClearLbxSource()
+    private void ClearLbxSource()
     {
         LbxSourceItems!.Clear();
         LblStatusBarContent = "All source entries cleared.";
     }
 
-    private void BtnMessagePreviewClear()
+    private void MessagePreviewClear()
     {
         if (IsTabMessage)
             LbxDestinationItems!.Clear();
         else if (IsTabPreview) TbPreviewText = string.Empty;
     }
 
-    private async Task BtnSelectOutFolder()
+    private async Task SelectOutFolder()
     {
         var mainWindow = _topLevelService!.GetMainWindow();
 
