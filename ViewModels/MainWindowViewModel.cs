@@ -161,7 +161,8 @@ public class MainWindowViewModel : ViewModelBase
             Title = "Open Text File",
             FileTypeFilter = new List<FilePickerFileType>
             {
-                new("Text Files") { Patterns = new[] { "*.txt" } }
+                new("Text Files") { Patterns = new[] { "*.txt" } },
+                new("All Files") { Patterns = new[] { "*.*" } }
             },
             AllowMultiple = false
         });
@@ -170,6 +171,12 @@ public class MainWindowViewModel : ViewModelBase
         var file = result[0];
         {
             var path = file.Path.LocalPath;
+            var fileExt = Path.GetExtension(path);
+            if (!_textFileTypes!.Contains(fileExt)) 
+                {
+                    LblStatusBarContent = $"Error: File type ({fileExt}) not support";
+                    return;
+                }
             UpdateTbSourceFileContents(path);
         }
     }
@@ -382,7 +389,8 @@ public class MainWindowViewModel : ViewModelBase
             Title = "Open Text File",
             FileTypeFilter = new List<FilePickerFileType>
             {
-                new("Text Files") { Patterns = new[] { "*.txt" } }
+                new("Text Files") { Patterns = new[] { "*.txt" } },
+                new("ALL Files") { Patterns = new[] { "*.*" } }
             },
             AllowMultiple = true
         });
@@ -557,7 +565,7 @@ public class MainWindowViewModel : ViewModelBase
         // Read file contents
         try
         {
-            using var reader = new StreamReader(_currentOpenFileName);
+            using var reader = new StreamReader(_currentOpenFileName, System.Text.Encoding.UTF8, true);
             var contents = await reader.ReadToEndAsync();
             // Display file contents to text box field
             TbSourceTextDocument!.Text = contents;

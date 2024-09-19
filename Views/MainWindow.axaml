@@ -114,7 +114,7 @@
                         <avaloniaEdit:TextEditor
                             x:Name="TbSource" Grid.Row="0" Grid.Column="0" Margin="5,5,5,0"
                             Document="{Binding TbSourceTextDocument}"
-                            FontFamily="Consolas" VerticalScrollBarVisibility="Visible" ShowLineNumbers="True"
+                            FontFamily="Noto Sans SC" VerticalScrollBarVisibility="Visible" ShowLineNumbers="True"
                             TextChanged="TbSource_TextChanged"
                             BorderThickness="2,2,2,2" BorderBrush="Black" Background="WhiteSmoke" WordWrap="True"
                             FontSize="16" />
@@ -126,7 +126,7 @@
                                                  Document="{Binding TbDestinationTextDocument}"
                                                  BorderThickness="2,2,2,2" BorderBrush="Black" WordWrap="True"
                                                  Background="WhiteSmoke" VerticalScrollBarVisibility="Visible"
-                                                 ShowLineNumbers="True"
+                                                 ShowLineNumbers="True" FontFamily="Noto Sans SC"
                                                  FontSize="16" IsReadOnly="True" />
                         <Label Grid.Row="1" Grid.Column="0" Content="Source:" HorizontalAlignment="Left"
                                VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" BorderBrush="Black"
