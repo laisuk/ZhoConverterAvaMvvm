@@ -4,16 +4,17 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reactive;
+using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using AvaloniaEdit.Document;
-using JiebaNet.Analyser;
-using JiebaNet.Segmenter;
 using OpenccFmmsegNetLib;
+using OpenccJiebaNetLib;
 using ReactiveUI;
 using ZhoConverterAvaMvvm.Services;
 using ZhoConverterAvaMvvm.Views;
+// using JiebaNet.Analyser;
 
 namespace ZhoConverterAvaMvvm.ViewModels;
 
@@ -172,11 +173,12 @@ public class MainWindowViewModel : ViewModelBase
         {
             var path = file.Path.LocalPath;
             var fileExt = Path.GetExtension(path);
-            if (!_textFileTypes!.Contains(fileExt)) 
-                {
-                    LblStatusBarContent = $"Error: File type ({fileExt}) not support";
-                    return;
-                }
+            if (!_textFileTypes!.Contains(fileExt))
+            {
+                LblStatusBarContent = $"Error: File type ({fileExt}) not support";
+                return;
+            }
+
             UpdateTbSourceFileContents(path);
         }
     }
@@ -231,17 +233,26 @@ public class MainWindowViewModel : ViewModelBase
         }
         else if (IsRbJieba)
         {
-            TbDestinationTextDocument.Text = string.Join("/", new JiebaSegmenter().Cut(TbSourceTextDocument.Text));
+            // TbDestinationTextDocument.Text = string.Join("/", new JiebaSegmenter().Cut(TbSourceTextDocument.Text));
+            TbDestinationTextDocument.Text = string.Join("/", OpenccJiebaNet.JiebaCut(TbSourceTextDocument.Text, true));
             LblDestinationCodeContent = LblSourceCodeContent;
         }
         else if (IsRbTag)
         {
-            var wordCount = int.Parse(TbWordCountText!) < 10 ? 10 : int.Parse(TbWordCountText!);
+            var wordCount = int.Parse(TbWordCountText!) < 1 ? 1 : int.Parse(TbWordCountText!);
+            TbWordCountText = wordCount.ToString();
+            // TbDestinationTextDocument.Text = "===== TextRank Method =====\n" + string.Join("/ ",
+            //     new TextRankExtractor().ExtractTags(TbSourceTextDocument.Text, wordCount));
+            // TbDestinationTextDocument.Text = TbDestinationTextDocument.Text + "\n\n====== TF-IDF Method ======\n" +
+            //                                  string.Join("/ ",
+            //                                      new TfidfExtractor().ExtractTags(TbSourceTextDocument.Text,
+            //                                          wordCount));
+
             TbDestinationTextDocument.Text = "===== TextRank Method =====\n" + string.Join("/ ",
-                new TextRankExtractor().ExtractTags(TbSourceTextDocument.Text, wordCount));
+                OpenccJiebaNet.JiebaKeywordExtractTextRank(TbSourceTextDocument.Text, wordCount));
             TbDestinationTextDocument.Text = TbDestinationTextDocument.Text + "\n\n====== TF-IDF Method ======\n" +
                                              string.Join("/ ",
-                                                 new TfidfExtractor().ExtractTags(TbSourceTextDocument.Text,
+                                                 OpenccJiebaNet.JiebaKeywordExtractTfidf(TbSourceTextDocument.Text,
                                                      wordCount));
             if (TbDestinationTextDocument.Text.Length == 0)
             {
@@ -565,7 +576,7 @@ public class MainWindowViewModel : ViewModelBase
         // Read file contents
         try
         {
-            using var reader = new StreamReader(_currentOpenFileName, System.Text.Encoding.UTF8, true);
+            using var reader = new StreamReader(_currentOpenFileName, Encoding.UTF8, true);
             var contents = await reader.ReadToEndAsync();
             // Display file contents to text box field
             TbSourceTextDocument!.Text = contents;
@@ -725,7 +736,7 @@ public class MainWindowViewModel : ViewModelBase
         get => _rbHkContent;
         set => this.RaiseAndSetIfChanged(ref _rbHkContent, value);
     }
-    
+
     public FontWeight TabMainFontWeight
     {
         get => _tabMainFontWeight;
@@ -737,7 +748,7 @@ public class MainWindowViewModel : ViewModelBase
         get => _tabBatchFontWeight;
         set => this.RaiseAndSetIfChanged(ref _tabBatchFontWeight, value);
     }
-    
+
     #endregion
 
     #region RbCb Boolean Binding Region

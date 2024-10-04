@@ -11,7 +11,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
-    
+
     private void TbSource_TextChanged(object? _1, EventArgs _2)
     {
         if (DataContext is MainWindowViewModel viewModel) viewModel.TbSourceTextChanged();
@@ -21,5 +21,4 @@ public partial class MainWindow : Window
     {
         Close();
     }
-    
 }

@@ -8,8 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ab2cb51-e8f0-4aca-a1c3-d0eb023c0689" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/projectSettingsUpdater.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OpenccJiebaNetLib.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/opencc_jieba_capi.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,6 +115,12 @@
       <workItem from="1723438863782" duration="307000" />
       <workItem from="1723602466417" duration="549000" />
       <workItem from="1723721283401" duration="93000" />
+      <workItem from="1726740726496" duration="366000" />
+      <workItem from="1727465827342" duration="699000" />
+      <workItem from="1727906713923" duration="99000" />
+      <workItem from="1728077691809" duration="1262000" />
+      <workItem from="1728082807442" duration="257000" />
+      <workItem from="1728083145734" duration="548000" />
     </task>
     <task id="LOCAL-00001" summary="Add Dependency Injection">
       <option name="closed" value="true" />
@@ -169,7 +178,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723602684474</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Fixed segmentation (Jieba) to handle surrogate paired Unicode characters">
+      <option name="closed" value="true" />
+      <created>1726740905482</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1726740905482</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,6 +204,7 @@
     <MESSAGE value="Code optimization" />
     <MESSAGE value="House keeping" />
     <MESSAGE value="Housekeeping" />
-    <option name="LAST_COMMIT_MESSAGE" value="Housekeeping" />
+    <MESSAGE value="Fixed segmentation (Jieba) to handle surrogate paired Unicode characters" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed segmentation (Jieba) to handle surrogate paired Unicode characters" />
   </component>
 </project>
