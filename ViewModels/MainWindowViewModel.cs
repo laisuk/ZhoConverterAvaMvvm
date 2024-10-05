@@ -9,11 +9,14 @@ using System.Threading.Tasks;
 using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using AvaloniaEdit.Document;
+using JiebaNet.Analyser;
+using JiebaNet.Segmenter;
 using OpenccFmmsegNetLib;
 using OpenccJiebaNetLib;
 using ReactiveUI;
 using ZhoConverterAvaMvvm.Services;
 using ZhoConverterAvaMvvm.Views;
+
 // using JiebaNet.Analyser;
 
 namespace ZhoConverterAvaMvvm.ViewModels;
@@ -28,6 +31,7 @@ public class MainWindowViewModel : ViewModelBase
     private bool _isBtnOpenFileVisible = true;
     private bool _isBtnProcessVisible = true;
     private bool _isBtnSaveFileVisible = true;
+    private bool _isCbJieba;
     private bool _isCbPunctuation = true;
     private bool _isCbZhtw;
     private bool _isCbZhtwEnabled;
@@ -215,7 +219,9 @@ public class MainWindowViewModel : ViewModelBase
         }
 
         var config = GetCurrentConfig();
-        var convertedText = OpenccFmmsegNet.Convert(TbSourceTextDocument.Text, config, IsCbPunctuation);
+        var convertedText = IsCbJieba
+            ? OpenccJiebaNet.Convert(TbSourceTextDocument!.Text, config, IsCbPunctuation)
+            : OpenccFmmsegNet.Convert(TbSourceTextDocument.Text, config, IsCbPunctuation);
 
         TbDestinationTextDocument!.Text = convertedText;
 
@@ -233,27 +239,30 @@ public class MainWindowViewModel : ViewModelBase
         }
         else if (IsRbJieba)
         {
-            // TbDestinationTextDocument.Text = string.Join("/", new JiebaSegmenter().Cut(TbSourceTextDocument.Text));
-            TbDestinationTextDocument.Text = string.Join("/", OpenccJiebaNet.JiebaCut(TbSourceTextDocument.Text, true));
+            TbDestinationTextDocument.Text = IsCbJieba
+                ? string.Join("/", OpenccJiebaNet.JiebaCut(TbSourceTextDocument.Text, true))
+                : string.Join("/", new JiebaSegmenter().Cut(TbSourceTextDocument.Text));
+
             LblDestinationCodeContent = LblSourceCodeContent;
         }
         else if (IsRbTag)
         {
             var wordCount = int.Parse(TbWordCountText!) < 1 ? 1 : int.Parse(TbWordCountText!);
             TbWordCountText = wordCount.ToString();
-            // TbDestinationTextDocument.Text = "===== TextRank Method =====\n" + string.Join("/ ",
-            //     new TextRankExtractor().ExtractTags(TbSourceTextDocument.Text, wordCount));
-            // TbDestinationTextDocument.Text = TbDestinationTextDocument.Text + "\n\n====== TF-IDF Method ======\n" +
-            //                                  string.Join("/ ",
-            //                                      new TfidfExtractor().ExtractTags(TbSourceTextDocument.Text,
-            //                                          wordCount));
+            TbDestinationTextDocument.Text = IsCbJieba
+                ? "===== TextRank Method =====\n" + string.Join("/ ",
+                      OpenccJiebaNet.JiebaKeywordExtractTextRank(TbSourceTextDocument.Text, wordCount)) +
+                  "\n\n====== TF-IDF Method ======\n" +
+                  string.Join("/ ",
+                      OpenccJiebaNet.JiebaKeywordExtractTfidf(TbSourceTextDocument.Text,
+                          wordCount))
+                : "===== TextRank Method =====\n" + string.Join("/ ",
+                      new TextRankExtractor().ExtractTags(TbSourceTextDocument.Text, wordCount)) +
+                  "\n\n====== TF-IDF Method ======\n" +
+                  string.Join("/ ",
+                      new TfidfExtractor().ExtractTags(TbSourceTextDocument.Text,
+                          wordCount));
 
-            TbDestinationTextDocument.Text = "===== TextRank Method =====\n" + string.Join("/ ",
-                OpenccJiebaNet.JiebaKeywordExtractTextRank(TbSourceTextDocument.Text, wordCount));
-            TbDestinationTextDocument.Text = TbDestinationTextDocument.Text + "\n\n====== TF-IDF Method ======\n" +
-                                             string.Join("/ ",
-                                                 OpenccJiebaNet.JiebaKeywordExtractTfidf(TbSourceTextDocument.Text,
-                                                     wordCount));
             if (TbDestinationTextDocument.Text.Length == 0)
             {
                 LblDestinationCodeContent = string.Empty;
@@ -929,6 +938,12 @@ public class MainWindowViewModel : ViewModelBase
     {
         get => _isCbPunctuation;
         set => this.RaiseAndSetIfChanged(ref _isCbPunctuation, value);
+    }
+
+    public bool IsCbJieba
+    {
+        get => _isCbJieba;
+        set => this.RaiseAndSetIfChanged(ref _isCbJieba, value);
     }
 
     public bool IsTbOutFolderFocus

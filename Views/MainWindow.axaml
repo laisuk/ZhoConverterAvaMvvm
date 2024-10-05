@@ -63,6 +63,7 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
                 <RadioButton x:Name="RbStd" Grid.Row="0" Grid.Column="0" Content="{Binding RbStdContent}" FontSize="14"
@@ -77,12 +78,16 @@
                              Padding="5,0,0,0" Margin="20,0,0,0" VerticalAlignment="Center"
                              HorizontalAlignment="Center" IsChecked="{Binding IsRbHk}"
                              GroupName="SecondRb" />
-                <CheckBox x:Name="CbZhtw" Grid.Row="0" Grid.Column="3" Content="ZH-TW Idioms(中台惯用语)" FontSize="14"
+                <CheckBox x:Name="CbZhtw" Grid.Row="0" Grid.Column="3" FontSize="14" Content="ZH-TW Idioms (中台惯用语)"
                           Padding="5,0,0,0" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"
                           IsChecked="{Binding IsCbZhtw}" IsEnabled="{Binding IsCbZhtwEnabled}" />
+
                 <CheckBox x:Name="CbPunctuation" Grid.Row="0" Grid.Column="4" Content="Punctuation (标点)"
                           FontSize="14" Padding="5,0,0,0" Margin="5,0,0,0" VerticalAlignment="Center"
                           HorizontalAlignment="Left" IsChecked="{Binding IsCbPunctuation}" />
+                <CheckBox x:Name="CbJieba" Grid.Row="0" Grid.Column="5" Content="Jieba (结巴分词)"
+                          FontSize="14" Padding="5,0,0,0" Margin="5,0,0,0" VerticalAlignment="Center"
+                          HorizontalAlignment="Left" IsChecked="{Binding IsCbJieba}" />
             </Grid>
         </Grid>
         <Grid Grid.Row="1">

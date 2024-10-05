@@ -8,11 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ab2cb51-e8f0-4aca-a1c3-d0eb023c0689" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/OpenccJiebaNetLib.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/opencc_jieba_capi.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/MainWindow.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MainWindow.axaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,6 +119,8 @@
       <workItem from="1728077691809" duration="1262000" />
       <workItem from="1728082807442" duration="257000" />
       <workItem from="1728083145734" duration="548000" />
+      <workItem from="1728083716175" duration="2662000" />
+      <workItem from="1728086774735" duration="2575000" />
     </task>
     <task id="LOCAL-00001" summary="Add Dependency Injection">
       <option name="closed" value="true" />
@@ -186,7 +186,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726740905482</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Fixed NewLine in keywords extraction">
+      <option name="closed" value="true" />
+      <created>1728083847445</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1728083847445</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,6 +213,7 @@
     <MESSAGE value="House keeping" />
     <MESSAGE value="Housekeeping" />
     <MESSAGE value="Fixed segmentation (Jieba) to handle surrogate paired Unicode characters" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed segmentation (Jieba) to handle surrogate paired Unicode characters" />
+    <MESSAGE value="Fixed NewLine in keywords extraction" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed NewLine in keywords extraction" />
   </component>
 </project>
