@@ -276,7 +276,7 @@ public class MainWindowViewModel : ViewModelBase
             return;
         }
 
-        LblStatusBarContent = "Process completed";
+        LblStatusBarContent = $"Process completed: {config}";
     }
 
     private async Task BatchStart()

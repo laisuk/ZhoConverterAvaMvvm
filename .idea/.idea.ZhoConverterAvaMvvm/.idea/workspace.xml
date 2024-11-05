@@ -7,10 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ab2cb51-e8f0-4aca-a1c3-d0eb023c0689" name="Changes" comment="">
+    <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/avalonia.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/projectSettingsUpdater.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/MainWindow.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MainWindow.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opencc_fmmseg_capi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/opencc_fmmseg_capi.dll" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,45 +32,37 @@
     &quot;assignee&quot;: &quot;laisuk&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/laisuk/ZhoConverterAvaMvvm.git&quot;,
-    &quot;accountId&quot;: &quot;f3a7018a-4bab-487a-b319-5cf990f65f18&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/laisuk/ZhoConverterAvaMvvm.git",
+    "accountId": "f3a7018a-4bab-487a-b319-5cf990f65f18"
   }
-}</component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="mock://D:/codes/avolonia/ZhoConverterAvaMvvm/ViewModels/MainWindowViewModel.cs" root0="SKIP_HIGHLIGHTING" />
-  </component>
-  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+}]]></component>
   <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 4
 }</component>
-  <component name="ProjectId" id="2irKHhmMhceKKsOYrSbijP6VuSN" />
+  <component name="ProjectId" id="2oLRQLMnTWL5v9x4oUu76dENXti" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Project.ZhoConverterAvaMvvm.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Project.ZhoConverterAvaMvvm.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected=".NET Project.ZhoConverterAvaMvvm">
-    <configuration name="ZhoConverterAvaMvvm: FolderProfile" type="DotNetMsBuildPublish" factoryName="Publish to IIS">
-      <riderPublish publish_profile="FolderProfile.pubxml" pubxml_path="$PROJECT_DIR$/Properties/PublishProfiles/FolderProfile.pubxml" uuid_high="3669345351269370026" uuid_low="-7023431122985378343" />
-      <method v="2" />
-    </configuration>
-    <configuration name="ZhoConverterAvaMvvm" type="DotNetProject" factoryName=".NET Project">
+}]]></component>
+  <component name="RunManager">
+    <configuration name="ZhoConverterAvaMvvm" type="DotNetProject" factoryName=".NET Project" temporary="true">
       <option name="EXE_PATH" value="$PROJECT_DIR$/bin/Release/net8.0/ZhoConverterAvaMvvm.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bin/Release/net8.0" />
@@ -85,135 +80,33 @@
         <option name="Build" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue=".NET Project.ZhoConverterAvaMvvm" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="3ab2cb51-e8f0-4aca-a1c3-d0eb023c0689" name="Changes" comment="" />
-      <created>1720243171200</created>
+      <changelist id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="" />
+      <created>1730646851968</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1720243171200</updated>
-      <workItem from="1720243172593" duration="24000" />
-      <workItem from="1720244787899" duration="1207000" />
-      <workItem from="1720291399164" duration="2645000" />
-      <workItem from="1720298163017" duration="482000" />
-      <workItem from="1720364616067" duration="216000" />
-      <workItem from="1720387843949" duration="733000" />
-      <workItem from="1720388596274" duration="271000" />
-      <workItem from="1720468709654" duration="2078000" />
-      <workItem from="1720554767302" duration="8872000" />
-      <workItem from="1720567633916" duration="7186000" />
-      <workItem from="1721037561822" duration="148000" />
-      <workItem from="1721512599515" duration="439000" />
-      <workItem from="1721686144438" duration="994000" />
-      <workItem from="1722928416506" duration="171000" />
-      <workItem from="1723006695384" duration="2020000" />
-      <workItem from="1723273240836" duration="1281000" />
-      <workItem from="1723438863782" duration="307000" />
-      <workItem from="1723602466417" duration="549000" />
-      <workItem from="1723721283401" duration="93000" />
-      <workItem from="1726740726496" duration="366000" />
-      <workItem from="1727465827342" duration="699000" />
-      <workItem from="1727906713923" duration="99000" />
-      <workItem from="1728077691809" duration="1262000" />
-      <workItem from="1728082807442" duration="257000" />
-      <workItem from="1728083145734" duration="548000" />
-      <workItem from="1728083716175" duration="2662000" />
-      <workItem from="1728086774735" duration="2575000" />
+      <updated>1730646851968</updated>
+      <workItem from="1730646852996" duration="91000" />
+      <workItem from="1730647352104" duration="34000" />
+      <workItem from="1730647491934" duration="20000" />
+      <workItem from="1730647518575" duration="128000" />
+      <workItem from="1730839162695" duration="680000" />
     </task>
-    <task id="LOCAL-00001" summary="Add Dependency Injection">
-      <option name="closed" value="true" />
-      <created>1720292006994</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1720292006994</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Update to MVVM 3">
-      <option name="closed" value="true" />
-      <created>1720562902838</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1720562902838</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Refactoring code-behind to MVVM done">
-      <option name="closed" value="true" />
-      <created>1720573551178</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1720573551178</updated>
-    </task>
-    <task id="LOCAL-00004" summary="MVVM update">
-      <option name="closed" value="true" />
-      <created>1721686238898</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1721686238899</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Code optimization">
-      <option name="closed" value="true" />
-      <created>1723010574781</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1723010574781</updated>
-    </task>
-    <task id="LOCAL-00006" summary="House keeping">
-      <option name="closed" value="true" />
-      <created>1723438947824</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1723438947824</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Housekeeping">
-      <option name="closed" value="true" />
-      <created>1723602684474</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1723602684474</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Fixed segmentation (Jieba) to handle surrogate paired Unicode characters">
-      <option name="closed" value="true" />
-      <created>1726740905482</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1726740905482</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Fixed NewLine in keywords extraction">
-      <option name="closed" value="true" />
-      <created>1728083847445</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1728083847445</updated>
-    </task>
-    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
-    <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Add Dependency Injection" />
-    <MESSAGE value="Update to MVVM 3" />
-    <MESSAGE value="Refactoring code-behind to MVVM done" />
-    <MESSAGE value="MVVM update" />
-    <MESSAGE value="Code optimization" />
-    <MESSAGE value="House keeping" />
-    <MESSAGE value="Housekeeping" />
-    <MESSAGE value="Fixed segmentation (Jieba) to handle surrogate paired Unicode characters" />
-    <MESSAGE value="Fixed NewLine in keywords extraction" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed NewLine in keywords extraction" />
   </component>
 </project>
