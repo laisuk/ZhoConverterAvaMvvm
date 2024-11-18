@@ -9,9 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenccJiebaNetLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OpenccJiebaNetLib.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/opencc_fmmseg_capi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/opencc_fmmseg_capi.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/opencc_jieba_capi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/opencc_jieba_capi.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +17,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DpaMonitoringSettings">
-    <option name="autoShow" value="false" />
+    <option name="firstShow" value="false" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,6 +47,7 @@
   &quot;keyToString&quot;: {
     &quot;.NET Project.ZhoConverterAvaMvvm.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -101,6 +100,13 @@
       <workItem from="1730989300947" duration="106000" />
       <workItem from="1731091888707" duration="66000" />
       <workItem from="1731271916016" duration="139000" />
+      <workItem from="1731322166075" duration="127000" />
+      <workItem from="1731465694495" duration="98000" />
+      <workItem from="1731465933218" duration="296000" />
+      <workItem from="1731466398218" duration="388000" />
+      <workItem from="1731513012287" duration="311000" />
+      <workItem from="1731513328018" duration="15000" />
+      <workItem from="1731604708030" duration="133000" />
     </task>
     <task id="LOCAL-00001" summary="Update Nuget">
       <option name="closed" value="true" />
@@ -118,7 +124,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730989339819</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Update CAPI">
+      <option name="closed" value="true" />
+      <created>1731322210428</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1731322210428</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,6 +144,7 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Update Nuget" />
     <MESSAGE value="Update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+    <MESSAGE value="Update CAPI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update CAPI" />
   </component>
 </project>
