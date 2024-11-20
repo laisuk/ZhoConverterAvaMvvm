@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ZhoConverterAvaMvvm;
 
+[Serializable]
 public class LanguageSettings
 {
     public List<Language>? Languages { get; set; }
@@ -10,6 +12,7 @@ public class LanguageSettings
     public List<string>? TextFileTypes { get; set; }
 }
 
+[Serializable]
 public class Language
 {
     public int Id { get; set; }

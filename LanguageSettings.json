@@ -1,5 +1,5 @@
 {
-  "languages": [
+  "Languages": [
     {
       "id": 0,
       "code": "non-zho",
@@ -16,14 +16,14 @@
       "name": "zh-Hans (简体)"
     }
   ],
-  "charcheck": 50,
-  "punctuations": {
+  "CharCheck": 50,
+  "Punctuations": {
     "“": "「",
     "”": "」",
     "‘": "『",
     "’": "』"
   },
-  "textfiletypes": [
+  "TextFileTypes": [
     ".txt",
     ".srt",
     ".vtt",
@@ -36,6 +36,7 @@
     ".cs",
     ".py",
     ".java",
-    ".md"
+    ".md",
+    ".js"
   ]
 }
