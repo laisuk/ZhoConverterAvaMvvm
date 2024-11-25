@@ -177,13 +177,22 @@ public class MainWindowViewModel : ViewModelBase
         {
             var path = file.Path.LocalPath;
             var fileExt = Path.GetExtension(path);
-            if (!_textFileTypes!.Contains(fileExt))
+            if (_textFileTypes == null || !_textFileTypes!.Contains(fileExt))
             {
                 LblStatusBarContent = $"Error: File type ({fileExt}) not support";
                 return;
             }
 
-            UpdateTbSourceFileContents(path);
+            try
+            {
+                await UpdateTbSourceFileContentsAsync(path);
+            }
+            catch (Exception ex)
+            {
+                // Handle unexpected exceptions here
+                // Console.WriteLine($"Unhandled exception: {ex}");
+                LblStatusBarContent = $"Error open file: {ex.Message}";
+            }
         }
     }
 
@@ -571,7 +580,7 @@ public class MainWindowViewModel : ViewModelBase
         }
     }
 
-    private async void UpdateTbSourceFileContents(string filename)
+    private async Task UpdateTbSourceFileContentsAsync(string filename)
     {
         var fileInfo = new FileInfo(filename);
         if (fileInfo.Length > int.MaxValue)
@@ -587,23 +596,30 @@ public class MainWindowViewModel : ViewModelBase
         {
             using var reader = new StreamReader(_currentOpenFileName, Encoding.UTF8, true);
             var contents = await reader.ReadToEndAsync();
+
             // Display file contents to text box field
             TbSourceTextDocument!.Text = contents;
             LblStatusBarContent = $"File: {_currentOpenFileName}";
+
             var displayName = fileInfo.Name;
-            LblFileNameContent =
-                displayName.Length > 50 ? $"{displayName[..25]}...{displayName[^15..]}" : displayName;
+            LblFileNameContent = displayName.Length > 50
+                ? $"{displayName[..25]}...{displayName[^15..]}"
+                : displayName;
+
             var codeText = OpenccFmmsegNet.ZhoCheck(contents);
             UpdateEncodeInfo(codeText);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
             TbSourceTextDocument!.Text = string.Empty;
             LblSourceCodeContent = string.Empty;
             LblStatusBarContent = "Error: Invalid file";
-            //throw;
+
+            // Optionally log the exception
+            Console.WriteLine($"Exception in UpdateTbSourceFileContentsAsync: {ex}");
         }
     }
+
 
     private string GetCurrentConfig()
     {
