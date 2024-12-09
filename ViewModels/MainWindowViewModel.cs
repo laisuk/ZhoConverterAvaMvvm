@@ -228,11 +228,14 @@ public class MainWindowViewModel : ViewModelBase
         }
 
         var config = GetCurrentConfig();
-        var convertedText = IsCbJieba
-            ? OpenccJiebaNet.Convert(TbSourceTextDocument!.Text, config, IsCbPunctuation)
-            : OpenccFmmsegNet.Convert(TbSourceTextDocument.Text, config, IsCbPunctuation);
+        if (IsRbS2T || IsRbT2S)
+        {
+            var convertedText = IsCbJieba
+                ? OpenccJiebaNet.Convert(TbSourceTextDocument!.Text, config, IsCbPunctuation)
+                : OpenccFmmsegNet.Convert(TbSourceTextDocument.Text, config, IsCbPunctuation);
 
-        TbDestinationTextDocument!.Text = convertedText;
+            TbDestinationTextDocument!.Text = convertedText;
+        }
 
         if (IsRbT2S)
         {
@@ -248,7 +251,7 @@ public class MainWindowViewModel : ViewModelBase
         }
         else if (IsRbJieba)
         {
-            TbDestinationTextDocument.Text = IsCbJieba
+            TbDestinationTextDocument!.Text = IsCbJieba
                 ? string.Join("/", OpenccJiebaNet.JiebaCut(TbSourceTextDocument.Text, true))
                 : string.Join("/", new JiebaSegmenter().Cut(TbSourceTextDocument.Text));
 
@@ -258,7 +261,7 @@ public class MainWindowViewModel : ViewModelBase
         {
             var wordCount = int.Parse(TbWordCountText!) < 1 ? 1 : int.Parse(TbWordCountText!);
             TbWordCountText = wordCount.ToString();
-            TbDestinationTextDocument.Text = IsCbJieba
+            TbDestinationTextDocument!.Text = IsCbJieba
                 ? "===== TextRank Method =====\n" + string.Join("/ ",
                       OpenccJiebaNet.JiebaKeywordExtractTextRank(TbSourceTextDocument.Text, wordCount)) +
                   "\n\n====== TF-IDF Method ======\n" +
@@ -620,7 +623,6 @@ public class MainWindowViewModel : ViewModelBase
         }
     }
 
-
     private string GetCurrentConfig()
     {
         var config = IsRbS2T
@@ -638,7 +640,12 @@ public class MainWindowViewModel : ViewModelBase
                     : IsCbZhtw
                         ? "tw2sp"
                         : "tw2s";
-        return config;
+
+        return IsRbJieba
+            ? "Segmentation"
+            : IsRbTag
+                ? "Keywords"
+                : config;
     }
 
     public void TbSourceTextChanged()

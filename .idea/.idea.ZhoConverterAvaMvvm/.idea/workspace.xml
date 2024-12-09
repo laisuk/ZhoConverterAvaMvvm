@@ -9,8 +9,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/LanguageSettingsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/LanguageSettingsService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/MessageBox.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MessageBox.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +33,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/laisuk/ZhoConverterAvaMvvm.git&quot;,
-    &quot;accountId&quot;: &quot;53754de8-7284-402a-8b90-77ef13b65bca&quot;
+    &quot;accountId&quot;: &quot;f3a7018a-4bab-487a-b319-5cf990f65f18&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
@@ -119,6 +119,14 @@
       <workItem from="1732134115556" duration="3614000" />
       <workItem from="1732149315548" duration="93000" />
       <workItem from="1732183041483" duration="360000" />
+      <workItem from="1732560372261" duration="164000" />
+      <workItem from="1732560543518" duration="24000" />
+      <workItem from="1732788147752" duration="885000" />
+      <workItem from="1733129364847" duration="110000" />
+      <workItem from="1733249983890" duration="31000" />
+      <workItem from="1733564805805" duration="45000" />
+      <workItem from="1733771776319" duration="27000" />
+      <workItem from="1733772678811" duration="1919000" />
     </task>
     <task id="LOCAL-00001" summary="Update Nuget">
       <option name="closed" value="true" />
@@ -160,7 +168,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732133637486</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Update Net9.0">
+      <option name="closed" value="true" />
+      <created>1732560434681</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732560434681</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,6 +191,7 @@
     <MESSAGE value="Update CAPI" />
     <MESSAGE value="update net 9.0" />
     <MESSAGE value="Update JSON PascalCase" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update JSON PascalCase" />
+    <MESSAGE value="Update Net9.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Net9.0" />
   </component>
 </project>
