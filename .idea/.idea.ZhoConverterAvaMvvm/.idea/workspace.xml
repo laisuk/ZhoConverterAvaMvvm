@@ -9,8 +9,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/opencc_jieba_capi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/opencc_jieba_capi.dll" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,6 +133,10 @@
       <workItem from="1736542652214" duration="79000" />
       <workItem from="1736717605541" duration="13000" />
       <workItem from="1736965109741" duration="80000" />
+      <workItem from="1737261267605" duration="64000" />
+      <workItem from="1737780338313" duration="63000" />
+      <workItem from="1737780480516" duration="19000" />
+      <workItem from="1738963836036" duration="145000" />
     </task>
     <task id="LOCAL-00001" summary="Update Nuget">
       <option name="closed" value="true" />
@@ -192,7 +194,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733776303037</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Update CAPI">
+      <option name="closed" value="true" />
+      <created>1737261311810</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1737261311810</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,11 +214,11 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Update Nuget" />
     <MESSAGE value="Update" />
-    <MESSAGE value="Update CAPI" />
     <MESSAGE value="update net 9.0" />
     <MESSAGE value="Update JSON PascalCase" />
     <MESSAGE value="Update Net9.0" />
     <MESSAGE value="Fixed getConfig" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed getConfig" />
+    <MESSAGE value="Update CAPI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update CAPI" />
   </component>
 </project>
