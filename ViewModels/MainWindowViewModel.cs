@@ -26,7 +26,6 @@ public class MainWindowViewModel : ViewModelBase
     private readonly List<Language>? _languagesInfo;
     private readonly List<string>? _textFileTypes;
     private readonly ITopLevelService? _topLevelService;
-    private string? _currentOpenFileName;
     private bool _isBtnBatchStartVisible;
     private bool _isBtnOpenFileVisible = true;
     private bool _isBtnProcessVisible = true;
@@ -69,6 +68,7 @@ public class MainWindowViewModel : ViewModelBase
     private string? _tbPreviewText;
     private TextDocument? _tbSourceTextDocument;
     private string? _tbWordCountText = "30";
+    internal string? CurrentOpenFileName;
 
     public MainWindowViewModel()
     {
@@ -134,7 +134,7 @@ public class MainWindowViewModel : ViewModelBase
         var codeText = OpenccFmmsegNet.ZhoCheck(inputText);
         UpdateEncodeInfo(codeText);
         LblFileNameContent = string.Empty;
-        _currentOpenFileName = string.Empty;
+        CurrentOpenFileName = string.Empty;
     }
 
     private async Task Copy()
@@ -398,7 +398,7 @@ public class MainWindowViewModel : ViewModelBase
     private void ClearTbSource()
     {
         TbSourceTextDocument!.Text = string.Empty;
-        _currentOpenFileName = string.Empty;
+        CurrentOpenFileName = string.Empty;
         LblSourceCodeContent = string.Empty;
         LblFileNameContent = string.Empty;
         LblStatusBarContent = "Source text box cleared";
@@ -561,7 +561,7 @@ public class MainWindowViewModel : ViewModelBase
         }
     }
 
-    private void UpdateEncodeInfo(int codeText)
+    internal void UpdateEncodeInfo(int codeText)
     {
         switch (codeText)
         {
@@ -592,17 +592,17 @@ public class MainWindowViewModel : ViewModelBase
             return;
         }
 
-        _currentOpenFileName = filename;
+        CurrentOpenFileName = filename;
 
         // Read file contents
         try
         {
-            using var reader = new StreamReader(_currentOpenFileName, Encoding.UTF8, true);
+            using var reader = new StreamReader(CurrentOpenFileName, Encoding.UTF8, true);
             var contents = await reader.ReadToEndAsync();
 
             // Display file contents to text box field
             TbSourceTextDocument!.Text = contents;
-            LblStatusBarContent = $"File: {_currentOpenFileName}";
+            LblStatusBarContent = $"File: {CurrentOpenFileName}";
 
             var displayName = fileInfo.Name;
             LblFileNameContent = displayName.Length > 50

@@ -9,6 +9,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/MainWindow.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MainWindow.axaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,6 +38,7 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Views/MainWindow.axaml.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -142,6 +145,9 @@
       <workItem from="1740786019693" duration="148000" />
       <workItem from="1741802581933" duration="142000" />
       <workItem from="1742405424302" duration="673000" />
+      <workItem from="1742457723582" duration="1585000" />
+      <workItem from="1742482430569" duration="6387000" />
+      <workItem from="1742490035063" duration="1690000" />
     </task>
     <task id="LOCAL-00001" summary="Update Nuget">
       <option name="closed" value="true" />
@@ -223,7 +229,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741802691075</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Housekeeping">
+      <option name="closed" value="true" />
+      <created>1742459225510</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1742459225510</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -242,6 +256,7 @@
     <MESSAGE value="Update CAPI" />
     <MESSAGE value="update Avalonia" />
     <MESSAGE value="update capi" />
-    <option name="LAST_COMMIT_MESSAGE" value="update capi" />
+    <MESSAGE value="Housekeeping" />
+    <option name="LAST_COMMIT_MESSAGE" value="Housekeeping" />
   </component>
 </project>
