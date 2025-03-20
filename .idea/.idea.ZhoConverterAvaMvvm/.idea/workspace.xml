@@ -140,6 +140,8 @@
       <workItem from="1738963836036" duration="145000" />
       <workItem from="1739862828858" duration="145000" />
       <workItem from="1740786019693" duration="148000" />
+      <workItem from="1741802581933" duration="142000" />
+      <workItem from="1742405424302" duration="673000" />
     </task>
     <task id="LOCAL-00001" summary="Update Nuget">
       <option name="closed" value="true" />
@@ -213,7 +215,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739862947061</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="update capi">
+      <option name="closed" value="true" />
+      <created>1741802691075</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1741802691075</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,6 +241,7 @@
     <MESSAGE value="Fixed getConfig" />
     <MESSAGE value="Update CAPI" />
     <MESSAGE value="update Avalonia" />
-    <option name="LAST_COMMIT_MESSAGE" value="update Avalonia" />
+    <MESSAGE value="update capi" />
+    <option name="LAST_COMMIT_MESSAGE" value="update capi" />
   </component>
 </project>
