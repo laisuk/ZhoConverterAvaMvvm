@@ -121,6 +121,7 @@ public class MainWindowViewModel : ViewModelBase
         BtnMessagePreviewClearCommand = ReactiveCommand.Create(MessagePreviewClear);
         BtnBatchStartCommand = ReactiveCommand.CreateFromTask(BatchStart);
         SelectedItem = CustomOptions[0]; // Set "Option 1" as default
+        CbCustomGotFocusCommand = ReactiveCommand.Create(() => { IsRbCustom = true; });
     }
 
     public MainWindowViewModel(ITopLevelService topLevelService, LanguageSettingsService languageSettingsService) :
@@ -147,6 +148,7 @@ public class MainWindowViewModel : ViewModelBase
     public ReactiveCommand<Unit, Unit> BtnDetectCommand { get; }
     public ReactiveCommand<Unit, Unit> BtnMessagePreviewClearCommand { get; }
     public ReactiveCommand<Unit, Unit> BtnBatchStartCommand { get; }
+    public ReactiveCommand<Unit, Unit> CbCustomGotFocusCommand { get; }
 
 
     private async Task Paste()
@@ -889,6 +891,20 @@ public class MainWindowViewModel : ViewModelBase
         }
     }
 
+    public bool IsRbCustom
+    {
+        get => _isRbCustom;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _isRbCustom, value);
+            if (!value) return;
+            IsRbS2T = false;
+            IsRbT2S = false;
+            IsRbJieba = false;
+            IsRbTag = false;
+        }
+    }
+
     public bool IsRbStd
     {
         get => _isRbStd;
@@ -1053,20 +1069,6 @@ public class MainWindowViewModel : ViewModelBase
     {
         get => _isBtnBatchStartVisible;
         set => this.RaiseAndSetIfChanged(ref _isBtnBatchStartVisible, value);
-    }
-
-    public bool IsRbCustom
-    {
-        get => _isRbCustom;
-        set
-        {
-            this.RaiseAndSetIfChanged(ref _isRbCustom, value);
-            if (!value) return;
-            IsRbS2T = false;
-            IsRbT2S = false;
-            IsRbJieba = false;
-            IsRbTag = false;
-        }
     }
 
     #endregion

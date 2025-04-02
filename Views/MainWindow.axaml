@@ -59,8 +59,15 @@
             <RadioButton x:Name="RbCustom" Content="" Grid.Row="0" Grid.Column="4" FontSize="14"
                          Padding="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="MainRb"
                          IsChecked="{Binding IsRbCustom}" />
-            <ComboBox Name="CbCustom" Grid.Column="4" Grid.Row="0" Width="160" Margin="25,0,0,0" ItemsSource="{Binding CustomOptions}"
-                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}" GotFocus="CbCustom_GotFocus"></ComboBox>
+            <ComboBox Name="CbCustom" Grid.Column="4" Grid.Row="0" Width="160" Margin="25,0,0,0"
+                      ItemsSource="{Binding CustomOptions}"
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+                <Interaction.Behaviors>
+                    <EventTriggerBehavior EventName="GotFocus">
+                        <InvokeCommandAction Command="{Binding CbCustomGotFocusCommand}" />
+                    </EventTriggerBehavior>
+                </Interaction.Behaviors>
+            </ComboBox>
 
             <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5">
                 <Grid.ColumnDefinitions>
