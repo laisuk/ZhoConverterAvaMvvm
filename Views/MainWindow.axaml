@@ -10,7 +10,7 @@
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="ZhoConverterAvaMvvm"
-        Height="720" Width="1050"
+        Height="720" Width="1100"
         WindowStartupLocation="CenterScreen"
         MinWidth="1000"
         MinHeight="300">
@@ -34,6 +34,7 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition />
@@ -53,10 +54,15 @@
                          IsChecked="{Binding IsRbTag}" />
             <TextBox Name="TbWordCount" Grid.Row="0" Grid.Column="3" Text="{Binding TbWordCountText}"
                      VerticalAlignment="Center"
-                     HorizontalAlignment="Left" Margin="160,0,0,0" FontSize="14"
+                     HorizontalAlignment="Left" Margin="150,0,10,0" FontSize="14"
                      ToolTip.Tip="Number of keywords to extract" />
+            <RadioButton x:Name="RbCustom" Content="" Grid.Row="0" Grid.Column="4" FontSize="14"
+                         Padding="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="MainRb"
+                         IsChecked="{Binding IsRbCustom}" />
+            <ComboBox Name="CbCustom" Grid.Column="4" Grid.Row="0" Width="160" Margin="25,0,0,0" ItemsSource="{Binding CustomOptions}"
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}" GotFocus="CbCustom_GotFocus"></ComboBox>
 
-            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4">
+            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />

@@ -144,6 +144,14 @@ public partial class MainWindow : Window
 
         return filePath;
     }
+    
+    private void CbCustom_GotFocus(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        if (DataContext is MainWindowViewModel vm)
+        {
+            vm.IsRbCustom = true; // Set RadioButton checked when ComboBox gets focus
+        }
+    }
 
     private void TbSource_TextChanged(object? _1, EventArgs _2)
     {

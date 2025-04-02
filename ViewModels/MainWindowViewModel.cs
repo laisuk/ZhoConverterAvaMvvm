@@ -41,6 +41,7 @@ public class MainWindowViewModel : ViewModelBase
     private bool _isRbStd = true;
     private bool _isRbT2S = true;
     private bool _isRbTag;
+    private bool _isRbCustom;
     private bool _isRbZhtw;
     private bool _isTabBatch;
     private bool _isTabMain = true;
@@ -57,9 +58,9 @@ public class MainWindowViewModel : ViewModelBase
     private int _lbxSourceSelectedIndex;
     private string? _lbxSourceSelectedItem;
     private string? _rbHkContent = "ZH-HK (中港简繁)";
-    private string? _rbS2TContent = "Hans (简体) to Hant (繁体)";
+    private string? _rbS2TContent = "Hans (简) to Hant (繁)";
     private string? _rbStdContent = "Standard (标准简繁)";
-    private string? _rbT2SContent = "Hant (繁体) to Hans (简体)";
+    private string? _rbT2SContent = "Hant (繁) to Hans (简)";
     private string? _rbZhtwContent = "ZH-TW (中台简繁)";
     private FontWeight _tabBatchFontWeight = FontWeight.Normal;
     private FontWeight _tabMainFontWeight = FontWeight.Bold;
@@ -69,6 +70,34 @@ public class MainWindowViewModel : ViewModelBase
     private TextDocument? _tbSourceTextDocument;
     private string? _tbWordCountText = "30";
     internal string? CurrentOpenFileName;
+    
+    private string? _selectedItem;
+
+    public ObservableCollection<string> CustomOptions { get; } = new()
+    {
+        "s2t (简->繁)",
+        "s2tw (简->繁台",
+        "s2twp (简->繁台/惯)",
+        "s2hk (简->繁港)",
+        "t2s (繁->简)",
+        "t2tw (繁->繁台)",
+        "t2twp (繁->繁台/惯)",
+        "t2hk (繁->繁港)",
+        "tw2s (繁台->简)",
+        "tw2sp (繁台->简/惯)",
+        "tw2t (繁台->繁)",
+        "tw2tp (繁台->繁/惯)",
+        "hk2s (繁港->简)",
+        "hk2t (繁港->繁)",
+        "t2jp (日舊->日新)",
+        "jp2t (日新->日舊)"
+    };
+
+    public string? SelectedItem
+    {
+        get => _selectedItem;
+        set => this.RaiseAndSetIfChanged(ref _selectedItem, value);
+    }
 
     public MainWindowViewModel()
     {
@@ -91,6 +120,7 @@ public class MainWindowViewModel : ViewModelBase
         BtnDetectCommand = ReactiveCommand.CreateFromTask(Detect);
         BtnMessagePreviewClearCommand = ReactiveCommand.Create(MessagePreviewClear);
         BtnBatchStartCommand = ReactiveCommand.CreateFromTask(BatchStart);
+        SelectedItem = CustomOptions[0]; // Set "Option 1" as default
     }
 
     public MainWindowViewModel(ITopLevelService topLevelService, LanguageSettingsService languageSettingsService) :
@@ -795,6 +825,7 @@ public class MainWindowViewModel : ViewModelBase
             IsRbT2S = false;
             IsRbJieba = false;
             IsRbTag = false;
+            IsRbCustom = false;
             LblSourceCodeContent = _languagesInfo![2].Name;
         }
     }
@@ -809,6 +840,7 @@ public class MainWindowViewModel : ViewModelBase
             IsRbS2T = false;
             IsRbJieba = false;
             IsRbTag = false;
+            IsRbCustom = false;
             LblSourceCodeContent = _languagesInfo![1].Name;
         }
     }
@@ -823,6 +855,7 @@ public class MainWindowViewModel : ViewModelBase
             IsRbS2T = false;
             IsRbT2S = false;
             IsRbTag = false;
+            IsRbCustom = false;
         }
     }
 
@@ -836,6 +869,7 @@ public class MainWindowViewModel : ViewModelBase
             IsRbS2T = false;
             IsRbT2S = false;
             IsRbJieba = false;
+            IsRbCustom = false;
         }
     }
 
@@ -1003,6 +1037,20 @@ public class MainWindowViewModel : ViewModelBase
     {
         get => _isBtnBatchStartVisible;
         set => this.RaiseAndSetIfChanged(ref _isBtnBatchStartVisible, value);
+    }
+
+    public bool IsRbCustom
+    {
+        get => _isRbCustom;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _isRbCustom, value);
+            if (!value) return;
+            IsRbS2T = false;
+            IsRbT2S = false;
+            IsRbJieba = false;
+            IsRbTag = false;
+        }
     }
 
     #endregion
