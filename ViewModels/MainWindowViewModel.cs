@@ -70,7 +70,7 @@ public class MainWindowViewModel : ViewModelBase
     private TextDocument? _tbSourceTextDocument;
     private string? _tbWordCountText = "30";
     internal string? CurrentOpenFileName;
-    
+
     private string? _selectedItem;
 
     public ObservableCollection<string> CustomOptions { get; } = new()
@@ -258,7 +258,7 @@ public class MainWindowViewModel : ViewModelBase
         }
 
         var config = GetCurrentConfig();
-        if (IsRbS2T || IsRbT2S)
+        if (IsRbS2T || IsRbT2S || IsRbCustom)
         {
             var convertedText = IsCbJieba
                 ? OpenccJiebaNet.Convert(TbSourceTextDocument!.Text, config, IsCbPunctuation)
@@ -278,6 +278,12 @@ public class MainWindowViewModel : ViewModelBase
             LblDestinationCodeContent = LblSourceCodeContent!.Contains("Non")
                 ? LblSourceCodeContent
                 : _languagesInfo![1].Name;
+        }
+        else if (IsRbCustom)
+        {
+            LblDestinationCodeContent = LblSourceCodeContent!.Contains("Non")
+                ? LblSourceCodeContent
+                : $"Custom ( {config} )";
         }
         else if (IsRbJieba)
         {
@@ -318,7 +324,7 @@ public class MainWindowViewModel : ViewModelBase
             return;
         }
 
-        LblStatusBarContent = $"Process completed: {config}";
+        LblStatusBarContent = $"Process completed: {config} {(IsCbJieba ? "(Jieba)" : "")}";
     }
 
     private async Task BatchStart()
@@ -340,14 +346,19 @@ public class MainWindowViewModel : ViewModelBase
             return;
         }
 
-        if (IsRbS2T == false && IsRbT2S == false)
+        if (IsRbS2T == false && IsRbT2S == false && IsRbCustom == false)
         {
             await MessageBox.Show("Please select conversion type:\n zh-Hans / zh-Hant", "Error",
                 _topLevelService!.GetMainWindow());
             return;
         }
 
-        var conversion = IsRbS2T ? RbS2TContent : RbT2SContent;
+        var config = GetCurrentConfig();
+        var conversion = IsRbCustom
+            ? config
+            : IsRbS2T
+                ? RbS2TContent
+                : RbT2SContent;
         var region = IsRbStd
             ? RbStdContent
             : IsRbHk
@@ -359,8 +370,12 @@ public class MainWindowViewModel : ViewModelBase
         IsTabMessage = true;
         LbxDestinationItems!.Clear();
         LbxDestinationItems.Add($"Conversion Type (转换方式) => {conversion}");
-        LbxDestinationItems.Add($"Region (区域) => {region}");
-        LbxDestinationItems.Add($"ZH/TW Idioms (中台惯用语) => {iSZhTwIdioms}");
+        if (!IsRbCustom)
+        {
+            LbxDestinationItems.Add($"Region (区域) => {region}");
+            LbxDestinationItems.Add($"ZH/TW Idioms (中台惯用语) => {iSZhTwIdioms}");
+        }
+
         LbxDestinationItems.Add($"Punctuations (标点) => {isPunctuations}");
         LbxDestinationItems.Add($"Output folder: (输出文件夹) => {TbOutFolderText}");
 
@@ -396,24 +411,23 @@ public class MainWindowViewModel : ViewModelBase
                 continue;
             }
 
-            string convertedText;
-            string suffix;
-            var config = GetCurrentConfig();
-            if (IsRbT2S)
-            {
-                suffix = "(Hans)";
-                convertedText = OpenccFmmsegNet.Convert(inputText, config, IsCbPunctuation);
-            }
-            else if (IsRbS2T)
-            {
-                suffix = "(Hant)";
-                convertedText = OpenccFmmsegNet.Convert(inputText, config, IsCbPunctuation);
-            }
-            else
-            {
-                suffix = "(Other)";
-                convertedText = inputText;
-            }
+            var suffix =
+                // Set suffix based on the radio button state
+                IsRbT2S
+                    ? "(Hans)"
+                    : IsRbS2T
+                        ? "(Hant)"
+                        : IsRbCustom
+                            ? $"({config})"
+                            : "(Other)";
+
+            // Choose conversion method based on IsCbJieba
+            Func<string, string, bool, string> conversionMethod = IsCbJieba
+                ? OpenccJiebaNet.Convert
+                : OpenccFmmsegNet.Convert;
+
+            // If the suffix isn't "(Other)", perform the conversion
+            var convertedText = suffix != "(Other)" ? conversionMethod(inputText, config, IsCbPunctuation) : inputText;
 
             var outputFilename = Path.Combine(Path.GetFullPath(TbOutFolderText),
                 filenameWithoutExt + suffix + fileExt);
@@ -422,7 +436,7 @@ public class MainWindowViewModel : ViewModelBase
             LbxDestinationItems.Add($"({count}) {outputFilename} -> [Done ✓]");
         }
 
-        LblStatusBarContent = "Batch conversion done.";
+        LblStatusBarContent = $"Batch conversion done. ( {config} {(IsCbJieba ? "Jieba " : "")})";
     }
 
     private void ClearTbSource()
@@ -675,7 +689,9 @@ public class MainWindowViewModel : ViewModelBase
             ? "Segmentation"
             : IsRbTag
                 ? "Keywords"
-                : config;
+                : IsRbCustom
+                    ? SelectedItem!.Split(" ").First()
+                    : config;
     }
 
     public void TbSourceTextChanged()
