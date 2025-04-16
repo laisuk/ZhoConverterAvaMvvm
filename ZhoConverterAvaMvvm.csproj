@@ -9,7 +9,7 @@
         <Platforms>AnyCPU</Platforms>
         <Configurations>Debug;Release</Configurations>
         <TargetFramework>net8.0</TargetFramework>
-        <LangVersion>13</LangVersion>
+        <LangVersion>12</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
