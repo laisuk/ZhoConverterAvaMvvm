@@ -267,25 +267,23 @@ public class MainWindowViewModel : ViewModelBase
                 : OpenccFmmsegNet.Convert(TbSourceTextDocument.Text, config, IsCbPunctuation);
 
             TbDestinationTextDocument!.Text = convertedText;
-        }
-
-        if (IsRbT2S)
-        {
-            LblDestinationCodeContent = LblSourceCodeContent!.Contains("Non")
-                ? LblSourceCodeContent
-                : _languagesInfo![2].Name;
-        }
-        else if (IsRbS2T)
-        {
-            LblDestinationCodeContent = LblSourceCodeContent!.Contains("Non")
-                ? LblSourceCodeContent
-                : _languagesInfo![1].Name;
-        }
-        else if (IsRbCustom)
-        {
-            LblDestinationCodeContent = LblSourceCodeContent!.Contains("Non")
-                ? LblSourceCodeContent
-                : $"Custom ( {config} )";
+            if (IsRbT2S) {
+                        LblDestinationCodeContent = LblSourceCodeContent!.Contains("Non")
+                            ? LblSourceCodeContent
+                            : _languagesInfo![2].Name;
+            }
+            else if (IsRbS2T)
+            {
+                LblDestinationCodeContent = LblSourceCodeContent!.Contains("Non")
+                    ? LblSourceCodeContent
+                    : _languagesInfo![1].Name;
+            }
+            else if (IsRbCustom)
+            {
+                LblDestinationCodeContent = LblSourceCodeContent!.Contains("Non")
+                    ? LblSourceCodeContent
+                    : $"Custom ( {config} )";
+            }
         }
         else if (IsRbJieba)
         {
