@@ -7,10 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/MainWindow.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MainWindow.axaml" afterDir="false" />
-    </list>
+    <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -177,6 +174,7 @@
       <workItem from="1744966757220" duration="118000" />
       <workItem from="1745009732508" duration="80000" />
       <workItem from="1745009824330" duration="3544000" />
+      <workItem from="1745132362228" duration="243000" />
     </task>
     <task id="LOCAL-00001" summary="Update Nuget">
       <option name="closed" value="true" />
@@ -362,7 +360,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744966801174</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Update CAPI">
+      <option name="closed" value="true" />
+      <created>1745132576357</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1745132576357</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
