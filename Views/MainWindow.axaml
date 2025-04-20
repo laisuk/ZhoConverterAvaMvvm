@@ -10,7 +10,7 @@
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="ZhoConverterAvaMvvm"
-        Height="720" Width="1100"
+        Height="720" Width="1000"
         WindowStartupLocation="CenterScreen"
         MinWidth="1000"
         MinHeight="300">
@@ -79,28 +79,27 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <RadioButton x:Name="RbStd" Grid.Row="0" Grid.Column="0" Content="{Binding RbStdContent}" FontSize="14"
+                <RadioButton x:Name="RbStd" Grid.Row="0" Grid.Column="0" Content="{Binding RbStdContent}" FontSize="13"
                              Padding="5,0,0,0" Margin="20,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"
                              GroupName="SecondRb" IsChecked="{Binding IsRbStd}" />
                 <RadioButton x:Name="RbZhtw" Grid.Row="0" Grid.Column="1" Content="{Binding RbZhtwContent}"
-                             FontSize="14"
+                             FontSize="13"
                              Padding="5,0,0,0" Margin="15,0,0,0" VerticalAlignment="Center"
                              HorizontalAlignment="Center"
                              GroupName="SecondRb" IsChecked="{Binding IsRbZhtw}" />
-                <RadioButton x:Name="RbHk" Grid.Row="0" Grid.Column="2" Content="{Binding RbHkContent}" FontSize="14"
+                <RadioButton x:Name="RbHk" Grid.Row="0" Grid.Column="2" Content="{Binding RbHkContent}" FontSize="13"
                              Padding="5,0,0,0" Margin="20,0,0,0" VerticalAlignment="Center"
                              HorizontalAlignment="Center" IsChecked="{Binding IsRbHk}"
                              GroupName="SecondRb" />
-                <CheckBox x:Name="CbZhtw" Grid.Row="0" Grid.Column="3" FontSize="14" Content="ZH-TW Idioms (中台惯用语)"
+                <CheckBox x:Name="CbZhtw" Grid.Row="0" Grid.Column="3" FontSize="12" Content="ZH-TW Idioms (中台惯用语)"
                           Padding="5,0,0,0" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"
                           IsChecked="{Binding IsCbZhtw}" IsEnabled="{Binding IsCbZhtwEnabled}" />
-
                 <CheckBox x:Name="CbPunctuation" Grid.Row="0" Grid.Column="4" Content="Punctuation (标点)"
-                          FontSize="14" Padding="5,0,0,0" Margin="5,0,0,0" VerticalAlignment="Center"
+                          FontSize="13" Padding="5,0,0,0" Margin="5,0,0,0" VerticalAlignment="Center"
                           HorizontalAlignment="Left" IsChecked="{Binding IsCbPunctuation}" />
                 <CheckBox x:Name="CbJieba" Grid.Row="0" Grid.Column="5" Content="Jieba (结巴分词)"
-                          FontSize="14" Padding="5,0,0,0" Margin="5,0,0,0" VerticalAlignment="Center"
-                          HorizontalAlignment="Left" IsChecked="{Binding IsCbJieba}" />
+                          FontSize="13" Padding="5,0,0,0" Margin="5,0,0,0" VerticalAlignment="Center"
+                          HorizontalAlignment="Left" IsChecked="{Binding IsCbJieba}"></CheckBox>
             </Grid>
         </Grid>
         <Grid Grid.Row="1">
@@ -180,8 +179,6 @@
                                 HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="0,2,5,0"
                                 Grid.Row="1" VerticalAlignment="Center"
                                 FontSize="14" Command="{Binding BtnCopyCommand}" />
-
-
                     </Grid>
                 </TabItem>
                 <TabItem x:Name="TabBatch" Header="Batch Conversion" IsSelected="{Binding IsTabBatch}" FontSize="14"
