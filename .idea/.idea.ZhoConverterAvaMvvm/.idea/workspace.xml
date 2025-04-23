@@ -7,7 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="" />
+    <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -175,6 +177,9 @@
       <workItem from="1745009732508" duration="80000" />
       <workItem from="1745009824330" duration="3544000" />
       <workItem from="1745132362228" duration="243000" />
+      <workItem from="1745169849358" duration="668000" />
+      <workItem from="1745170675538" duration="81000" />
+      <workItem from="1745322424046" duration="24000" />
     </task>
     <task id="LOCAL-00001" summary="Update Nuget">
       <option name="closed" value="true" />
@@ -368,7 +373,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745132576357</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Update Avalonia">
+      <option name="closed" value="true" />
+      <created>1745170494758</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1745170494758</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -399,7 +412,8 @@
     <MESSAGE value="Code optimization (Process())" />
     <MESSAGE value="update" />
     <MESSAGE value="Update CAPI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update CAPI" />
+    <MESSAGE value="Update Avalonia" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Avalonia" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
