@@ -7,10 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" afterDir="false" />
-    </list>
+    <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,6 +49,7 @@
     &quot;.NET Project.ZhoConverterAvaMvvm.executor&quot;: &quot;Run&quot;,
     &quot;Publish to folder.Publish ZhoConverterAvaMvvm to folder.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
@@ -188,6 +186,7 @@
       <workItem from="1745322424046" duration="24000" />
       <workItem from="1745420618814" duration="388000" />
       <workItem from="1745597796431" duration="1256000" />
+      <workItem from="1745665227210" duration="81000" />
     </task>
     <task id="LOCAL-00001" summary="Update Nuget">
       <option name="closed" value="true" />
@@ -397,7 +396,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745420696841</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Update Avalonia">
+      <option name="closed" value="true" />
+      <created>1745665262057</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1745665262057</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -428,9 +435,9 @@
     <MESSAGE value="Code optimization (Process())" />
     <MESSAGE value="update" />
     <MESSAGE value="Update CAPI" />
-    <MESSAGE value="Update Avalonia" />
     <MESSAGE value="Use CAPI with Win7 x64 compatible" />
-    <option name="LAST_COMMIT_MESSAGE" value="Use CAPI with Win7 x64 compatible" />
+    <MESSAGE value="Update Avalonia" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Avalonia" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
