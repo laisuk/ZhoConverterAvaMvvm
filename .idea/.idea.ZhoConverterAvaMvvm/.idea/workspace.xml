@@ -7,7 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="" />
+    <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libopencc_fmmseg_capi.dylib" beforeDir="false" afterPath="$PROJECT_DIR$/libopencc_fmmseg_capi.dylib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libopencc_fmmseg_capi.so" beforeDir="false" afterPath="$PROJECT_DIR$/libopencc_fmmseg_capi.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libopencc_jieba_capi.dylib" beforeDir="false" afterPath="$PROJECT_DIR$/libopencc_jieba_capi.dylib" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -187,6 +192,8 @@
       <workItem from="1745420618814" duration="388000" />
       <workItem from="1745597796431" duration="1256000" />
       <workItem from="1745665227210" duration="81000" />
+      <workItem from="1745786936412" duration="85000" />
+      <workItem from="1745802646002" duration="1531000" />
     </task>
     <task id="LOCAL-00001" summary="Update Nuget">
       <option name="closed" value="true" />
@@ -404,7 +411,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745665262057</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="update Avalonia">
+      <option name="closed" value="true" />
+      <created>1745787004288</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1745787004288</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -420,7 +435,6 @@
     <MESSAGE value="Update JSON PascalCase" />
     <MESSAGE value="Update Net9.0" />
     <MESSAGE value="Fixed getConfig" />
-    <MESSAGE value="update Avalonia" />
     <MESSAGE value="update capi" />
     <MESSAGE value="Housekeeping" />
     <MESSAGE value="Optimized Drag n Drop" />
@@ -437,7 +451,8 @@
     <MESSAGE value="Update CAPI" />
     <MESSAGE value="Use CAPI with Win7 x64 compatible" />
     <MESSAGE value="Update Avalonia" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update Avalonia" />
+    <MESSAGE value="update Avalonia" />
+    <option name="LAST_COMMIT_MESSAGE" value="update Avalonia" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
