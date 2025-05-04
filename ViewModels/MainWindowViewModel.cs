@@ -17,8 +17,6 @@ using ReactiveUI;
 using ZhoConverterAvaMvvm.Services;
 using ZhoConverterAvaMvvm.Views;
 
-// using JiebaNet.Analyser;
-
 namespace ZhoConverterAvaMvvm.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
@@ -150,7 +148,6 @@ public class MainWindowViewModel : ViewModelBase
     public ReactiveCommand<Unit, Unit> BtnBatchStartCommand { get; }
     public ReactiveCommand<Unit, Unit> CbCustomGotFocusCommand { get; }
 
-
     private async Task Paste()
     {
         var inputText = await _topLevelService!.GetClipboardTextAsync();
@@ -260,6 +257,7 @@ public class MainWindowViewModel : ViewModelBase
         }
 
         var config = GetCurrentConfig();
+
         if (IsRbS2T || IsRbT2S || IsRbCustom)
         {
             var convertedText = IsCbJieba
@@ -267,10 +265,11 @@ public class MainWindowViewModel : ViewModelBase
                 : OpenccFmmsegNet.Convert(TbSourceTextDocument.Text, config, IsCbPunctuation);
 
             TbDestinationTextDocument!.Text = convertedText;
-            if (IsRbT2S) {
-                        LblDestinationCodeContent = LblSourceCodeContent!.Contains("Non")
-                            ? LblSourceCodeContent
-                            : _languagesInfo![2].Name;
+            if (IsRbT2S)
+            {
+                LblDestinationCodeContent = LblSourceCodeContent!.Contains("Non")
+                    ? LblSourceCodeContent
+                    : _languagesInfo![2].Name;
             }
             else if (IsRbS2T)
             {
