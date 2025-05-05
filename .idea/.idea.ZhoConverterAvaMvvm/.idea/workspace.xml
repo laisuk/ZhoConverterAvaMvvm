@@ -9,7 +9,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/opencc_jieba_capi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/opencc_jieba_capi.dll" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -206,7 +205,8 @@
       <workItem from="1746305789349" duration="95000" />
       <workItem from="1746334181083" duration="184000" />
       <workItem from="1746368422967" duration="114000" />
-      <workItem from="1746382354979" duration="1046000" />
+      <workItem from="1746382354979" duration="1291000" />
+      <workItem from="1746471571185" duration="1041000" />
     </task>
     <task id="LOCAL-00001" summary="Update Nuget">
       <option name="closed" value="true" />
@@ -448,7 +448,23 @@
       <option name="project" value="LOCAL" />
       <updated>1745881199847</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Housekeeping">
+      <option name="closed" value="true" />
+      <created>1746383473988</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1746383473988</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Update jieba capi to 0.5.0">
+      <option name="closed" value="true" />
+      <created>1746383600257</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1746383600257</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -465,7 +481,6 @@
     <MESSAGE value="Update Net9.0" />
     <MESSAGE value="Fixed getConfig" />
     <MESSAGE value="update capi" />
-    <MESSAGE value="Housekeeping" />
     <MESSAGE value="Optimized Drag n Drop" />
     <MESSAGE value="Update README.md" />
     <MESSAGE value="Update LISENCE" />
@@ -482,7 +497,9 @@
     <MESSAGE value="update Avalonia" />
     <MESSAGE value="Update macOS CAPI" />
     <MESSAGE value="Update Avalonia" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update Avalonia" />
+    <MESSAGE value="Housekeeping" />
+    <MESSAGE value="Update jieba capi to 0.5.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update jieba capi to 0.5.0" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
