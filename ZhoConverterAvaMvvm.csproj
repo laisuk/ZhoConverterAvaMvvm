@@ -45,11 +45,11 @@
         <Reference Include="Newtonsoft.Json">
             <HintPath>Newtonsoft.Json.dll</HintPath>
         </Reference>
-        <Reference Include="OpenccFmmsegNetLib">
-            <HintPath>OpenccFmmsegNetLib.dll</HintPath>
+        <Reference Include="OpenccFmmsegLib">
+          <HintPath>OpenccFmmsegLib.dll</HintPath>
         </Reference>
-        <Reference Include="OpenccJiebaNetLib">
-            <HintPath>OpenccJiebaNetLib.dll</HintPath>
+        <Reference Include="OpenccJiebaLib">
+          <HintPath>OpenccJiebaLib.dll</HintPath>
         </Reference>
     </ItemGroup>
 
@@ -76,6 +76,12 @@
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
         <None Update="libopencc_jieba_capi.dylib">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="OpenccFmmsegLib.dll">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="OpenccJiebaLib.dll">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
     </ItemGroup>

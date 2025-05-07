@@ -8,7 +8,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using AvaloniaEdit;
-using OpenccFmmsegNetLib;
+using OpenccFmmsegLib;
 using ZhoConverterAvaMvvm.ViewModels;
 
 namespace ZhoConverterAvaMvvm.Views;
@@ -88,7 +88,7 @@ public partial class MainWindow : Window
                 vm.TbSourceTextDocument!.Text = text;
 
             vm.LblStatusBarContent = $"Contents dropped {filePath?.TryGetLocalPath()}";
-            var codeText = OpenccFmmsegNet.ZhoCheck(vm.TbSourceTextDocument!.Text);
+            var codeText = new OpenccFmmseg().ZhoCheck(vm.TbSourceTextDocument!.Text);
             vm.UpdateEncodeInfo(codeText);
             vm.LblFileNameContent = filePath?.Name;
             vm.CurrentOpenFileName = filePath?.TryGetLocalPath();

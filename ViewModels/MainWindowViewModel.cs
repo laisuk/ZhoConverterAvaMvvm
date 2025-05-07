@@ -11,8 +11,8 @@ using Avalonia.Platform.Storage;
 using AvaloniaEdit.Document;
 using JiebaNet.Analyser;
 using JiebaNet.Segmenter;
-using OpenccFmmsegNetLib;
-using OpenccJiebaNetLib;
+using OpenccFmmsegLib;
+using OpenccJiebaLib;
 using ReactiveUI;
 using ZhoConverterAvaMvvm.Services;
 using ZhoConverterAvaMvvm.Views;
@@ -68,8 +68,10 @@ public class MainWindowViewModel : ViewModelBase
     private TextDocument? _tbSourceTextDocument;
     private string? _tbWordCountText = "30";
     internal string? CurrentOpenFileName;
-
     private string? _selectedItem;
+
+    private readonly OpenccFmmseg _openccFmmseg = new();
+    private readonly OpenccJieba _openccJieba = new();
 
     public ObservableCollection<string> CustomOptions { get; } = new()
     {
@@ -160,7 +162,7 @@ public class MainWindowViewModel : ViewModelBase
 
         TbSourceTextDocument!.Text = inputText;
         LblStatusBarContent = "Clipboard content pasted";
-        var codeText = OpenccFmmsegNet.ZhoCheck(inputText);
+        var codeText = _openccFmmseg.ZhoCheck(inputText);
         UpdateEncodeInfo(codeText);
         LblFileNameContent = string.Empty;
         CurrentOpenFileName = string.Empty;
@@ -261,8 +263,8 @@ public class MainWindowViewModel : ViewModelBase
         if (IsRbS2T || IsRbT2S || IsRbCustom)
         {
             var convertedText = IsCbJieba
-                ? OpenccJiebaNet.Convert(TbSourceTextDocument!.Text, config, IsCbPunctuation)
-                : OpenccFmmsegNet.Convert(TbSourceTextDocument.Text, config, IsCbPunctuation);
+                ? _openccJieba.Convert(TbSourceTextDocument!.Text, config, IsCbPunctuation)
+                : _openccFmmseg.Convert(TbSourceTextDocument.Text, config, IsCbPunctuation);
 
             TbDestinationTextDocument!.Text = convertedText;
             if (IsRbT2S)
@@ -287,7 +289,7 @@ public class MainWindowViewModel : ViewModelBase
         else if (IsRbJieba)
         {
             TbDestinationTextDocument!.Text = IsCbJieba
-                ? string.Join("/", OpenccJiebaNet.JiebaCut(TbSourceTextDocument.Text, true))
+                ? string.Join("/", _openccJieba.JiebaCut(TbSourceTextDocument.Text, true))
                 : string.Join("/", new JiebaSegmenter().Cut(TbSourceTextDocument.Text));
 
             LblDestinationCodeContent = LblSourceCodeContent;
@@ -298,10 +300,10 @@ public class MainWindowViewModel : ViewModelBase
             TbWordCountText = wordCount.ToString();
             TbDestinationTextDocument!.Text = IsCbJieba
                 ? "===== TextRank Method =====\n" + string.Join("/ ",
-                      OpenccJiebaNet.JiebaKeywordExtractTextRank(TbSourceTextDocument.Text, wordCount)) +
+                      _openccJieba.JiebaKeywordExtractTextRank(TbSourceTextDocument.Text, wordCount)) +
                   "\n\n====== TF-IDF Method ======\n" +
                   string.Join("/ ",
-                      OpenccJiebaNet.JiebaKeywordExtractTfidf(TbSourceTextDocument.Text,
+                      _openccJieba.JiebaKeywordExtractTfidf(TbSourceTextDocument.Text,
                           wordCount))
                 : "===== TextRank Method =====\n" + string.Join("/ ",
                       new TextRankExtractor().ExtractTags(TbSourceTextDocument.Text, wordCount)) +
@@ -422,8 +424,8 @@ public class MainWindowViewModel : ViewModelBase
 
             // Choose conversion method based on IsCbJieba
             Func<string, string, bool, string> conversionMethod = IsCbJieba
-                ? OpenccJiebaNet.Convert
-                : OpenccFmmsegNet.Convert;
+                ? _openccJieba.Convert
+                : _openccFmmseg.Convert;
 
             // If the suffix isn't "(Other)", perform the conversion
             var convertedText = suffix != "(Other)" ? conversionMethod(inputText, config, IsCbPunctuation) : inputText;
@@ -558,7 +560,7 @@ public class MainWindowViewModel : ViewModelBase
                     continue;
                 }
 
-                var textCode = _languagesInfo![OpenccFmmsegNet.ZhoCheck(inputText)].Name!;
+                var textCode = _languagesInfo![_openccFmmseg.ZhoCheck(inputText)].Name!;
                 LbxDestinationItems.Add($"[{textCode}] {item}");
             }
             else
@@ -652,7 +654,7 @@ public class MainWindowViewModel : ViewModelBase
                 ? $"{displayName[..25]}...{displayName[^15..]}"
                 : displayName;
 
-            var codeText = OpenccFmmsegNet.ZhoCheck(contents);
+            var codeText = _openccFmmseg.ZhoCheck(contents);
             UpdateEncodeInfo(codeText);
         }
         catch (Exception ex)

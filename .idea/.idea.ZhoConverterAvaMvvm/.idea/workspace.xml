@@ -8,7 +8,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/OpenccFmmsegLib.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OpenccJiebaLib.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenccFmmsegNetLib.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenccJiebaNetLib.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/MainWindow.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MainWindow.axaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opencc_fmmseg_capi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/opencc_fmmseg_capi.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/opencc_jieba_capi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/opencc_jieba_capi.dll" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -207,6 +215,8 @@
       <workItem from="1746368422967" duration="114000" />
       <workItem from="1746382354979" duration="1291000" />
       <workItem from="1746471571185" duration="1041000" />
+      <workItem from="1746488054813" duration="216000" />
+      <workItem from="1746639742630" duration="1476000" />
     </task>
     <task id="LOCAL-00001" summary="Update Nuget">
       <option name="closed" value="true" />
@@ -464,7 +474,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746383600257</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="update">
+      <option name="closed" value="true" />
+      <created>1746488078197</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1746488078197</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -491,7 +509,6 @@
     <MESSAGE value="Revert to .Net 8" />
     <MESSAGE value="Update macOS Jieba capi" />
     <MESSAGE value="Code optimization (Process())" />
-    <MESSAGE value="update" />
     <MESSAGE value="Update CAPI" />
     <MESSAGE value="Use CAPI with Win7 x64 compatible" />
     <MESSAGE value="update Avalonia" />
@@ -499,7 +516,8 @@
     <MESSAGE value="Update Avalonia" />
     <MESSAGE value="Housekeeping" />
     <MESSAGE value="Update jieba capi to 0.5.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update jieba capi to 0.5.0" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
