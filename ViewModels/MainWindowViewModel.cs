@@ -34,7 +34,7 @@ public class MainWindowViewModel : ViewModelBase
     private bool _isCbZhtwEnabled;
     private bool _isLblFileNameVisible = true;
     private bool _isRbHk;
-    private bool _isRbJieba;
+    private bool _isRbSegment;
     private bool _isRbS2T;
     private bool _isRbStd = true;
     private bool _isRbT2S = true;
@@ -286,7 +286,7 @@ public class MainWindowViewModel : ViewModelBase
                     : $"Custom ( {config} )";
             }
         }
-        else if (IsRbJieba)
+        else if (IsRbSegment)
         {
             TbDestinationTextDocument!.Text = IsCbJieba
                 ? string.Join("/", _openccJieba.JiebaCut(TbSourceTextDocument.Text, true))
@@ -686,7 +686,7 @@ public class MainWindowViewModel : ViewModelBase
                         ? "tw2sp"
                         : "tw2s";
 
-        return IsRbJieba
+        return IsRbSegment
             ? "Segmentation"
             : IsRbTag
                 ? "Keywords"
@@ -840,7 +840,7 @@ public class MainWindowViewModel : ViewModelBase
             this.RaiseAndSetIfChanged(ref _isRbS2T, value);
             if (!value) return;
             IsRbT2S = false;
-            IsRbJieba = false;
+            IsRbSegment = false;
             IsRbTag = false;
             IsRbCustom = false;
             LblSourceCodeContent = _languagesInfo![2].Name;
@@ -855,19 +855,19 @@ public class MainWindowViewModel : ViewModelBase
             this.RaiseAndSetIfChanged(ref _isRbT2S, value);
             if (!value) return;
             IsRbS2T = false;
-            IsRbJieba = false;
+            IsRbSegment = false;
             IsRbTag = false;
             IsRbCustom = false;
             LblSourceCodeContent = _languagesInfo![1].Name;
         }
     }
 
-    public bool IsRbJieba
+    public bool IsRbSegment
     {
-        get => _isRbJieba;
+        get => _isRbSegment;
         set
         {
-            this.RaiseAndSetIfChanged(ref _isRbJieba, value);
+            this.RaiseAndSetIfChanged(ref _isRbSegment, value);
             if (!value) return;
             IsRbS2T = false;
             IsRbT2S = false;
@@ -885,7 +885,7 @@ public class MainWindowViewModel : ViewModelBase
             if (!value) return;
             IsRbS2T = false;
             IsRbT2S = false;
-            IsRbJieba = false;
+            IsRbSegment = false;
             IsRbCustom = false;
         }
     }
@@ -899,7 +899,7 @@ public class MainWindowViewModel : ViewModelBase
             if (!value) return;
             IsRbS2T = false;
             IsRbT2S = false;
-            IsRbJieba = false;
+            IsRbSegment = false;
             IsRbTag = false;
         }
     }
