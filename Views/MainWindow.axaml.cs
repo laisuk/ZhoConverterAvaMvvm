@@ -56,7 +56,7 @@ public partial class MainWindow : Window
         else
         {
             // Windows and macOS standard behavior
-            if (data.Contains(DataFormats.Files))
+            if (data.Contains(DataFormats.Files) || data.Contains(DataFormats.Text))
                 return DragDropEffects.Copy;
         }
 
@@ -74,24 +74,25 @@ public partial class MainWindow : Window
     {
         if (DataContext is MainWindowViewModel vm)
         {
-            var text = e.Data.Contains(DataFormats.Text) ? e.Data.GetText() : null;
+            // var text = e.Data.Contains(DataFormats.Text) ? e.Data.GetText() : null;
             var files = e.Data.Contains(DataFormats.Files) ? e.Data.GetFiles()?.OfType<IStorageFile>().ToList() : null;
-            IStorageFile? filePath = null;
 
             if (files is { Count: > 0 })
             {
                 await HandleFileDropAsync(sender, vm, files);
-                filePath = files.FirstOrDefault()!;
+                var filePath = files.FirstOrDefault()!;
+                vm.LblStatusBarContent = $"Contents dropped {filePath.TryGetLocalPath()}";
+                vm.LblFileNameContent = filePath.Name;
+                vm.CurrentOpenFileName = filePath.TryGetLocalPath();
             }
 
-            if (text != null)
-                vm.TbSourceTextDocument!.Text = text;
+            // if (text != null)
+            // {
+            //      vm.TbSourceTextDocument = new TextDocument(text);
+            // }
 
-            vm.LblStatusBarContent = $"Contents dropped {filePath?.TryGetLocalPath()}";
             var codeText = new OpenccFmmseg().ZhoCheck(vm.TbSourceTextDocument!.Text);
             vm.UpdateEncodeInfo(codeText);
-            vm.LblFileNameContent = filePath?.Name;
-            vm.CurrentOpenFileName = filePath?.TryGetLocalPath();
         }
     }
 
@@ -144,7 +145,7 @@ public partial class MainWindow : Window
 
         return filePath;
     }
-    
+
     // private void CbCustom_GotFocus(object? sender, RoutedEventArgs e)
     // {
     //     if (DataContext is MainWindowViewModel vm)

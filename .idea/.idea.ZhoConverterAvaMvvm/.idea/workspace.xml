@@ -9,7 +9,10 @@
   <component name="ChangeListManager">
     <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/MainWindow.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MainWindow.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/MainWindow.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MainWindow.axaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,7 +211,10 @@
       <workItem from="1746382354979" duration="1291000" />
       <workItem from="1746471571185" duration="1041000" />
       <workItem from="1746488054813" duration="216000" />
-      <workItem from="1746639742630" duration="2567000" />
+      <workItem from="1746639742630" duration="3125000" />
+      <workItem from="1746647040182" duration="313000" />
+      <workItem from="1746648548032" duration="258000" />
+      <workItem from="1746656155970" duration="5326000" />
     </task>
     <task id="LOCAL-00001" summary="Update Nuget">
       <option name="closed" value="true" />
@@ -482,7 +488,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746641580339</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Changed name RbJieba to RbSegment">
+      <option name="closed" value="true" />
+      <created>1746642839769</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1746642839769</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -492,7 +506,6 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Update" />
     <MESSAGE value="update net 9.0" />
     <MESSAGE value="Update JSON PascalCase" />
     <MESSAGE value="Update Net9.0" />
@@ -517,7 +530,8 @@
     <MESSAGE value="Update jieba capi to 0.5.0" />
     <MESSAGE value="update" />
     <MESSAGE value="Change OpenccFmmseg and OpenccJieba from static to instance" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change OpenccFmmseg and OpenccJieba from static to instance" />
+    <MESSAGE value="Changed name RbJieba to RbSegment" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed name RbJieba to RbSegment" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
