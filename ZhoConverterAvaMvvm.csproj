@@ -36,12 +36,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Reference Include="JiebaNet.Analyser">
-            <HintPath>JiebaNet.Analyser.dll</HintPath>
-        </Reference>
-        <Reference Include="JiebaNet.Segmenter">
-            <HintPath>JiebaNet.Segmenter.dll</HintPath>
-        </Reference>
         <Reference Include="Newtonsoft.Json">
             <HintPath>Newtonsoft.Json.dll</HintPath>
         </Reference>

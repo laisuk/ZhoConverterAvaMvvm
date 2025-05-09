@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using AvaloniaEdit.Document;
-using JiebaNet.Analyser;
-using JiebaNet.Segmenter;
 using OpenccFmmsegLib;
 using OpenccJiebaLib;
 using ReactiveUI;
@@ -121,7 +119,8 @@ public class MainWindowViewModel : ViewModelBase
         BtnMessagePreviewClearCommand = ReactiveCommand.Create(MessagePreviewClear);
         BtnBatchStartCommand = ReactiveCommand.CreateFromTask(BatchStart);
         SelectedItem = CustomOptions[0]; // Set "Option 1" as default
-        CbCustomGotFocusCommand = ReactiveCommand.Create(() => { IsRbCustom = true; });
+        CmbCustomGotFocusCommand = ReactiveCommand.Create(() => { IsRbCustom = true; });
+        RbSegmentRbTagGotFocusCommand = ReactiveCommand.Create(() => { IsCbJieba = true; });
     }
 
     public MainWindowViewModel(ITopLevelService topLevelService, LanguageSettingsService languageSettingsService,
@@ -151,7 +150,8 @@ public class MainWindowViewModel : ViewModelBase
     public ReactiveCommand<Unit, Unit> BtnDetectCommand { get; }
     public ReactiveCommand<Unit, Unit> BtnMessagePreviewClearCommand { get; }
     public ReactiveCommand<Unit, Unit> BtnBatchStartCommand { get; }
-    public ReactiveCommand<Unit, Unit> CbCustomGotFocusCommand { get; }
+    public ReactiveCommand<Unit, Unit> CmbCustomGotFocusCommand { get; }
+    public ReactiveCommand<Unit, Unit> RbSegmentRbTagGotFocusCommand { get; }
 
     private async Task Paste()
     {
@@ -291,9 +291,7 @@ public class MainWindowViewModel : ViewModelBase
         }
         else if (IsRbSegment)
         {
-            TbDestinationTextDocument!.Text = IsCbJieba
-                ? string.Join("/", _openccJieba!.JiebaCut(TbSourceTextDocument.Text, true))
-                : string.Join("/", new JiebaSegmenter().Cut(TbSourceTextDocument.Text));
+            TbDestinationTextDocument!.Text = string.Join("/", _openccJieba!.JiebaCut(TbSourceTextDocument.Text, true));
 
             LblDestinationCodeContent = LblSourceCodeContent;
         }
@@ -301,19 +299,13 @@ public class MainWindowViewModel : ViewModelBase
         {
             var wordCount = int.Parse(TbWordCountText!) < 1 ? 1 : int.Parse(TbWordCountText!);
             TbWordCountText = wordCount.ToString();
-            TbDestinationTextDocument!.Text = IsCbJieba
-                ? "===== TextRank Method =====\n" + string.Join("/ ",
-                      _openccJieba!.JiebaKeywordExtractTextRank(TbSourceTextDocument.Text, wordCount)) +
-                  "\n\n====== TF-IDF Method ======\n" +
-                  string.Join("/ ",
-                      _openccJieba.JiebaKeywordExtractTfidf(TbSourceTextDocument.Text,
-                          wordCount))
-                : "===== TextRank Method =====\n" + string.Join("/ ",
-                      new TextRankExtractor().ExtractTags(TbSourceTextDocument.Text, wordCount)) +
-                  "\n\n====== TF-IDF Method ======\n" +
-                  string.Join("/ ",
-                      new TfidfExtractor().ExtractTags(TbSourceTextDocument.Text,
-                          wordCount));
+            TbDestinationTextDocument!.Text =
+                "===== TextRank Method =====\n" + string.Join("/ ",
+                    _openccJieba!.JiebaKeywordExtractTextRank(TbSourceTextDocument.Text, wordCount)) +
+                "\n\n====== TF-IDF Method ======\n" +
+                string.Join("/ ",
+                    _openccJieba.JiebaKeywordExtractTfidf(TbSourceTextDocument.Text,
+                        wordCount));
 
             if (TbDestinationTextDocument.Text.Length == 0)
             {

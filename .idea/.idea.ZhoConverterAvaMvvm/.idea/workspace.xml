@@ -7,9 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,6 +35,8 @@
     <setting file="file://$PROJECT_DIR$/../../CSharp/OpenccNet/OpenccNet/OpenccNet.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../CSharp/OpenccNet8/OpenccNet8/OpenccNet8.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/App.axaml.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/codes/avolonia/ZhoConverterAvaMvvm/ViewModels/MainWindowViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/codes/avolonia/ZhoConverterAvaMvvm/ViewModels/MainWindowViewModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Views/MainWindow.axaml.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -217,6 +217,7 @@
       <workItem from="1746759389386" duration="720000" />
       <workItem from="1746763410273" duration="65000" />
       <workItem from="1746815274368" duration="39000" />
+      <workItem from="1746815401618" duration="805000" />
     </task>
     <task id="LOCAL-00001" summary="Update Nuget">
       <option name="closed" value="true" />
@@ -514,7 +515,23 @@
       <option name="project" value="LOCAL" />
       <updated>1746763461617</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Update">
+      <option name="closed" value="true" />
+      <created>1746816140671</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1746816140671</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Update">
+      <option name="closed" value="true" />
+      <created>1746816193415</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1746816193415</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -524,7 +541,6 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Update Net9.0" />
     <MESSAGE value="Fixed getConfig" />
     <MESSAGE value="update capi" />
     <MESSAGE value="Optimized Drag n Drop" />
@@ -549,7 +565,8 @@
     <MESSAGE value="Changed name RbJieba to RbSegment" />
     <MESSAGE value="Fic drag text" />
     <MESSAGE value="Add DI to opencc CAPI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add DI to opencc CAPI" />
+    <MESSAGE value="Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

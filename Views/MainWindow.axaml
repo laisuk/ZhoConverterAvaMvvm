@@ -48,10 +48,22 @@
                          GroupName="MainRb" IsChecked="{Binding IsRbS2T}" />
             <RadioButton x:Name="RbSegment" Content="Segmentation (分词)" Grid.Row="0" Grid.Column="2" FontSize="14"
                          Padding="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="MainRb"
-                         IsChecked="{Binding IsRbSegment}" />
+                         IsChecked="{Binding IsRbSegment}">
+                <Interaction.Behaviors>
+                    <EventTriggerBehavior EventName="GotFocus">
+                        <InvokeCommandAction Command="{Binding RbSegmentRbTagGotFocusCommand}" />
+                    </EventTriggerBehavior>
+                </Interaction.Behaviors>
+            </RadioButton>
             <RadioButton x:Name="RbTag" Content="Keywords (关键词)" Grid.Row="0" Grid.Column="3" FontSize="14"
                          Padding="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="MainRb"
-                         IsChecked="{Binding IsRbTag}" />
+                         IsChecked="{Binding IsRbTag}">
+                <Interaction.Behaviors>
+                    <EventTriggerBehavior EventName="GotFocus">
+                        <InvokeCommandAction Command="{Binding RbSegmentRbTagGotFocusCommand}" />
+                    </EventTriggerBehavior>
+                </Interaction.Behaviors>
+            </RadioButton>
             <TextBox Name="TbWordCount" Grid.Row="0" Grid.Column="3" Text="{Binding TbWordCountText}"
                      VerticalAlignment="Center"
                      HorizontalAlignment="Left" Margin="150,0,10,0" FontSize="14"
@@ -64,7 +76,7 @@
                       SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
                 <Interaction.Behaviors>
                     <EventTriggerBehavior EventName="GotFocus">
-                        <InvokeCommandAction Command="{Binding CbCustomGotFocusCommand}" />
+                        <InvokeCommandAction Command="{Binding CmbCustomGotFocusCommand}" />
                     </EventTriggerBehavior>
                 </Interaction.Behaviors>
             </ComboBox>
