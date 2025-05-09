@@ -124,7 +124,7 @@ public class MainWindowViewModel : ViewModelBase
         CbCustomGotFocusCommand = ReactiveCommand.Create(() => { IsRbCustom = true; });
     }
 
-    public MainWindowViewModel(ITopLevelService topLevelService, LanguageSettingsService languageSettingsService, OpenccFmmseg openccFmmseg, OpenccJieba openccJieba) :
+    public MainWindowViewModel(ITopLevelService topLevelService, LanguageSettingsService languageSettingsService, OpenccFmmseg openccFmmseg, OpenccJieba openccJieba ) :
         this()
     {
         _topLevelService = topLevelService;

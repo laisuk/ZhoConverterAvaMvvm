@@ -9,8 +9,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App.axaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -217,6 +215,8 @@
       <workItem from="1746729207244" duration="1094000" />
       <workItem from="1746730343999" duration="315000" />
       <workItem from="1746759389386" duration="720000" />
+      <workItem from="1746763410273" duration="65000" />
+      <workItem from="1746815274368" duration="39000" />
     </task>
     <task id="LOCAL-00001" summary="Update Nuget">
       <option name="closed" value="true" />
@@ -506,7 +506,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746661877277</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Add DI to opencc CAPI">
+      <option name="closed" value="true" />
+      <created>1746763461617</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1746763461617</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -516,7 +524,6 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Update JSON PascalCase" />
     <MESSAGE value="Update Net9.0" />
     <MESSAGE value="Fixed getConfig" />
     <MESSAGE value="update capi" />
@@ -541,7 +548,8 @@
     <MESSAGE value="Change OpenccFmmseg and OpenccJieba from static to instance" />
     <MESSAGE value="Changed name RbJieba to RbSegment" />
     <MESSAGE value="Fic drag text" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fic drag text" />
+    <MESSAGE value="Add DI to opencc CAPI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add DI to opencc CAPI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
