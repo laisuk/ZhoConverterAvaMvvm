@@ -7,7 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using ZhoConverterAvaMvvm.Services;
 using ZhoConverterAvaMvvm.ViewModels;
 using ZhoConverterAvaMvvm.Views;
-
+using OpenccFmmsegLib;
+using OpenccJiebaLib;
 namespace ZhoConverterAvaMvvm;
 
 public class App : Application
@@ -48,5 +49,7 @@ public class App : Application
         services.AddSingleton<MainWindowViewModel>();
         // Register MainWindow
         services.AddTransient<MainWindow>();
+        services.AddSingleton<OpenccFmmseg>();
+        services.AddSingleton<OpenccJieba>();
     }
 }
