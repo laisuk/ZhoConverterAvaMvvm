@@ -14,6 +14,7 @@ using OpenccJiebaLib;
 using ReactiveUI;
 using ZhoConverterAvaMvvm.Services;
 using ZhoConverterAvaMvvm.Views;
+using System.Diagnostics;
 
 namespace ZhoConverterAvaMvvm.ViewModels;
 
@@ -262,12 +263,17 @@ public class MainWindowViewModel : ViewModelBase
         }
 
         var config = GetCurrentConfig();
+        Stopwatch stopwatch = new Stopwatch();
 
         if (IsRbS2T || IsRbT2S || IsRbCustom)
         {
+            stopwatch.Start();
+            
             var convertedText = IsCbJieba
                 ? _openccJieba!.Convert(TbSourceTextDocument!.Text, config, IsCbPunctuation)
                 : _openccFmmseg!.Convert(TbSourceTextDocument.Text, config, IsCbPunctuation);
+            
+            stopwatch.Stop();
 
             TbDestinationTextDocument!.Text = convertedText;
             if (IsRbT2S)
@@ -291,12 +297,15 @@ public class MainWindowViewModel : ViewModelBase
         }
         else if (IsRbSegment)
         {
-            TbDestinationTextDocument!.Text = string.Join("/", _openccJieba!.JiebaCut(TbSourceTextDocument.Text, true));
-
+            stopwatch.Start();
+            // TbDestinationTextDocument!.Text = string.Join("/", _openccJieba!.JiebaCut(TbSourceTextDocument.Text, true));
+            TbDestinationTextDocument!.Text = _openccJieba!.JiebaCutAndJoin(TbSourceTextDocument.Text, true, "/");
+            stopwatch.Stop();
             LblDestinationCodeContent = LblSourceCodeContent;
         }
         else if (IsRbTag)
         {
+            stopwatch.Stop(); // Not measuring tag case
             var wordCount = int.Parse(TbWordCountText!) < 1 ? 1 : int.Parse(TbWordCountText!);
             TbWordCountText = wordCount.ToString();
             TbDestinationTextDocument!.Text =
@@ -320,7 +329,8 @@ public class MainWindowViewModel : ViewModelBase
             return;
         }
 
-        LblStatusBarContent = $"Process completed: {config} {(IsCbJieba ? "(Jieba)" : "")}";
+        // LblStatusBarContent = $"Process completed: {config} {(IsCbJieba ? "(Jieba)" : "")}";
+        LblStatusBarContent = $"Process completed: {config} {(IsCbJieba ? "(Jieba)" : "")} — Time used: {stopwatch.ElapsedMilliseconds} ms";
     }
 
     private async Task BatchStart()
@@ -438,6 +448,7 @@ public class MainWindowViewModel : ViewModelBase
     private void ClearTbSource()
     {
         TbSourceTextDocument!.Text = string.Empty;
+        TbSourceTextDocument.UndoStack.ClearAll();
         CurrentOpenFileName = string.Empty;
         LblSourceCodeContent = string.Empty;
         LblFileNameContent = string.Empty;
@@ -447,6 +458,7 @@ public class MainWindowViewModel : ViewModelBase
     private void ClearTbDestination()
     {
         TbDestinationTextDocument!.Text = string.Empty;
+        TbDestinationTextDocument.UndoStack.ClearAll();
         LblDestinationCodeContent = string.Empty;
         LblStatusBarContent = "Destination contents cleared";
     }

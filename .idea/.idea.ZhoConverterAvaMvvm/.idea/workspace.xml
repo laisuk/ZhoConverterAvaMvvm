@@ -7,7 +7,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="" />
+    <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenccFmmsegLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OpenccFmmsegLib.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenccJiebaLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OpenccJiebaLib.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opencc_fmmseg_capi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/opencc_fmmseg_capi.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opencc_jieba_capi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/opencc_jieba_capi.dll" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,11 +39,8 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/../../CSharp/OpenccNet/OpenccNet/OpenccNet.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../CSharp/OpenccNet8/OpenccNet8/OpenccNet8.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/App.axaml.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://D:/codes/avolonia/ZhoConverterAvaMvvm/ViewModels/MainWindowViewModel.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/codes/avolonia/ZhoConverterAvaMvvm/ViewModels/MainWindowViewModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Views/MainWindow.axaml.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -218,6 +222,17 @@
       <workItem from="1746763410273" duration="65000" />
       <workItem from="1746815274368" duration="39000" />
       <workItem from="1746815401618" duration="805000" />
+      <workItem from="1746816648703" duration="1850000" />
+      <workItem from="1746945451059" duration="95000" />
+      <workItem from="1747000563841" duration="610000" />
+      <workItem from="1747003274923" duration="3008000" />
+      <workItem from="1747010267728" duration="75000" />
+      <workItem from="1747024573093" duration="110000" />
+      <workItem from="1747031227347" duration="1715000" />
+      <workItem from="1747127793146" duration="835000" />
+      <workItem from="1747336306055" duration="406000" />
+      <workItem from="1747336726443" duration="112000" />
+      <workItem from="1747642843420" duration="219000" />
     </task>
     <task id="LOCAL-00001" summary="Update Nuget">
       <option name="closed" value="true" />
@@ -531,7 +546,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746816193415</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Dropped Nuget OpenCCNet">
+      <option name="closed" value="true" />
+      <created>1746818434973</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1746818434973</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -541,7 +564,6 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Fixed getConfig" />
     <MESSAGE value="update capi" />
     <MESSAGE value="Optimized Drag n Drop" />
     <MESSAGE value="Update README.md" />
@@ -566,7 +588,8 @@
     <MESSAGE value="Fic drag text" />
     <MESSAGE value="Add DI to opencc CAPI" />
     <MESSAGE value="Update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+    <MESSAGE value="Dropped Nuget OpenCCNet" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dropped Nuget OpenCCNet" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
