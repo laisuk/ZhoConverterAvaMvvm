@@ -56,7 +56,9 @@ public class LanguageSettingsService
                                                   ".java",
                                                   ".md",
                                                   ".js"
-                                                ]
+                                                ],
+                                                "TagWordCount": "30",
+                                                "SegDelimiter": "/ "
                                             }
                                             """;
 

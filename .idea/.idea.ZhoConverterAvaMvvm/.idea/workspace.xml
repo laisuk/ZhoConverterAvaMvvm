@@ -9,9 +9,11 @@
   <component name="ChangeListManager">
     <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenccFmmsegLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OpenccFmmsegLib.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenccJiebaLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OpenccJiebaLib.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LanguageSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LanguageSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LanguageSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/LanguageSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/LanguageSettingsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/LanguageSettingsService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/MainWindow.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MainWindow.axaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/opencc_fmmseg_capi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/opencc_fmmseg_capi.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/opencc_jieba_capi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/opencc_jieba_capi.dll" afterDir="false" />
     </list>
@@ -233,6 +235,8 @@
       <workItem from="1747336306055" duration="406000" />
       <workItem from="1747336726443" duration="112000" />
       <workItem from="1747642843420" duration="219000" />
+      <workItem from="1747691177646" duration="265000" />
+      <workItem from="1747808760389" duration="3210000" />
     </task>
     <task id="LOCAL-00001" summary="Update Nuget">
       <option name="closed" value="true" />
@@ -554,7 +558,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746818434973</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Add used time">
+      <option name="closed" value="true" />
+      <created>1747691418811</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1747691418811</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -564,7 +576,6 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="update capi" />
     <MESSAGE value="Optimized Drag n Drop" />
     <MESSAGE value="Update README.md" />
     <MESSAGE value="Update LISENCE" />
@@ -589,7 +600,8 @@
     <MESSAGE value="Add DI to opencc CAPI" />
     <MESSAGE value="Update" />
     <MESSAGE value="Dropped Nuget OpenCCNet" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dropped Nuget OpenCCNet" />
+    <MESSAGE value="Add used time" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add used time" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

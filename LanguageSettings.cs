@@ -10,6 +10,8 @@ public class LanguageSettings
     public int CharCheck { get; set; }
     public Dictionary<char, char>? Punctuations { get; set; }
     public List<string>? TextFileTypes { get; set; }
+    public string? TagWordCount { get; set; }
+    public string? SegDelimiter { get; set; }
 }
 
 [Serializable]

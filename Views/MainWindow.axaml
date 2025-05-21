@@ -46,8 +46,8 @@
             <RadioButton x:Name="RbS2T" Content="{Binding RbS2TContent}" Grid.Row="0" Grid.Column="1" FontSize="14"
                          Padding="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"
                          GroupName="MainRb" IsChecked="{Binding IsRbS2T}" />
-            <RadioButton x:Name="RbSegment" Content="Segmentation (分词)" Grid.Row="0" Grid.Column="2" FontSize="14"
-                         Padding="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="MainRb"
+            <RadioButton x:Name="RbSegment" Content="Segment (分词)" Grid.Row="0" Grid.Column="2" FontSize="14"
+                         Padding="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="MainRb"
                          IsChecked="{Binding IsRbSegment}">
                 <Interaction.Behaviors>
                     <EventTriggerBehavior EventName="GotFocus">
@@ -55,6 +55,10 @@
                     </EventTriggerBehavior>
                 </Interaction.Behaviors>
             </RadioButton>
+            <TextBox Name="TbDelim" Grid.Row="0" Grid.Column="2" Text="{Binding TbDelimText }"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Right" Margin="130,0,10,0" FontSize="14"
+                     ToolTip.Tip="Number of keywords to extract" />
             <RadioButton x:Name="RbTag" Content="Keywords (关键词)" Grid.Row="0" Grid.Column="3" FontSize="14"
                          Padding="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="MainRb"
                          IsChecked="{Binding IsRbTag}">
@@ -71,7 +75,7 @@
             <RadioButton x:Name="RbCustom" Content="" Grid.Row="0" Grid.Column="4" FontSize="14"
                          Padding="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="MainRb"
                          IsChecked="{Binding IsRbCustom}" />
-            <ComboBox Name="CbCustom" Grid.Column="4" Grid.Row="0" Width="160" Margin="25,0,0,0"
+            <ComboBox Name="CbCustom" Grid.Column="4" Grid.Row="0" Width="140" Margin="25,0,0,0"
                       ItemsSource="{Binding CustomOptions}"
                       SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
                 <Interaction.Behaviors>

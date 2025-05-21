@@ -65,7 +65,8 @@ public class MainWindowViewModel : ViewModelBase
     private string? _tbOutFolderText = "./output/";
     private string? _tbPreviewText;
     private TextDocument? _tbSourceTextDocument;
-    private string? _tbWordCountText = "30";
+    private string? _tbDelimText;
+    private string? _tbWordCountText;
     internal string? CurrentOpenFileName;
     private string? _selectedItem;
 
@@ -129,9 +130,11 @@ public class MainWindowViewModel : ViewModelBase
         this()
     {
         _topLevelService = topLevelService;
-        var languageSettings = languageSettingsService.LanguageSettings;
-        _languagesInfo = languageSettings?.Languages;
-        _textFileTypes = languageSettings?.TextFileTypes;
+        var languageSettings = languageSettingsService.LanguageSettings!;
+        _languagesInfo = languageSettings.Languages;
+        _textFileTypes = languageSettings.TextFileTypes;
+        _tbWordCountText = languageSettings.TagWordCount;
+        _tbDelimText = languageSettings.SegDelimiter;
         _openccFmmseg = openccFmmseg;
         _openccJieba = openccJieba;
     }
@@ -299,7 +302,7 @@ public class MainWindowViewModel : ViewModelBase
         {
             stopwatch.Start();
             // TbDestinationTextDocument!.Text = string.Join("/", _openccJieba!.JiebaCut(TbSourceTextDocument.Text, true));
-            TbDestinationTextDocument!.Text = _openccJieba!.JiebaCutAndJoin(TbSourceTextDocument.Text, true, "/");
+            TbDestinationTextDocument!.Text = _openccJieba!.JiebaCutAndJoin(TbSourceTextDocument.Text, true, TbDelimText);
             stopwatch.Stop();
             LblDestinationCodeContent = LblSourceCodeContent;
         }
@@ -331,6 +334,7 @@ public class MainWindowViewModel : ViewModelBase
 
         // LblStatusBarContent = $"Process completed: {config} {(IsCbJieba ? "(Jieba)" : "")}";
         LblStatusBarContent = $"Process completed: {config} {(IsCbJieba ? "(Jieba)" : "")} — Time used: {stopwatch.ElapsedMilliseconds} ms";
+        TbDestinationTextDocument.UndoStack.ClearAll();
     }
 
     private async Task BatchStart()
@@ -751,6 +755,12 @@ public class MainWindowViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _lblTotalCharsContent, value);
     }
 
+    public string? TbDelimText
+    {
+        get => _tbDelimText;
+        set => this.RaiseAndSetIfChanged(ref _tbDelimText, value);
+    }
+    
     public string? TbWordCountText
     {
         get => _tbWordCountText;
