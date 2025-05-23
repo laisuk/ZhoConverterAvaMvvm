@@ -8,14 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LanguageSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LanguageSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LanguageSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/LanguageSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/LanguageSettingsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/LanguageSettingsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/MainWindow.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MainWindow.axaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/opencc_fmmseg_capi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/opencc_fmmseg_capi.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/opencc_jieba_capi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/opencc_jieba_capi.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libopencc_fmmseg_capi.dylib" beforeDir="false" afterPath="$PROJECT_DIR$/libopencc_fmmseg_capi.dylib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libopencc_jieba_capi.dylib" beforeDir="false" afterPath="$PROJECT_DIR$/libopencc_jieba_capi.dylib" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +35,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/../../CSharp/OpenccNet8/OpenccNet8/OpenccNet8.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/CSharp/OpenccNet8/OpenccNet8/OpenccNet8.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/App.axaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Views/MainWindow.axaml.cs" root0="FORCE_HIGHLIGHTING" />
@@ -84,13 +78,8 @@
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bin/Release/net8.0" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      <option name="ENV_FILE_PATHS" value="" />
-      <option name="REDIRECT_INPUT_PATH" value="" />
-      <option name="PTY_MODE" value="Auto" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
-      <option name="AUTO_ATTACH_CHILDREN" value="0" />
-      <option name="MIXED_MODE_DEBUG" value="0" />
       <option name="PROJECT_PATH" value="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" />
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
@@ -602,23 +591,5 @@
     <MESSAGE value="Dropped Nuget OpenCCNet" />
     <MESSAGE value="Add used time" />
     <option name="LAST_COMMIT_MESSAGE" value="Add used time" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
-          <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />
-          <option name="timeStamp" value="1" />
-        </breakpoint>
-        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
-          <properties exception="System.Threading.Tasks.TaskCanceledException" breakIfHandledByOtherCode="false" displayValue="System.Threading.Tasks.TaskCanceledException" />
-          <option name="timeStamp" value="2" />
-        </breakpoint>
-        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
-          <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
-          <option name="timeStamp" value="3" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
