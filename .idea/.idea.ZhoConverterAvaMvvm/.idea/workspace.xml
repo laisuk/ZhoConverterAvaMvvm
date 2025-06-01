@@ -8,8 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/libopencc_fmmseg_capi.dylib" beforeDir="false" afterPath="$PROJECT_DIR$/libopencc_fmmseg_capi.dylib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libopencc_jieba_capi.dylib" beforeDir="false" afterPath="$PROJECT_DIR$/libopencc_jieba_capi.dylib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenccFmmsegLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OpenccFmmsegLib.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenccJiebaLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OpenccJiebaLib.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opencc_jieba_capi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/opencc_jieba_capi.dll" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +38,6 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$USER_HOME$/CSharp/OpenccNet8/OpenccNet8/OpenccNet8.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/App.axaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Views/MainWindow.axaml.cs" root0="FORCE_HIGHLIGHTING" />
@@ -78,8 +80,13 @@
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bin/Release/net8.0" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="ENV_FILE_PATHS" value="" />
+      <option name="REDIRECT_INPUT_PATH" value="" />
+      <option name="PTY_MODE" value="Auto" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="AUTO_ATTACH_CHILDREN" value="0" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
       <option name="PROJECT_PATH" value="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" />
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
@@ -90,6 +97,10 @@
         <option name="Build" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue=".NET Project.ZhoConverterAvaMvvm" />
+      <item itemvalue="Publish to folder.Publish ZhoConverterAvaMvvm to folder" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue=".NET Project.ZhoConverterAvaMvvm" />
@@ -226,6 +237,9 @@
       <workItem from="1747642843420" duration="219000" />
       <workItem from="1747691177646" duration="265000" />
       <workItem from="1747808760389" duration="3210000" />
+      <workItem from="1748154417511" duration="41000" />
+      <workItem from="1748626890923" duration="27000" />
+      <workItem from="1748802330384" duration="36000" />
     </task>
     <task id="LOCAL-00001" summary="Update Nuget">
       <option name="closed" value="true" />
