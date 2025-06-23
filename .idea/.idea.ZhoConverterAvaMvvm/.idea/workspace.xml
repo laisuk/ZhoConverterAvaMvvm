@@ -10,9 +10,10 @@
     <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenccFmmsegLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OpenccFmmsegLib.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenccJiebaLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OpenccJiebaLib.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/opencc_jieba_capi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/opencc_jieba_capi.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/runtimes/win-x64/native/opencc_fmmseg_capi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/runtimes/win-x64/native/opencc_fmmseg_capi.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/runtimes/win-x64/native/opencc_jieba_capi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/runtimes/win-x64/native/opencc_jieba_capi.dll" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +72,7 @@
 }</component>
   <component name="RunManager" selected=".NET Project.ZhoConverterAvaMvvm">
     <configuration name="Publish ZhoConverterAvaMvvm to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
-      <riderPublish configuration="Release" platform="Any CPU" runtime="win-x64" self_contained="true" target_folder="R:/Media/ZhoConverterAvaNet8" target_framework="net8.0" uuid_high="3669345351269370026" uuid_low="-7023431122985378343" />
+      <riderPublish configuration="Release" platform="Any CPU" produce_single_file="true" runtime="win-x64" target_folder="R:/Media/ZhoConverterAvaNet8" target_framework="net8.0" uuid_high="3669345351269370026" uuid_low="-7023431122985378343" />
       <method v="2" />
     </configuration>
     <configuration name="ZhoConverterAvaMvvm" type="DotNetProject" factoryName=".NET Project" temporary="true">
@@ -240,6 +241,12 @@
       <workItem from="1748154417511" duration="41000" />
       <workItem from="1748626890923" duration="27000" />
       <workItem from="1748802330384" duration="36000" />
+      <workItem from="1748802368664" duration="2220000" />
+      <workItem from="1748853048946" duration="102000" />
+      <workItem from="1749143440852" duration="4108000" />
+      <workItem from="1749234287155" duration="603000" />
+      <workItem from="1750091405263" duration="153000" />
+      <workItem from="1750667581107" duration="103000" />
     </task>
     <task id="LOCAL-00001" summary="Update Nuget">
       <option name="closed" value="true" />
@@ -569,7 +576,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747691418811</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Update runtimes native libraries">
+      <option name="closed" value="true" />
+      <created>1748804042595</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1748804042595</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -579,7 +594,6 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Optimized Drag n Drop" />
     <MESSAGE value="Update README.md" />
     <MESSAGE value="Update LISENCE" />
     <MESSAGE value="Add Custom config" />
@@ -604,6 +618,7 @@
     <MESSAGE value="Update" />
     <MESSAGE value="Dropped Nuget OpenCCNet" />
     <MESSAGE value="Add used time" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add used time" />
+    <MESSAGE value="Update runtimes native libraries" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update runtimes native libraries" />
   </component>
 </project>

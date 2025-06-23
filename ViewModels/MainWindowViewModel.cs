@@ -424,12 +424,12 @@ public class MainWindowViewModel : ViewModelBase
             var suffix =
                 // Set suffix based on the radio button state
                 IsRbT2S
-                    ? "(Hans)"
+                    ? "_Hans"
                     : IsRbS2T
-                        ? "(Hant)"
+                        ? "_Hant"
                         : IsRbCustom
-                            ? $"({config})"
-                            : "(Other)";
+                            ? $"_{config}"
+                            : "_Other";
 
             // Choose conversion method based on IsCbJieba
             Func<string, string, bool, string> conversionMethod = IsCbJieba
@@ -437,7 +437,7 @@ public class MainWindowViewModel : ViewModelBase
                 : _openccFmmseg!.Convert;
 
             // If the suffix isn't "(Other)", perform the conversion
-            var convertedText = suffix != "(Other)" ? conversionMethod(inputText, config, IsCbPunctuation) : inputText;
+            var convertedText = suffix != "_Other" ? conversionMethod(inputText, config, IsCbPunctuation) : inputText;
 
             var outputFilename = Path.Combine(Path.GetFullPath(TbOutFolderText),
                 filenameWithoutExt + suffix + fileExt);
