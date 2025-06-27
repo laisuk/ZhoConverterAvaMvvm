@@ -8,9 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1641536b-b3be-4d27-93b6-a8efb2685c52" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Models/OfficeDocModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ZhoConverterAvaMvvm/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ZhoConverterAvaMvvm.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/runtimes/win-x64/native/opencc_fmmseg_capi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/runtimes/win-x64/native/opencc_fmmseg_capi.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/runtimes/win-x64/native/opencc_jieba_capi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/runtimes/win-x64/native/opencc_jieba_capi.dll" afterDir="false" />
     </list>
@@ -248,6 +246,8 @@
       <workItem from="1750667581107" duration="103000" />
       <workItem from="1750674678474" duration="67000" />
       <workItem from="1750830569215" duration="4386000" />
+      <workItem from="1750844639311" duration="671000" />
+      <workItem from="1750971166365" duration="709000" />
     </task>
     <task id="LOCAL-00001" summary="Update Nuget">
       <option name="closed" value="true" />
@@ -593,7 +593,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750674724721</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Add Office class">
+      <option name="closed" value="true" />
+      <created>1750844689219</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1750844689219</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -603,7 +611,6 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Update LISENCE" />
     <MESSAGE value="Add Custom config" />
     <MESSAGE value="Add custom conversions" />
     <MESSAGE value="Decoupled ComboBox GotFocus event to ViewModel" />
@@ -628,6 +635,7 @@
     <MESSAGE value="Add used time" />
     <MESSAGE value="Update runtimes native libraries" />
     <MESSAGE value="update dictionary" />
-    <option name="LAST_COMMIT_MESSAGE" value="update dictionary" />
+    <MESSAGE value="Add Office class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Office class" />
   </component>
 </project>

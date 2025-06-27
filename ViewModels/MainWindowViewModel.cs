@@ -265,6 +265,11 @@ public class MainWindowViewModel : ViewModelBase
             return;
         }
 
+        if (string.IsNullOrEmpty(LblStatusBarContent))
+        {
+            UpdateEncodeInfo(_openccFmmseg!.ZhoCheck(TbSourceTextDocument!.Text));
+        }
+
         var config = GetCurrentConfig();
         Stopwatch stopwatch = new Stopwatch();
 
