@@ -265,25 +265,26 @@ public class MainWindowViewModel : ViewModelBase
             return;
         }
 
-        if (string.IsNullOrEmpty(LblStatusBarContent))
+        if (string.IsNullOrEmpty(LblSourceCodeContent))
         {
             UpdateEncodeInfo(_openccFmmseg!.ZhoCheck(TbSourceTextDocument!.Text));
         }
 
         var config = GetCurrentConfig();
-        Stopwatch stopwatch = new Stopwatch();
+        string convertedText;
+        LblDestinationCodeContent = string.Empty;
+        long elapsedMs = 0;
 
         if (IsRbS2T || IsRbT2S || IsRbCustom)
         {
-            stopwatch.Start();
-            
-            var convertedText = IsCbJieba
+            var stopwatch = Stopwatch.StartNew();
+
+            convertedText = IsCbJieba
                 ? _openccJieba!.Convert(TbSourceTextDocument!.Text, config, IsCbPunctuation)
                 : _openccFmmseg!.Convert(TbSourceTextDocument.Text, config, IsCbPunctuation);
-            
-            stopwatch.Stop();
 
-            TbDestinationTextDocument!.Text = convertedText;
+            elapsedMs = stopwatch.ElapsedMilliseconds;
+
             if (IsRbT2S)
             {
                 LblDestinationCodeContent = LblSourceCodeContent!.Contains("Non")
@@ -296,7 +297,7 @@ public class MainWindowViewModel : ViewModelBase
                     ? LblSourceCodeContent
                     : _languagesInfo![1].Name;
             }
-            else if (IsRbCustom)
+            else // Custom
             {
                 LblDestinationCodeContent = LblSourceCodeContent!.Contains("Non")
                     ? LblSourceCodeContent
@@ -305,26 +306,26 @@ public class MainWindowViewModel : ViewModelBase
         }
         else if (IsRbSegment)
         {
-            stopwatch.Start();
-            // TbDestinationTextDocument!.Text = string.Join("/", _openccJieba!.JiebaCut(TbSourceTextDocument.Text, true));
-            TbDestinationTextDocument!.Text = _openccJieba!.JiebaCutAndJoin(TbSourceTextDocument.Text, true, TbDelimText);
-            stopwatch.Stop();
+            var stopwatch = Stopwatch.StartNew();
+
+            convertedText = _openccJieba!.JiebaCutAndJoin(TbSourceTextDocument.Text, true, TbDelimText);
+
+            elapsedMs = stopwatch.ElapsedMilliseconds;
             LblDestinationCodeContent = LblSourceCodeContent;
         }
         else if (IsRbTag)
         {
-            stopwatch.Stop(); // Not measuring tag case
-            var wordCount = int.Parse(TbWordCountText!) < 1 ? 1 : int.Parse(TbWordCountText!);
+            var wordCount = int.TryParse(TbWordCountText, out var parsed) && parsed > 0 ? parsed : 1;
             TbWordCountText = wordCount.ToString();
-            TbDestinationTextDocument!.Text =
+
+            convertedText =
                 "===== TextRank Method =====\n" + string.Join("/ ",
                     _openccJieba!.JiebaKeywordExtractTextRank(TbSourceTextDocument.Text, wordCount)) +
                 "\n\n====== TF-IDF Method ======\n" +
                 string.Join("/ ",
-                    _openccJieba.JiebaKeywordExtractTfidf(TbSourceTextDocument.Text,
-                        wordCount));
+                    _openccJieba.JiebaKeywordExtractTfidf(TbSourceTextDocument.Text, wordCount));
 
-            if (TbDestinationTextDocument.Text.Length == 0)
+            if (convertedText.Length == 0)
             {
                 LblDestinationCodeContent = string.Empty;
                 return;
@@ -337,8 +338,9 @@ public class MainWindowViewModel : ViewModelBase
             return;
         }
 
-        // LblStatusBarContent = $"Process completed: {config} {(IsCbJieba ? "(Jieba)" : "")}";
-        LblStatusBarContent = $"Process completed: {config} {(IsCbJieba ? "(Jieba)" : "")} — Time used: {stopwatch.ElapsedMilliseconds} ms";
+        TbDestinationTextDocument!.Text = convertedText;
+        LblStatusBarContent = $"Process completed: {config} {(IsCbJieba ? "(Jieba)" : "")}" +
+                              (elapsedMs > 0 ? $" — Time used: {elapsedMs} ms" : "");
         TbDestinationTextDocument.UndoStack.ClearAll();
     }
 
@@ -409,20 +411,9 @@ public class MainWindowViewModel : ViewModelBase
                 continue;
             }
 
-            if (!_textFileTypes!.Contains(fileExt))
+            if (!_textFileTypes!.Contains(fileExt) && !Models.OfficeDocModel.OfficeFormats.Contains(fileExt[1..]))
             {
                 LbxDestinationItems.Add($"({count}) [File skipped ({fileExt})] {sourceFilePath}");
-                continue;
-            }
-
-            string inputText;
-            try
-            {
-                inputText = await File.ReadAllTextAsync(sourceFilePath);
-            }
-            catch (Exception)
-            {
-                LbxDestinationItems.Add($"({count}) {sourceFilePath} -> Conversion error.");
                 continue;
             }
 
@@ -436,19 +427,53 @@ public class MainWindowViewModel : ViewModelBase
                             ? $"_{config}"
                             : "_Other";
 
-            // Choose conversion method based on IsCbJieba
-            Func<string, string, bool, string> conversionMethod = IsCbJieba
-                ? _openccJieba!.Convert
-                : _openccFmmseg!.Convert;
-
-            // If the suffix isn't "(Other)", perform the conversion
-            var convertedText = suffix != "_Other" ? conversionMethod(inputText, config, IsCbPunctuation) : inputText;
-
             var outputFilename = Path.Combine(Path.GetFullPath(TbOutFolderText),
                 filenameWithoutExt + suffix + fileExt);
-            await File.WriteAllTextAsync(outputFilename, convertedText);
 
-            LbxDestinationItems.Add($"({count}) {outputFilename} -> [Done ✓]");
+            if (Models.OfficeDocModel.OfficeFormats.Contains(fileExt[1..]))
+            {
+                var converter = new Models.ConverterHelper(IsCbJieba ? "Jieba" : "fmmseg", config);
+
+                var (success, message) = await Models.OfficeDocModel.ConvertOfficeDocAsync(
+                    sourceFilePath,
+                    outputFilename,
+                    fileExt[1..], // remove "."
+                    converter,
+                    IsCbPunctuation,
+                    true);
+
+                LbxDestinationItems.Add(
+                    success
+                        ? $"({count}) {outputFilename} -> {message}"
+                        : $"({count}) [File skipped] {sourceFilePath} -> {message}"
+                );
+            }
+            else
+            {
+                string inputText;
+                try
+                {
+                    inputText = await File.ReadAllTextAsync(sourceFilePath);
+                }
+                catch (Exception)
+                {
+                    LbxDestinationItems.Add($"({count}) {sourceFilePath} -> Conversion error.");
+                    continue;
+                }
+
+                // Choose conversion method based on IsCbJieba
+                Func<string, string, bool, string> conversionMethod = IsCbJieba
+                    ? _openccJieba!.Convert
+                    : _openccFmmseg!.Convert;
+
+                // If the suffix isn't "(Other)", perform the conversion
+                var convertedText =
+                    suffix != "_Other" ? conversionMethod(inputText, config, IsCbPunctuation) : inputText;
+
+                await File.WriteAllTextAsync(outputFilename, convertedText);
+
+                LbxDestinationItems.Add($"({count}) {outputFilename} -> [Done ✓]");
+            }
         }
 
         LblStatusBarContent = $"Batch conversion done. ( {config} {(IsCbJieba ? "Jieba " : "")})";
@@ -697,7 +722,7 @@ public class MainWindowViewModel : ViewModelBase
             : IsRbStd
                 ? "t2s"
                 : IsRbHk
-                    ? "t2hk"
+                    ? "hk2s"
                     : IsCbZhtw
                         ? "tw2sp"
                         : "tw2s";
@@ -765,7 +790,7 @@ public class MainWindowViewModel : ViewModelBase
         get => _tbDelimText;
         set => this.RaiseAndSetIfChanged(ref _tbDelimText, value);
     }
-    
+
     public string? TbWordCountText
     {
         get => _tbWordCountText;

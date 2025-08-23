@@ -211,7 +211,8 @@
                         <ListBox x:Name="LbxSource" Grid.Row="0" Grid.Column="0" Margin="5,5,5,0"
                                  BorderThickness="2,2,2,2" ItemsSource="{Binding LbxSourceItems}"
                                  SelectedIndex="{Binding LbxSourceSelectedIndex, Mode=TwoWay}"
-                                 SelectedItem="{Binding LbxSourceSelectedItem, Mode=TwoWay}" />
+                                 SelectedItem="{Binding LbxSourceSelectedItem, Mode=TwoWay}"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
                         <Label Grid.Row="1" Grid.Column="0" Content="Source:" HorizontalAlignment="Left"
                                VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" BorderBrush="Black"
                                BorderThickness="3,0,0,0" />
@@ -222,8 +223,8 @@
                                      FontWeight="Medium">
                                 <Grid>
                                     <ListBox x:Name="LbxDestination" Grid.Row="0" Grid.Column="0" Margin="0,5,0,0"
-                                             BorderThickness="2,2,2,2" ItemsSource="{Binding LbxDestinationItems}" />
-
+                                             BorderThickness="2,2,2,2" ItemsSource="{Binding LbxDestinationItems}"
+                                             ScrollViewer.HorizontalScrollBarVisibility="Auto" />
                                 </Grid>
                             </TabItem>
                             <TabItem x:Name="TabPreview" Header="Preview" FontSize="14" FontWeight="Medium"

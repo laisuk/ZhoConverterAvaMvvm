@@ -11,7 +11,7 @@ using OpenccJiebaLib;
 
 namespace ZhoConverterAvaMvvm.Models;
 
-public record OccConverter(string Opencc, string Config);
+public record ConverterHelper(string Opencc, string Config);
 
 /// <summary>
 /// Provides functionality to convert Office document formats (.docx, .xlsx, .pptx, .odt)
@@ -19,6 +19,12 @@ public record OccConverter(string Opencc, string Config);
 /// </summary>
 public static class OfficeDocModel
 {
+    // Supported Office file formats for Office documents conversion.
+    public static readonly HashSet<string> OfficeFormats = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "docx", "xlsx", "pptx", "odt", "ods", "odp", "epub"
+    };
+    
     /// <summary>
     /// Converts an Office document by applying OpenCC conversion on specific XML parts.
     /// Optionally preserves original font names to prevent them from being altered.
@@ -26,7 +32,7 @@ public static class OfficeDocModel
     /// <param name="inputPath">The full path to the input Office document (e.g., .docx).</param>
     /// <param name="outputPath">The desired full path to the converted output file.</param>
     /// <param name="format">The document format ("docx", "xlsx", "pptx", "odt", "ods", "odp", or "epub").</param>
-    /// <param name="converter">The OpenCC converter instance used for conversion.</param>
+    /// <param name="converterHelper">The OpenCC converter instance used for conversion.</param>
     /// <param name="punctuation">Whether to convert punctuation during OpenCC transformation.</param>
     /// <param name="keepFont">If true, font names are preserved using placeholder markers during conversion.</param>
     /// <returns>A tuple indicating whether the conversion succeeded and a status message.</returns>
@@ -34,7 +40,7 @@ public static class OfficeDocModel
         string inputPath,
         string outputPath,
         string format,
-        OccConverter converter,
+        ConverterHelper converterHelper,
         bool punctuation,
         bool keepFont = false)
     {
@@ -67,6 +73,7 @@ public static class OfficeDocModel
                     ? Directory.GetFiles(tempDir, "*.*", SearchOption.AllDirectories)
                         .Where(f =>
                             f.EndsWith(".xhtml", StringComparison.OrdinalIgnoreCase) ||
+                            f.EndsWith(".html", StringComparison.OrdinalIgnoreCase) ||
                             f.EndsWith(".opf", StringComparison.OrdinalIgnoreCase) ||
                             f.EndsWith(".ncx", StringComparison.OrdinalIgnoreCase))
                         .Select(f => Path.GetRelativePath(tempDir, f))
@@ -129,15 +136,15 @@ public static class OfficeDocModel
 
                 // Run OpenCC conversion on the XML content
                 string convertedXml;
-                if (converter.Opencc == "fmmseg")
+                if (converterHelper.Opencc == "fmmseg")
                 {
                     var instance = new OpenccFmmseg();
-                    convertedXml = instance.Convert(xmlContent, converter.Config, punctuation);
+                    convertedXml = instance.Convert(xmlContent, converterHelper.Config, punctuation);
                 }
                 else
                 {
                     var instance = new OpenccJieba();
-                    convertedXml = instance.Convert(xmlContent, converter.Config, punctuation);
+                    convertedXml = instance.Convert(xmlContent, converterHelper.Config, punctuation);
                 }
 
                 // Post-process: restore font names from markers
