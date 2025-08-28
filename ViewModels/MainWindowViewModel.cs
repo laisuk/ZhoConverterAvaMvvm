@@ -363,7 +363,7 @@ public class MainWindowViewModel : ViewModelBase
             return;
         }
 
-        if (IsRbS2T == false && IsRbT2S == false && IsRbCustom == false)
+        if (!IsRbS2T && !IsRbT2S && !IsRbCustom)
         {
             await MessageBox.Show("Please select conversion type:\n zh-Hans / zh-Hant", "Error",
                 _topLevelService!.GetMainWindow());
@@ -508,6 +508,7 @@ public class MainWindowViewModel : ViewModelBase
             FileTypeFilter = new List<FilePickerFileType>
             {
                 new("Text Files") { Patterns = new[] { "*.txt" } },
+                new("Office Files") { Patterns = new[] { "*.docx", "*.xlsx", "*.pptx", "*.odt", "*.ods", "*.odp", "*.epub" } },
                 new("ALL Files") { Patterns = new[] { "*.*" } }
             },
             AllowMultiple = true
