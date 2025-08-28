@@ -31,6 +31,7 @@ public class MainWindowViewModel : ViewModelBase
     private bool _isCbPunctuation = true;
     private bool _isCbZhtw;
     private bool _isCbZhtwEnabled;
+    private bool _isCbConvertFilename;
     private bool _isLblFileNameVisible = true;
     private bool _isRbHk;
     private bool _isRbSegment;
@@ -56,7 +57,7 @@ public class MainWindowViewModel : ViewModelBase
     private string? _lbxSourceSelectedItem;
     private string? _rbHkContent = "ZH-HK (中港简繁)";
     private string? _rbS2TContent = "Hans (简) to Hant (繁)";
-    private string? _rbStdContent = "Standard (标准简繁)";
+    private string? _rbStdContent = "General (通用简繁)";
     private string? _rbT2SContent = "Hant (繁) to Hans (简)";
     private string? _rbZhtwContent = "ZH-TW (中台简繁)";
     private FontWeight _tabBatchFontWeight = FontWeight.Normal;
@@ -427,17 +428,25 @@ public class MainWindowViewModel : ViewModelBase
                             ? $"_{config}"
                             : "_Other";
 
+            if (IsCbConvertFilename)
+            {
+                filenameWithoutExt = IsCbJieba
+                    ? _openccJieba!.Convert(filenameWithoutExt, config, IsCbPunctuation)
+                    : _openccFmmseg!.Convert(filenameWithoutExt, config, IsCbPunctuation);
+            }
+
             var outputFilename = Path.Combine(Path.GetFullPath(TbOutFolderText),
                 filenameWithoutExt + suffix + fileExt);
+            var fileExtNoDot = fileExt[1..];
 
-            if (Models.OfficeDocModel.OfficeFormats.Contains(fileExt[1..]))
+            if (Models.OfficeDocModel.OfficeFormats.Contains(fileExtNoDot))
             {
                 var converter = new Models.ConverterHelper(IsCbJieba ? "Jieba" : "fmmseg", config);
 
                 var (success, message) = await Models.OfficeDocModel.ConvertOfficeDocAsync(
                     sourceFilePath,
                     outputFilename,
-                    fileExt[1..], // remove "."
+                    fileExtNoDot, // remove "."
                     converter,
                     IsCbPunctuation,
                     true);
@@ -508,7 +517,8 @@ public class MainWindowViewModel : ViewModelBase
             FileTypeFilter = new List<FilePickerFileType>
             {
                 new("Text Files") { Patterns = new[] { "*.txt" } },
-                new("Office Files") { Patterns = new[] { "*.docx", "*.xlsx", "*.pptx", "*.odt", "*.ods", "*.odp", "*.epub" } },
+                new("Office Files")
+                    { Patterns = new[] { "*.docx", "*.xlsx", "*.pptx", "*.odt", "*.ods", "*.odp", "*.epub" } },
                 new("ALL Files") { Patterns = new[] { "*.*" } }
             },
             AllowMultiple = true
@@ -1080,6 +1090,12 @@ public class MainWindowViewModel : ViewModelBase
     {
         get => _isCbJieba;
         set => this.RaiseAndSetIfChanged(ref _isCbJieba, value);
+    }
+
+    public bool IsCbConvertFilename
+    {
+        get => _isCbConvertFilename;
+        set => this.RaiseAndSetIfChanged(ref _isCbConvertFilename, value);
     }
 
     public bool IsTbOutFolderFocus
