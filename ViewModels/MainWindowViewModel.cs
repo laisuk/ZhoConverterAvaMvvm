@@ -441,13 +441,15 @@ public class MainWindowViewModel : ViewModelBase
 
             if (Models.OfficeDocModel.OfficeFormats.Contains(fileExtNoDot))
             {
-                var converter = new Models.ConverterHelper(IsCbJieba ? "Jieba" : "fmmseg", config);
+                var converterHelper = new Models.ConverterHelper(IsCbJieba ? "Jieba" : "fmmseg", config);
 
                 var (success, message) = await Models.OfficeDocModel.ConvertOfficeDocAsync(
                     sourceFilePath,
                     outputFilename,
                     fileExtNoDot, // remove "."
-                    converter,
+                    converterHelper,
+                    _openccFmmseg!,
+                    _openccJieba!,
                     IsCbPunctuation,
                     true);
 
