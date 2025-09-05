@@ -15,6 +15,7 @@ using ReactiveUI;
 using ZhoConverterAvaMvvm.Services;
 using ZhoConverterAvaMvvm.Views;
 using System.Diagnostics;
+using ZhoConverterAvaMvvm.Models;
 
 namespace ZhoConverterAvaMvvm.ViewModels;
 
@@ -412,7 +413,7 @@ public class MainWindowViewModel : ViewModelBase
                 continue;
             }
 
-            if (!_textFileTypes!.Contains(fileExt) && !Models.OfficeDocModel.OfficeFormats.Contains(fileExt[1..]))
+            if (!_textFileTypes!.Contains(fileExt) && !OfficeDocModel.OfficeFormats.Contains(fileExt[1..]))
             {
                 LbxDestinationItems.Add($"({count}) [File skipped ({fileExt})] {sourceFilePath}");
                 continue;
@@ -439,11 +440,12 @@ public class MainWindowViewModel : ViewModelBase
                 filenameWithoutExt + suffix + fileExt);
             var fileExtNoDot = fileExt[1..];
 
-            if (Models.OfficeDocModel.OfficeFormats.Contains(fileExtNoDot))
+            if (OfficeDocModel.OfficeFormats.Contains(fileExtNoDot))
             {
-                var converterHelper = new Models.ConverterHelper(IsCbJieba ? "Jieba" : "fmmseg", config);
+                var converterType = IsCbJieba ? ConverterType.Jieba : ConverterType.Fmmseg;
+                var converterHelper = new ConverterHelper(converterType, config);
 
-                var (success, message) = await Models.OfficeDocModel.ConvertOfficeDocAsync(
+                var (success, message) = await OfficeDocModel.ConvertOfficeDocAsync(
                     sourceFilePath,
                     outputFilename,
                     fileExtNoDot, // remove "."
