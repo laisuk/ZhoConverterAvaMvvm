@@ -115,7 +115,8 @@
                           HorizontalAlignment="Left" IsChecked="{Binding IsCbPunctuation}" />
                 <CheckBox x:Name="CbJieba" Grid.Row="0" Grid.Column="5" Content="Jieba (结巴分词)"
                           FontSize="13" Padding="5,0,0,0" Margin="5,0,0,0" VerticalAlignment="Center"
-                          HorizontalAlignment="Left" IsChecked="{Binding IsCbJieba}"></CheckBox>
+                          HorizontalAlignment="Left" IsChecked="{Binding IsCbJieba}">
+                </CheckBox>
             </Grid>
         </Grid>
         <Grid Grid.Row="1">
@@ -132,7 +133,8 @@
             <TabControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="10,0,10,0">
                 <TabItem x:Name="TabMain" Header="Main Conversion" IsSelected="{Binding IsTabMain}"
                          FontSize="14" FontWeight="{Binding TabMainFontWeight}">
-                    <Grid Background="#FFE5E5E5">
+                    <!-- <Grid Background="#FFE5E5E5"> -->
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition Height="40" />
@@ -144,26 +146,39 @@
                         <!-- <TextBox x:Name="TbSource" Grid.Row="0" Grid.Column="0" Margin="5,5,5,0" -->
                         <!--          BorderThickness="2,2,2,2" TextWrapping="Wrap" -->
                         <!--          TextChanged="TbSource_TextChanged" AcceptsReturn="True" FontSize="16" IsUndoEnabled="False" /> -->
-                        <avaloniaEdit:TextEditor
-                            x:Name="TbSource" Grid.Row="0" Grid.Column="0" Margin="5,5,5,0"
-                            Document="{Binding TbSourceTextDocument}"
-                            FontFamily="Noto Sans SC" VerticalScrollBarVisibility="Visible" ShowLineNumbers="True"
-                            TextChanged="TbSource_TextChanged"
-                            BorderThickness="2,2,2,2" BorderBrush="Black" Background="WhiteSmoke" WordWrap="True"
-                            FontSize="16" />
+                        <Border Grid.Row="0" Grid.Column="0"
+                                Margin="5"
+                                BorderThickness="2"
+                                CornerRadius="6"
+                                BorderBrush="DarkGray">
+                            <avaloniaEdit:TextEditor
+                                x:Name="TbSource" Margin="5,5,5,0"
+                                Document="{Binding TbSourceTextDocument}"
+                                FontFamily="Noto Sans SC" VerticalScrollBarVisibility="Visible" ShowLineNumbers="True"
+                                TextChanged="TbSource_TextChanged"
+                                WordWrap="True"
+                                FontSize="16" />
+                        </Border>
 
                         <!-- <TextBox x:Name="TbDestination" Grid.Row="0" Grid.Column="1" Margin="5,5,5,0" -->
                         <!--          BorderThickness="2,2,2,2" TextWrapping="Wrap" -->
                         <!--          FontSize="16" IsReadOnly="True" /> -->
-                        <avaloniaEdit:TextEditor x:Name="TbDestination" Grid.Row="0" Grid.Column="1" Margin="5,5,5,0"
-                                                 Document="{Binding TbDestinationTextDocument}"
-                                                 BorderThickness="2,2,2,2" BorderBrush="Black" WordWrap="True"
-                                                 Background="WhiteSmoke" VerticalScrollBarVisibility="Visible"
-                                                 ShowLineNumbers="True" FontFamily="Noto Sans SC"
-                                                 FontSize="16" IsReadOnly="True" />
+                        <Border Grid.Row="0" Grid.Column="1"
+                                Margin="5"
+                                BorderThickness="2"
+                                CornerRadius="6"
+                                BorderBrush="DarkGray">
+                            <avaloniaEdit:TextEditor x:Name="TbDestination"
+                                                     Margin="5,5,5,0"
+                                                     Document="{Binding TbDestinationTextDocument}"
+                                                     WordWrap="True"
+                                                     VerticalScrollBarVisibility="Visible"
+                                                     ShowLineNumbers="True" FontFamily="Noto Sans SC"
+                                                     FontSize="16" IsReadOnly="True" />
+                        </Border>
                         <Label Grid.Row="1" Grid.Column="0" Content="Source:" HorizontalAlignment="Left"
-                               VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" BorderBrush="Black"
-                               BorderThickness="3,0,0,0" />
+                               VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" BorderBrush="DimGray"
+                               BorderThickness="3,0,0,2" />
                         <Label x:Name="LblSourceCode" Grid.Row="1" Grid.Column="0"
                                Content="{Binding LblSourceCodeContent}"
                                HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,0,0,0" FontSize="16" />
@@ -171,8 +186,8 @@
                                Content="{Binding LblTotalCharsContent}" HorizontalAlignment="Right"
                                VerticalAlignment="Center" Margin="0,0,130,0" FontSize="14" />
                         <Label Grid.Column="1" Content="Destination:" HorizontalAlignment="Left" Margin="5,0,0,0"
-                               Grid.Row="1" VerticalAlignment="Center" FontSize="16" BorderBrush="Black"
-                               BorderThickness="3,0,0,0" />
+                               Grid.Row="1" VerticalAlignment="Center" FontSize="16" BorderBrush="DimGray"
+                               BorderThickness="3,0,0,2" />
                         <Label x:Name="LblDestinationCode" Grid.Column="1"
                                Content="{Binding LblDestinationCodeContent}" HorizontalAlignment="Left"
                                Margin="110,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontSize="16" />
@@ -199,7 +214,8 @@
                 </TabItem>
                 <TabItem x:Name="TabBatch" Header="Batch Conversion" IsSelected="{Binding IsTabBatch}" FontSize="14"
                          FontWeight="{Binding TabBatchFontWeight}">
-                    <Grid Background="#FFE5E5E5">
+                    <!-- <Grid Background="#FFE5E5E5"> -->
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition Height="40" />
@@ -212,10 +228,10 @@
                                  BorderThickness="2,2,2,2" ItemsSource="{Binding LbxSourceItems}"
                                  SelectedIndex="{Binding LbxSourceSelectedIndex, Mode=TwoWay}"
                                  SelectedItem="{Binding LbxSourceSelectedItem, Mode=TwoWay}"
-                                 ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
+                                 ScrollViewer.HorizontalScrollBarVisibility="Auto" />
                         <Label Grid.Row="1" Grid.Column="0" Content="Source:" HorizontalAlignment="Left"
-                               VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" BorderBrush="Black"
-                               BorderThickness="3,0,0,0" />
+                               VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" BorderBrush="DimGray"
+                               BorderThickness="3,0,0,2" />
 
                         <TabControl Grid.Row="0" Grid.Column="1" TabStripPlacement="Bottom">
                             <TabItem x:Name="TabMessage" Header="Message" FontSize="14"
@@ -238,8 +254,8 @@
                         </TabControl>
 
                         <Label Grid.Column="1" Content="Output:" HorizontalAlignment="Left" Margin="5,0,0,0"
-                               Grid.Row="1" VerticalAlignment="Center" FontSize="16" BorderBrush="Black"
-                               BorderThickness="3,0,0,0" />
+                               Grid.Row="1" VerticalAlignment="Center" FontSize="16" BorderBrush="DimGray"
+                               BorderThickness="3,0,0,2" />
                         <Button x:Name="BtnAdd" Content="＋" Padding="0 2" Width="50" HorizontalAlignment="Left"
                                 HorizontalContentAlignment="Center"
                                 Margin="70,2,0,2" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" FontSize="14"
@@ -250,7 +266,8 @@
                                 FontSize="14"
                                 FontWeight="Bold" Command="{Binding BtnRemoveCommand}" />
                         <CheckBox x:Name="CbConvertFilename" Grid.Row="1" Grid.Column="0" Content="Filename"
-                                  FontSize="13" FontWeight="Bold" Padding="3,0,0,0" Margin="180,2,0,2" VerticalAlignment="Center"
+                                  FontSize="13" FontWeight="Bold" Padding="3,0,0,0" Margin="180,2,0,2"
+                                  VerticalAlignment="Center"
                                   HorizontalAlignment="Left" IsChecked="{Binding IsCbConvertFilename}" />
                         <Button x:Name="BtnPreview" Content="Preview" Padding="0 2" Width="70"
                                 HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="0,2,135,2"
@@ -305,7 +322,7 @@
                 HorizontalContentAlignment="Center"
                 Margin="0,0,20,0" Grid.Row="2" VerticalAlignment="Center" FontSize="14" Foreground="Red"
                 FontWeight="Bold" Click="BtnExit_Click" />
-        <StackPanel x:Name="StbStatusBar" Grid.Row="3" Height="25" Background="FloralWhite">
+        <StackPanel x:Name="StbStatusBar" Grid.Row="3" Height="25">
             <Label x:Name="LblStatusBar" Content="{Binding LblStatusBarContent}" Padding="0 2" Margin="10,0,0,0"
                    HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
         </StackPanel>

@@ -400,10 +400,9 @@ public class MainWindowViewModel : ViewModelBase
 
         var count = 0;
 
-        foreach (var item in LbxSourceItems)
+        foreach (var sourceFilePath in LbxSourceItems)
         {
             count++;
-            var sourceFilePath = item;
             var fileExt = Path.GetExtension(sourceFilePath);
             var filenameWithoutExt = Path.GetFileNameWithoutExtension(sourceFilePath);
 
@@ -485,7 +484,7 @@ public class MainWindowViewModel : ViewModelBase
 
                 await File.WriteAllTextAsync(outputFilename, convertedText);
 
-                LbxDestinationItems.Add($"({count}) {outputFilename} -> [Done ✓]");
+                LbxDestinationItems.Add($"({count}) {outputFilename} -> ✅ Done");
             }
         }
 
