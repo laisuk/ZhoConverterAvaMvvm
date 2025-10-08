@@ -74,25 +74,12 @@ public partial class MainWindow : Window
     {
         if (DataContext is MainWindowViewModel vm)
         {
-            // var text = e.Data.Contains(DataFormats.Text) ? e.Data.GetText() : null;
             var files = e.Data.Contains(DataFormats.Files) ? e.Data.GetFiles()?.OfType<IStorageFile>().ToList() : null;
 
             if (files is { Count: > 0 })
             {
                 await HandleFileDropAsync(sender, vm, files);
-                var filePath = files.FirstOrDefault()!;
-                vm.LblStatusBarContent = $"Contents dropped {filePath.TryGetLocalPath()}";
-                vm.LblFileNameContent = filePath.Name;
-                vm.CurrentOpenFileName = filePath.TryGetLocalPath();
             }
-
-            // if (text != null)
-            // {
-            //      vm.TbSourceTextDocument = new TextDocument(text);
-            // }
-
-            var codeText = new OpenccFmmseg().ZhoCheck(vm.TbSourceTextDocument!.Text);
-            vm.UpdateEncodeInfo(codeText);
         }
     }
 
@@ -111,10 +98,15 @@ public partial class MainWindow : Window
                 if (filePath == null) return;
                 var content = await File.ReadAllTextAsync(filePath);
                 vm.TbSourceTextDocument!.Text = content;
+                vm.UpdateEncodeInfo(new OpenccFmmseg().ZhoCheck(content));
+                vm.LblFileNameContent = firstFile.Name;
+                vm.LblStatusBarContent = $"Contents dropped: {firstFile.TryGetLocalPath()}";
+
                 break;
 
             case ListBox:
                 var newItems = new HashSet<string>(vm.LbxSourceItems!); // Ensure uniqueness
+                var currentCount = newItems.Count;
                 foreach (var file in fileList)
                 {
                     filePath = NormalizeFilePath(file);
@@ -122,10 +114,13 @@ public partial class MainWindow : Window
                         newItems.Add(filePath);
                 }
 
+                var newCount = newItems.Count;
+
                 // Clear & update ObservableCollection in bulk to minimize UI updates
                 vm.LbxSourceItems!.Clear();
                 foreach (var item in newItems.OrderBy(item => item))
                     vm.LbxSourceItems.Add(item);
+                vm.LblStatusBarContent = $"File(s) dropped: {newCount - currentCount}";
 
                 break;
         }

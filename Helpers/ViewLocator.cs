@@ -3,7 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using ZhoConverterAvaMvvm.ViewModels;
 
-namespace ZhoConverterAvaMvvm;
+namespace ZhoConverterAvaMvvm.Helpers;
 
 public class ViewLocator : IDataTemplate
 {

@@ -437,7 +437,7 @@ public class MainWindowViewModel : ViewModelBase
 
             var outputFilename = Path.Combine(Path.GetFullPath(TbOutFolderText),
                 filenameWithoutExt + suffix + fileExt);
-            var fileExtNoDot = fileExt[1..];
+            var fileExtNoDot = fileExt.Length > 1 ? fileExt[1..] : "";
 
             if (OfficeDocModel.OfficeFormats.Contains(fileExtNoDot))
             {
@@ -565,8 +565,9 @@ public class MainWindowViewModel : ViewModelBase
         }
 
         var filename = LbxSourceSelectedItem;
+        var fileExtension = Path.GetExtension(filename);
 
-        if (!_textFileTypes!.Contains(Path.GetExtension(filename)!))
+        if (fileExtension!.Length > 1 && !_textFileTypes!.Contains(fileExtension))
         {
             IsTabMessage = true;
             LbxDestinationItems!.Add("File type [" + Path.GetExtension(filename)! + "] Preview not supported");
@@ -656,6 +657,7 @@ public class MainWindowViewModel : ViewModelBase
         {
             var folderPath = result[0].Path.LocalPath;
             TbOutFolderText = folderPath;
+            IsTbOutFolderFocus = false;
             IsTbOutFolderFocus = true;
             LblStatusBarContent = $"Output folder set: {folderPath}";
         }
