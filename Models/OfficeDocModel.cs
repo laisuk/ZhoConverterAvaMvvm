@@ -66,8 +66,8 @@ public static class OfficeDocModel
             // Collect target XML parts by format
             var targetXmlPaths = format switch
             {
-                "docx" => [Path.Combine("word", "document.xml")],
-                "xlsx" => [Path.Combine("xl", "sharedStrings.xml")],
+                "docx" => new List<string> { Path.Combine("word", "document.xml") },
+                "xlsx" => new List<string> { Path.Combine("xl", "sharedStrings.xml") },
                 "pptx" => Directory.Exists(Path.Combine(tempDir, "ppt"))
                     ? Directory.GetFiles(Path.Combine(tempDir, "ppt"), "*.xml", SearchOption.AllDirectories)
                         .Where(p => Path.GetFileName(p).StartsWith("slide", StringComparison.OrdinalIgnoreCase)
@@ -77,8 +77,8 @@ public static class OfficeDocModel
                                     || p.Contains("comment", StringComparison.OrdinalIgnoreCase))
                         .Select(p => Path.GetRelativePath(tempDir, p))
                         .ToList()
-                    : [],
-                "odt" or "ods" or "odp" => ["content.xml"],
+                    : new List<string>(),
+                "odt" or "ods" or "odp" => new List<string> { "content.xml" },
                 "epub" => Directory.Exists(tempDir)
                     ? Directory.GetFiles(tempDir, "*.*", SearchOption.AllDirectories)
                         .Where(f => f.EndsWith(".xhtml", StringComparison.OrdinalIgnoreCase)
@@ -87,7 +87,7 @@ public static class OfficeDocModel
                                     || f.EndsWith(".ncx", StringComparison.OrdinalIgnoreCase))
                         .Select(f => Path.GetRelativePath(tempDir, f))
                         .ToList()
-                    : [],
+                    : new List<string>(),
                 _ => null
             };
 
@@ -108,12 +108,12 @@ public static class OfficeDocModel
                 {
                     var pattern = format switch
                     {
-                        "docx" => """(w:eastAsia="|w:ascii="|w:hAnsi="|w:cs=")(.*?)(")""",
-                        "xlsx" => """(val=")(.*?)(")""",
-                        "pptx" => """(typeface=")(.*?)(")""",
+                        "docx" => @"(w:eastAsia=""|w:ascii=""|w:hAnsi=""|w:cs="")(.*?)("")",
+                        "xlsx" => @"(val="")(.*?)("")",
+                        "pptx" => @"(typeface="")(.*?)("")",
                         "odt" or "ods" or "odp" =>
-                            """((?:style:font-name(?:-asian|-complex)?|svg:font-family|style:name)=["'])([^"']+)(["'])""",
-                        "epub" => """(font-family\s*:\s*)([^;"']+)([;"'])?""",
+                            @"((?:style:font-name(?:-asian|-complex)?|svg:font-family|style:name)=[""'])([^""']+)([""'])",
+                        "epub" => @"(font-family\s*:\s*)([^;""']+)([;""'])?",
                         _ => null
                     };
 
@@ -135,7 +135,7 @@ public static class OfficeDocModel
                 }
 
                 // Convert using selected engine
-                string convertedXml = convert(xmlContent, converterHelper.Config, punctuation);
+                var convertedXml = convert(xmlContent, converterHelper.Config, punctuation);
 
                 if (fontMap is not null)
                 {
