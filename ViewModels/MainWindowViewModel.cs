@@ -49,15 +49,15 @@ public class MainWindowViewModel : ViewModelBase
     private bool _isTabMessage = true;
     private bool _isTabPreview;
     private bool _isTbOutFolderFocus;
-    private string? _lblDestinationCodeContent;
-    private string? _lblFilenameContent;
-    private string? _lblSourceCodeContent;
-    private string? _lblStatusBarContent;
-    private string? _lblTotalCharsContent;
+    private string? _lblDestinationCodeContent = string.Empty;
+    private string? _lblFilenameContent = string.Empty;
+    private string? _lblSourceCodeContent = string.Empty;
+    private string? _lblStatusBarContent = string.Empty;
+    private string? _lblTotalCharsContent = string.Empty;
     private ObservableCollection<string>? _lbxDestinationItems;
     private ObservableCollection<string>? _lbxSourceItems;
     private int _lbxSourceSelectedIndex;
-    private string? _lbxSourceSelectedItem;
+    private string? _lbxSourceSelectedItem = string.Empty;
     private string? _rbT2SContent = "Hant (繁) to Hans (简)";
     private string? _rbS2TContent = "Hans (简) to Hant (繁)";
     private string? _rbSegmentContent = "Segment (分词)";
@@ -404,8 +404,8 @@ public class MainWindowViewModel : ViewModelBase
             : $"Conversion Type (转换方式) => {conversion}");
         if (!IsRbCustom)
         {
-            LbxDestinationItems.Add(_locale == 1 
-                ? $"Region (區域) => {region}" 
+            LbxDestinationItems.Add(_locale == 1
+                ? $"Region (區域) => {region}"
                 : $"Region (区域) => {region}");
             LbxDestinationItems.Add(_locale == 1
                 ? $"ZH/TW Idioms (中臺慣用語) => {iSZhTwIdioms}"
@@ -582,7 +582,7 @@ public class MainWindowViewModel : ViewModelBase
 
     private async Task Preview()
     {
-        if (LbxSourceSelectedIndex == -1)
+        if (LbxSourceSelectedIndex == -1 || string.IsNullOrWhiteSpace(LbxSourceSelectedItem))
         {
             LblStatusBarContent = "Nothing to preview.";
             return;
@@ -591,10 +591,10 @@ public class MainWindowViewModel : ViewModelBase
         var filename = LbxSourceSelectedItem;
         var fileExtension = Path.GetExtension(filename);
 
-        if (fileExtension!.Length > 1 && !_textFileTypes!.Contains(fileExtension))
+        if (fileExtension.Length > 1 && !_textFileTypes!.Contains(fileExtension))
         {
             IsTabMessage = true;
-            LbxDestinationItems!.Add("File type [" + Path.GetExtension(filename)! + "] Preview not supported");
+            LbxDestinationItems!.Add("File type [" + Path.GetExtension(filename) + "] Preview not supported");
             return;
         }
 
@@ -603,10 +603,11 @@ public class MainWindowViewModel : ViewModelBase
             var displayText = await File.ReadAllTextAsync(filename!);
             IsTabPreview = true;
             TbPreviewText = displayText;
+            LblStatusBarContent = $"File {filename} previewed";
         }
         catch (Exception)
         {
-            IsTabPreview = true;
+            IsTabMessage = true;
             LbxDestinationItems!.Add($"File read error: {filename}");
             LblStatusBarContent = "File read error.";
         }
