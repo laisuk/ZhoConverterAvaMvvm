@@ -154,7 +154,7 @@
                                 BorderBrush="DarkGray">
                             <avaloniaEdit:TextEditor
                                 x:Name="TbSource" Margin="5,5,5,0"
-                                Document="{Binding TbSourceTextDocument}"
+                                Document="{Binding TbSourceTextDocument, Mode=TwoWay}"
                                 FontFamily="Noto Sans SC" VerticalScrollBarVisibility="Visible" ShowLineNumbers="True"
                                 TextChanged="TbSource_TextChanged"
                                 WordWrap="True"
