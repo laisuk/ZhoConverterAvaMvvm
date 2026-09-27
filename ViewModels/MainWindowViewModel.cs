@@ -15,6 +15,7 @@ using ReactiveUI;
 using ZhoConverterAvaMvvm.Services;
 using ZhoConverterAvaMvvm.Views;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using ZhoConverterAvaMvvm.Models;
 
 namespace ZhoConverterAvaMvvm.ViewModels;
@@ -147,6 +148,9 @@ public class MainWindowViewModel : ViewModelBase
         _officeFileTypes = languageSettings.OfficeFileTypes;
         _tbDelimText = languageSettings.SegDelimiter;
         _tbWordCountText = languageSettings.TagWordCount;
+        // Show the .NET runtime version in the status bar
+        var runtimeVersion = RuntimeInformation.FrameworkDescription;
+        LblStatusBarContent = $"Runtime: {runtimeVersion}";
         _openccFmmseg = openccFmmseg;
         _openccJieba = openccJieba;
     }

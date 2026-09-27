@@ -1,6 +1,6 @@
 ﻿using System;
 using Avalonia;
-using Avalonia.ReactiveUI;
+using ReactiveUI.Avalonia;
 
 namespace ZhoConverterAvaMvvm;
 
@@ -23,6 +23,10 @@ internal static class Program
             .UsePlatformDetect()
             .WithInterFont()
             .LogToTrace()
-            .UseReactiveUI();
+            .UseReactiveUI(_ =>
+            {
+                // ✅ ReactiveUI.Avalonia 11.4 requires a non-null callback
+                /* register extra services here later */
+            });
     }
 }
